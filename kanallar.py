@@ -40,7 +40,7 @@ kanallar = [
     # 3. TRT SPOR YILDIZ (Senin istedigin site: trtspor.com.tr)
     {
         "isim": "TRT Spor Yildiz",
-        "url": "https://www.trtspor.com.tr/canli-yayin-izle/trt-spor-yildiz",
+        "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150028",
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg"
     },
