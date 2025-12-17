@@ -20,7 +20,7 @@ def link_yakala(url):
 kanallar = [
     {
         "isim": "TRT 1", 
-        "url": "https://www.tabii.com/tr/watch/live/trt1?trackId=150002", 
+        "url": "https://www.canlitv.me/live/trt1-canli-kesintisiz-izle", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"
     },
     {
@@ -45,12 +45,12 @@ kanallar = [
     },
     {
         "isim": "TRT Spor", 
-        "url": "https://www.trtspor.com.tr/canli-yayin-izle/trt-spor", 
+        "url": "https://www.canlitv.me/live/trtspor-canli-yayin", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg"
     },
     {
         "isim": "TRT Spor Yildiz", 
-        "url": "https://www.trtspor.com.tr/canli-yayin-izle/trt-spor-yildiz", 
+        "url": "https://www.canlitv.me/live/trtsporyildiz-hd", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg"
     },
     {
@@ -70,3 +70,5 @@ with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(m3u_icerik)
 
 print("✅ Liste güncellendi. Nick kaldırıldı, logolar düzeltildi.")
+
+
