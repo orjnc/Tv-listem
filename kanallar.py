@@ -36,6 +36,12 @@ kanallar = [
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtspor.jpg"
     },
     {
+        "isim": "TRT Spor Yildiz",
+        "url": "https://www.trtspor.com.tr/canli-yayin-izle/trt-spor-yildiz",
+        "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg"
+    },
+    {
         "isim": "Tabii Spor",
         "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002",
         # BURASI DUZELTILDI: Artik daha genis arama yapiyor, kesin bulacak.
