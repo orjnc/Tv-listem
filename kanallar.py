@@ -24,35 +24,35 @@ def link_bul(url, regex_pattern):
 # --- KANAL LISTESI (Sadece Resmi Linkler) ---
 kanallar = [
     {
-        "isim": "TRT 1 HD",
+        "isim": "TRT 1",
         "url": "https://www.tabii.com/tr/watch/live/trt1?trackId=150002",
         "regex": r'["\'](https:[^"\']*?trt1[^"\']*?\.m3u8[^"\']*?)["\']', 
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/TRT_1_logo.svg/1024px-TRT_1_logo.svg.png"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/Trt1.jpg"
     },
     {
         "isim": "TRT Spor",
         "url": "https://www.tabii.com/tr/watch/live/trtspor?trackId=150002",
         "regex": r'["\'](https:[^"\']*?trtspor[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/TRT_Spor_logo.svg/1024px-TRT_Spor_logo.svg.png"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/Trtspor.jpg"
     },
     {
         "isim": "Tabii Spor",
         "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002",
         # BURASI DUZELTILDI: Artik daha genis arama yapiyor, kesin bulacak.
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/TRT_Spor_Yildiz_logo.svg/1024px-TRT_Spor_Yildiz_logo.svg.png"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"
     },
     {
         "isim": "DMAX TR",
         "url": "https://www.dmax.com.tr/canli-izle",
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/DMAX_Logo_2016.svg/1024px-DMAX_Logo_2016.svg.png"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg"
     },
     {
         "isim": "TLC TR",
         "url": "https://www.tlctv.com.tr/canli-izle",
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/TLC_Logo.svg/1024px-TLC_Logo.svg.png"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg"
     }
 ]
 
