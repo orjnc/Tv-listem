@@ -1,0 +1,9 @@
+#EXTM3U
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/TRT_1_logo.svg/1024px-TRT_1_logo.svg.png", TRT 1 HD (Tabii)
+https://tv-trt1.medya.trt.com.tr/master.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/TRT_4K_logo.svg/1024px-TRT_4K_logo.svg.png", TRT 4K (Ultra HD)
+https://tv-trt4k.live.trt.com.tr/master.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/DMAX_Logo_2016.svg/1024px-DMAX_Logo_2016.svg.png", DMAX TR
+https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=TW4zbmh2RFV2czc0alpXL1NVWnl3ZmtmL3pLSW94a3VPUTBpTElSNGYwQT0=
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/TLC_Logo.svg/1024px-TLC_Logo.svg.png", TLC TR
+https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=K3ZsTlZzZVFpZ01DMUMyWTkrZzF6RVFGU2JoNFJnbjcwZ3JyNDhDanJ5WT0=
