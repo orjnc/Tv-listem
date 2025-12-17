@@ -1,19 +1,19 @@
 #EXTM3U
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg", TRT 1
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/logolar/trt1.jpg", TRT 1
 https://www.tabii.com/tr/watch/live/trt1?trackId=150002
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg", Kanal D HD
-https://www.todtv.com.tr/canli-tv/kanal-d
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg", Tabii TV
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/logolar/kanald.jpg", Kanal D HD
+https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&amp;ce=3
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/logolar/nickelodeon.jpg", Nickelodeon
+https://www.todtv.com.tr/canli-tv/nickelodeon-sd
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/logolar/tabiispor.jpg", Tabii TV
 https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg", DMAX TR
-https://www.dmax.com.tr/canli-izle
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg", TLC TR
-https://www.tlctv.com.tr/canli-izle
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg", TRT Spor
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/logolar/dmax.jpg", DMAX TR
+https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=dnM1Sm9rU282MVRsVUlINGdsTmE1SURkTlFGaVBGTEx2d3k0emZ1ZFJFTT0=
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/logolar/tlc.jpg", TLC TR
+https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=UVNkQ1RIS1hXRTVTM05iTGk0aWxqcTdhTG5zWkhsa0hoOGFkRWRqNVFJWT0=
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/logolar/trtspor.jpg", TRT Spor
 https://www.tabii.com/tr/watch/live/trtspor?trackId=150002
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg", TRT Spor Yildiz
-https://www.trtspor.com.tr/canli-yayin-izle/trt-spor-yildiz
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg", Tabii Spor
+https://trt.daioncdn.net/trtspor/master.m3u8?app=web\u0026platform=trtspor
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/logolar/tabiispor.jpg", Tabii Spor
 https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nickelodeon.jpg", Nickelodeon
-https://www.todtv.com.tr/canli-tv/nickelodeon-sd
