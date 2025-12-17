@@ -23,55 +23,61 @@ def link_bul(url, regex_pattern):
 
 # --- KANAL LISTESI ---
 kanallar = [
-    # 1. TRT 1 (Kucuk harf: trt1.jpg)
+    # 1. TRT 1
     {
         "isim": "TRT 1",
         "url": "https://www.tabii.com/tr/watch/live/trt1?trackId=150002",
         "regex": r'["\'](https:[^"\']*?trt1[^"\']*?\.m3u8[^"\']*?)["\']', 
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg",
+        "tip": "ara"
     },
-    # 2. TRT SPOR (Kucuk harf: trtspor.jpg)
+    # 2. TABII TV (SABIT LINK)
     {
-        "isim": "TRT Spor",
-        "url": "https://www.tabii.com/tr/watch/live/trtspor?trackId=150002",
-        "regex": r'["\'](https:[^"\']*?trtspor[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg"
+        "isim": "Tabii TV",
+        "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8",
+        "regex": None,
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiitv.jpg",
+        "tip": "sabit" 
     },
-    # 3. TRT SPOR YILDIZ (Senin verdigin OZEL LINK)
-    {
-        "isim": "TRT Spor Yildiz",
-        "url": "https://www.trtspor.com.tr/canli-yayin-izle/trt-spor-yildiz",
-        "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
-        # DIKKAT: Verdigin ozel linki birebir kullandim:
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg"
-    },
-    # 4. TABII SPOR (Kucuk harf: tabiispor.jpg)
-    {
-        "isim": "Tabii Spor",
-        "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002",
-        "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"
-    },
-    # 5. DMAX (Kucuk harf: dmax.jpg)
+    # 3. DMAX (ISTEGIN UZERINE 3. SIRA)
     {
         "isim": "DMAX TR",
         "url": "https://www.dmax.com.tr/canli-izle",
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg",
+        "tip": "ara"
     },
-    # 6. TLC (Kucuk harf: tlc.jpg)
+    # 4. TLC (ISTEGIN UZERINE 4. SIRA)
     {
         "isim": "TLC TR",
         "url": "https://www.tlctv.com.tr/canli-izle",
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg",
+        "tip": "ara"
     },
-    # 7. TABII COCUK (Kucuk harf: tabiicocuk.jpg)
+    # 5. TRT SPOR
     {
-        "isim": "Tabii Cocuk",
-        "url": "https://www.tabii.com/tr/watch/live/tabii-cocuk?trackId=516992",
+        "isim": "TRT Spor",
+        "url": "https://www.tabii.com/tr/watch/live/trtspor?trackId=150002",
+        "regex": r'["\'](https:[^"\']*?trtspor[^"\']*?\.m3u8[^"\']*?)["\']',
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg",
+        "tip": "ara"
+    },
+    # 6. TRT SPOR YILDIZ (Ozel logo ve link)
+    {
+        "isim": "TRT Spor Yildiz",
+        "url": "https://www.trtspor.com.tr/canli-yayin-izle/trt-spor-yildiz",
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiicocuk.jpg"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg",
+        "tip": "ara"
+    },
+    # 7. TABII SPOR
+    {
+        "isim": "Tabii Spor",
+        "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002",
+        "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg",
+        "tip": "ara"
     }
 ]
 
@@ -79,7 +85,13 @@ kanallar = [
 dosya_icerigi = "#EXTM3U\n"
 
 for k in kanallar:
-    canli_link = link_bul(k["url"], k["regex"])
+    canli_link = None
+    
+    if k.get("tip") == "sabit":
+        canli_link = k["url"]
+        print(f"SABIT EKLENDI: {k['isim']}")
+    else:
+        canli_link = link_bul(k["url"], k["regex"])
             
     if canli_link:
         dosya_icerigi += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
@@ -87,4 +99,4 @@ for k in kanallar:
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(dosya_icerigi)
 
-print("Liste guncellendi: Kucuk harf kuralina uyuldu.")
+print("Liste guncellendi: DMAX 3, TLC 4 oldu.")
