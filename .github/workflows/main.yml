@@ -1,0 +1,36 @@
+name: Kanallari Guncelle
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Her saat basi otomatik calisir
+  workflow_dispatch: # Elle tetiklemek icin
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Depoyu Cek
+        uses: actions/checkout@v3
+
+      - name: Python Kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Kutuphaneleri Yukle
+        run: pip install requests
+
+      - name: Robotu Calistir
+        run: python kanallar.py
+
+      - name: Listeyi Kaydet
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add playlist.m3u
+          git commit -m "Otomatik Guncelleme" || exit 0
+          git push
+          
