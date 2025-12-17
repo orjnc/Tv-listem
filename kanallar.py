@@ -21,39 +21,44 @@ def link_bul(url, regex_pattern):
         print(f"Hata: {e}")
     return None
 
-# --- KANAL LISTESI (Sadece Resmi Linkler) ---
+# --- KANAL LISTESI (6 KANAL) ---
 kanallar = [
+    # 1. TRT 1
     {
         "isim": "TRT 1",
         "url": "https://www.tabii.com/tr/watch/live/trt1?trackId=150002",
         "regex": r'["\'](https:[^"\']*?trt1[^"\']*?\.m3u8[^"\']*?)["\']', 
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trt1.jpg"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"
     },
+    # 2. TRT SPOR
     {
         "isim": "TRT Spor",
         "url": "https://www.tabii.com/tr/watch/live/trtspor?trackId=150002",
         "regex": r'["\'](https:[^"\']*?trtspor[^"\']*?\.m3u8[^"\']*?)["\']',
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtspor.jpg"
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg"
     },
+    # 3. TRT SPOR YILDIZ (Senin istedigin site: trtspor.com.tr)
     {
         "isim": "TRT Spor Yildiz",
         "url": "https://www.trtspor.com.tr/canli-yayin-izle/trt-spor-yildiz",
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg"
     },
+    # 4. TABII SPOR (Saglam Link - Geri Geldi)
     {
         "isim": "Tabii Spor",
         "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002",
-        # BURASI DUZELTILDI: Artik daha genis arama yapiyor, kesin bulacak.
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"
     },
+    # 5. DMAX
     {
         "isim": "DMAX TR",
         "url": "https://www.dmax.com.tr/canli-izle",
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg"
     },
+    # 6. TLC
     {
         "isim": "TLC TR",
         "url": "https://www.tlctv.com.tr/canli-izle",
@@ -62,7 +67,7 @@ kanallar = [
     }
 ]
 
-# --- KAYDETME (Yedek Kontrolu Yok - Direkt Kayit) ---
+# --- KAYDETME ---
 dosya_icerigi = "#EXTM3U\n"
 
 for k in kanallar:
@@ -74,4 +79,4 @@ for k in kanallar:
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(dosya_icerigi)
 
-print("Liste guncellendi (Sadece bulunan kanallar eklendi).")
+print("Liste guncellendi: 6 Kanal (TRT Yildiz ve Tabii Spor dahil).")
