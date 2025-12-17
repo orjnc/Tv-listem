@@ -31,7 +31,7 @@ kanallar = [
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg",
         "tip": "ara"
     },
-    # 2. KANAL D HD (YENI EKLENDI - 2. SIRA)
+    # 2. KANAL D HD (TOD TV - Bulamazsa bile listeye girecek)
     {
         "isim": "Kanal D HD",
         "url": "https://www.todtv.com.tr/canli-tv/kanal-d",
@@ -39,7 +39,7 @@ kanallar = [
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg",
         "tip": "ara"
     },
-    # 3. TABII TV (SABIT LINK)
+    # 3. TABII TV (SABIT)
     {
         "isim": "Tabii TV",
         "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8",
@@ -71,7 +71,7 @@ kanallar = [
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg",
         "tip": "ara"
     },
-    # 7. TRT SPOR YILDIZ
+    # 7. TRT SPOR YILDIZ (Resmi Site - Bulamazsa bile ekleyecek)
     {
         "isim": "TRT Spor Yildiz",
         "url": "https://www.trtspor.com.tr/canli-yayin-izle/trt-spor-yildiz",
@@ -95,16 +95,23 @@ dosya_icerigi = "#EXTM3U\n"
 for k in kanallar:
     canli_link = None
     
+    # 1. Adim: Link turune gore islem yap
     if k.get("tip") == "sabit":
         canli_link = k["url"]
         print(f"SABIT EKLENDI: {k['isim']}")
     else:
         canli_link = link_bul(k["url"], k["regex"])
+        
+    # 2. Adim: Eger link BULUNAMADIYSA bile kanali oldurme!
+    # Sitenin ana adresini yaz ki listede gozuksun.
+    if not canli_link:
+        print(f"UYARI: {k['isim']} linki bulunamadi. Yine de listeye ekleniyor.")
+        canli_link = k["url"]
             
-    if canli_link:
-        dosya_icerigi += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
+    # Listeye yaz
+    dosya_icerigi += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
 
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(dosya_icerigi)
 
-print("Liste guncellendi: Kanal D 2. siraya eklendi.")
+print("Liste guncellendi: Hicbir kanal silinmedi!")
