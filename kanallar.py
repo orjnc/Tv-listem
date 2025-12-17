@@ -36,7 +36,7 @@ kanallar = [
         "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/TRT_Spor_logo.svg/1024px-TRT_Spor_logo.svg.png"
     },
     {
-        "isim": "TRT Spor Yildiz",
+        "isim": "Tabii Spor",
         "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002",
         # BURASI DUZELTILDI: Artik daha genis arama yapiyor, kesin bulacak.
         "regex": r'["\'](https:[^"\']*?\.m3u8[^"\']*?)["\']',
