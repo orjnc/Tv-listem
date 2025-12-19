@@ -2,75 +2,96 @@ import requests
 import re
 import os
 
-# --- 1. ADIM: GİZLİ BİLGİLERİ AL ---
+# --- 1. ADIM: GİZLİ BİLGİLER ---
 USER_EMAIL = os.getenv('TOD_EMAIL')
 USER_PASS = os.getenv('TOD_PASSWORD')
 
-# --- 2. ADIM: TEK BİR OTURUM BAŞLAT ---
+# --- 2. ADIM: GELİŞMİŞ OTURUM YÖNETİMİ ---
 def oturum_hazirla():
     session = requests.Session()
-    login_url = "https://www.todtv.com.tr/api/login"
-    payload = {"username": USER_EMAIL, "password": USER_PASS, "rememberMe": True}
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36",
-        "Content-Type": "application/json",
-        "Referer": "https://www.todtv.com.tr/giris"
-    }
+    
+    # TOD'un web sitesine bir kez gidip başlangıç çerezlerini alalım
     try:
-        r = session.post(login_url, json=payload, headers=headers, timeout=15)
+        ana_sayfa = "https://www.todtv.com.tr/giris"
+        headers_ilk = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+        session.get(ana_sayfa, headers=headers_ilk, timeout=10)
+        
+        # Giriş için asıl API ucu (Daha yaygın kullanılan endpoint)
+        login_url = "https://www.todtv.com.tr/api/v1/login" 
+        
+        payload = {
+            "email": USER_EMAIL, # Bazı API'ler 'username' yerine 'email' ister
+            "password": USER_PASS,
+            "rememberMe": True
+        }
+        
+        headers_login = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "Content-Type": "application/json",
+            "Referer": "https://www.todtv.com.tr/giris",
+            "X-Requested-With": "XMLHttpRequest"
+        }
+        
+        r = session.post(login_url, json=payload, headers=headers_login, timeout=15)
+        
         if r.status_code == 200:
-            print("✅ Oturum başarıyla açıldı.")
+            print("✅ GİRİŞ BAŞARILI: Oturum anahtarları alındı.")
             return session
-    except:
-        pass
-    print("⚠️ Oturum açılamadı, standart modda devam ediliyor.")
-    return requests # Oturum açılmazsa normal requests moduna döner
+        else:
+            print(f"❌ GİRİŞ HATASI: Durum Kodu {r.status_code}")
+            # Hata mesajının içeriğini bas ki sorunu anlayalım
+            print(f"Sunucu Yanıtı: {r.text[:200]}") 
+    except Exception as e:
+        print(f"⚠️ KRİTİK HATA: {e}")
+        
+    return requests # Başarısız olursa normal requests ile devam et
 
-# --- 3. ADIM: HER KANALI SÖKEN GENEL FONKSİYON ---
+# --- 3. ADIM: GENEL SÖKÜCÜ ---
 def kanal_sokucu(url, baglanti):
-    # Eğer link zaten m3u8 ise dokunma (TRT'ler gibi)
     if ".m3u8" in url:
         return url
     
     try:
-        # Bu kısım her kanalda senin oturumunu (session) kullanır
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-            "X-Requested-With": "com.instantbits.cast.webvideo"
+            "Referer": "https://www.todtv.com.tr/"
         }
+        # Oturum açıksa 'baglanti' objesi session'dır, değilse requests'tir
         r = baglanti.get(url, headers=headers, timeout=10)
         
-        # Sayfadaki m3u8 linkini çek (Kanal D, BBC, DMAX hepsi burada taranır)
-        match = re.search(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', r.text.replace("\\/", "/"))
+        # HTML içinde m3u8 avı
+        text = r.text.replace("\\/", "/")
+        match = re.search(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', text)
+        
         if match:
             return match.group(1)
+        else:
+            # Eğer m3u8 yoksa ama sayfa geldiyse linkleri tek tek logla (Hata çözmek için)
+            if "bbc-first" in url:
+                print("🚨 BBC Sayfası yüklendi ama m3u8 bulunamadı! Sayfa içeriği giriş yapmamış gibi görünüyor olabilir.")
     except:
         pass
     return url
 
-# --- 4. ADIM: SENİN ÇALIŞAN LİSTEN ---
+# --- 4. ADIM: LİSTE VE ÇALIŞTIRMA ---
 kanallar = [
     {"isim": "TRT 1", "url": "https://trt.daioncdn.net/trt-1/master.m3u8?app=web", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"},
     {"isim": "Kanal D HD", "url": "https://www.kanald.com.tr/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg"},
-    {"isim": "Tabii TV", "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"},
-    {"isim": "BBC First", "url": "https://www.todtv.com.tr/canli-tv/bbc-first", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/bbcfirst.jpg"},
+    {"isim": "BBC First", "url": "www.todtv.com.tr/canli-tv/bbc-first", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/bbcfirst.jpg"},
     {"isim": "DMAX TR", "url": "https://www.dmax.com.tr/canli-izle", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg"},
     {"isim": "TLC TR", "url": "https://www.tlctv.com.tr/canli-izle", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg"},
-    {"isim": "TRT Spor", "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg"},
-    {"isim": "TRT Spor Yildiz", "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg"},
-    {"isim": "Tabii Spor", "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"}
+    {"isim": "TRT Spor", "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg"}
 ]
 
-# --- 5. ADIM: İŞLEME VE KAYDETME ---
 aktif_baglanti = oturum_hazirla()
 m3u_icerik = "#EXTM3U\n"
 
 for k in kanallar:
-    # Her kanal için aynı sökücü çalışır
     canli_link = kanal_sokucu(k["url"], aktif_baglanti)
     m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
 
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(m3u_icerik)
 
-print("✅ Her kanal oturum desteğiyle tarandı ve liste güncellendi.")
+print("✅ İşlem bitti. Logları kontrol et.")
+
