@@ -24,7 +24,12 @@ kanallar = [
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"
     },
     {
-        "isim": "Kanal D HD", 
+        "isim": "ATV", 
+        "url":  "www.atv.com.tr/canli-yayin" , 
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"
+    },
+    {
+        "isim": "Kanal D", 
         "url": "https://www.kanald.com.tr/canli-yayin", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg"
     },
