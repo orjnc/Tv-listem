@@ -5,12 +5,10 @@ https://trt.daioncdn.net/trt-1/master.m3u8?app=web
 https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&amp;ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg", Tabii TV
 https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/bbcfirst.jpg", BBC First
-https://www.todtv.com.tr/canli-tv/bbc-first
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg", DMAX TR
-https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=ZXpvWTJQczFvdG5CdzBaWVJkYWI0SFhwK0xMSExzNitodGZkNGkxOU1uaz0=
+https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=U0RHakdzM1pMc3NyUmREbnhST0lQbWxabmJhL1NWcW0zSGZ3UjNjMUJ0cz0=
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg", TLC TR
-https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=TDZzUU9JbDBhNmFNQzVybGFUUGlhYUw4L2xOZUpvMWhnYmI0aTMwaXNtTT0=
+https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=QWVXMnd6eU9Qa3UyWER1YlRRbDk2Sm9IU0U4c3V5WElHc09USkNQaldQOD0=
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg", TRT Spor
 https://tv-trtspor1.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg", TRT Spor Yildiz
