@@ -1,57 +1,60 @@
 import requests
 import re
 import json
+import time
 
 def link_yakala(url):
-    # Eğer listede zaten doğrudan m3u8 varsa dokunma
     if ".m3u8" in url:
         return url
         
     try:
-        # TAKTİK 1: Web Video Caster gibi Mobil (Android) kimliği kullan
-        # Bu, bazı sitelerin korumasını doğrudan devre dışı bırakır.
+        # Web Video Caster'ın kullandığı Android kimliğini birebir taklit et
         headers = {
-            "User-Agent": "Mozilla/5.0 (Linux; Android 11; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Mobile Safari/537.36",
+            "User-Agent": "Mozilla/5.0 (Linux; Android 12; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36",
             "Referer": url,
-            "Accept": "*/*"
+            "Accept": "*/*",
+            "Connection": "keep-alive"
         }
 
-        # TAKTİK 2: Arka Kapı (API) Taraması
-        # Sitenin kendisi yerine, linki asıl üreten "bilgi servislerine" git.
-        sorgu_url = url
-        if "atv.com.tr" in url:
-            sorgu_url = "https://v.tmgrup.com.tr/getv_test?atv"
-        elif "kanald.com.tr" in url:
-            sorgu_url = "https://www.kanald.com.tr/action/media/get-live-stream"
-        elif "startv.com.tr" in url:
-            sorgu_url = "https://api.dogusdigital.com/video/contents/startv/live"
+        # --- TAKTİK 1: BEKLEME VE TEKRARLI DENEME ---
+        # Video oynatıcının arka planda linki oluşturması için 3 deneme yapıyoruz
+        for deneme in range(3):
+            # Eğer ilk deneme değilse, videonun yüklenmesi için 3 saniye bekle
+            if deneme > 0:
+                print(f"⏳ {url} için link bekleniyor (Deneme {deneme+1})...")
+                time.sleep(3)
 
-        # Sayfayı veya API'yi indir
-        r = requests.get(sorgu_url, headers=headers, timeout=15)
-        # Karakter temizliği yaparak ham veriyi oku
-        ham_veri = r.text.replace("\\/", "/").replace("\\\\", "\\")
+            # --- TAKTİK 2: ARKA KAPI (API) VE ANA SAYFA TARAMASI ---
+            sorgu_listesi = []
+            if "atv.com.tr" in url:
+                sorgu_listesi.append("https://v.tmgrup.com.tr/getv_test?atv")
+            elif "kanald.com.tr" in url:
+                sorgu_listesi.append("https://www.kanald.com.tr/action/media/get-live-stream")
+            elif "startv.com.tr" in url:
+                sorgu_listesi.append("https://api.dogusdigital.com/video/contents/startv/live")
+            
+            sorgu_listesi.append(url) # Ana sayfayı da listeye ekle
 
-        # TAKTİK 3: Derin Regex (WVC gibi her yerdeki .m3u8'i tara)
-        # JSON objeleri, JS değişkenleri ve HTML etiketleri dahil her yere bakar.
-        desenler = [
-            r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']',
-            r'(?:src|url|file|videoUrl)["\']?\s*[:=]\s*["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']'
-        ]
-
-        for desen in desenler:
-            match = re.search(desen, ham_veri, re.IGNORECASE)
-            if match:
-                bulunan_link = match.group(1)
-                # Reklamları ele ve gerçek yayını döndür
-                if "ads" not in bulunan_link.lower() and "vpaid" not in bulunan_link.lower():
-                    return bulunan_link
+            for hedef in sorgu_listesi:
+                r = requests.get(hedef, headers=headers, timeout=15)
+                # İçeriği temizle ve m3u8 avına çık
+                icerik = r.text.replace("\\/", "/").replace("\\\\", "\\")
+                
+                # Detaylı Regex: WVC'nin yaptığı gibi tüm gizli köşelere bak
+                pattern = r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']'
+                match = re.search(pattern, icerik, re.IGNORECASE)
+                
+                if match:
+                    link = match.group(1)
+                    if "ads" not in link.lower() and "vpaid" not in link.lower():
+                        return link
 
     except Exception as e:
-        print(f"Hata ({url}): {e}")
+        print(f"❌ Hata ({url}): {e}")
         
     return url
 
-# --- SENİN TAM KANAL LİSTEN ---
+# --- KANAL LİSTESİ ---
 kanallar = [
     {"isim": "TRT 1", "url": "https://trt.daioncdn.net/trt-1/master.m3u8?app=web", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"},
     {"isim": "ATV", "url": "https://www.atv.com.tr/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"},
@@ -71,16 +74,15 @@ kanallar = [
     {"isim": "Tabii Spor", "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"}
 ]
 
-# --- PLAYLIST OLUŞTURMA ---
 m3u_icerik = "#EXTM3U\n"
-print("📡 Taktiksel tarama başlatıldı...")
+print("🚀 Gecikmeli 'Network Hunter' Başlatıldı...")
 
 for k in kanallar:
     canli_link = link_yakala(k["url"])
     m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
-    print(f"✔️ {k['isim']} işlendi.")
+    print(f"✅ {k['isim']} bitti.")
 
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(m3u_icerik)
 
-print("\n✅ Tam otomatik playlist başarıyla güncellendi.")
+print("\n🎯 Playlist güncellendi. Eğer hala bazı linkler web sitesi olarak dönüyorsa, o kanalın JS şifrelemesi çok ağırdır.")
