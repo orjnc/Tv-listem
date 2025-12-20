@@ -2,23 +2,23 @@
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg", TRT 1
 https://trt.daioncdn.net/trt-1/master.m3u8?app=web
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg", ATV
-https://trkvz-live.ercdn.net/atvhd/atvhd_360p.m3u8?st=HiVzRaSEFbIieIehzuxu0w&e=1766311882
+https://trkvz-live.ercdn.net/atvhd/atvhd_360p.m3u8?st=t6T8P4gHBOuqmFPx2jkvig&e=1766312795
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg", Kanal D
-https://demiroren.daioncdn.net/kanald/kanald_1080p.m3u8?&sid=80iq4bisjw32&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3
+https://demiroren.daioncdn.net/kanald/kanald_1080p.m3u8?&sid=80irhe6qrd59&app=da2109ea-5dfe-4107-89ab-23593336ed61&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/star.jpg", Star TV
-https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80iq50xnv39q&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3
+https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80irictuurer&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/showtv.jpg", Show TV
-https://ciner.daioncdn.net/showtv/showtv_480p.m3u8?ex=1664766175&st=RBzhSuGauna0OGld-DJUVA&tv=1&sid=80iq5nbb9ucf&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&ce=3
+https://ciner.daioncdn.net/showtv/showtv_480p.m3u8?ex=1664766175&st=RBzhSuGauna0OGld-DJUVA&tv=1&sid=80irj3kxpetz&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/now.jpg", NOW TV
 https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv8.jpg", TV8
 https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beyaztv.jpg", Beyaz TV
-https://beyaztv.daioncdn.net/beyaztv/beyaztv_480p.m3u8?&sid=80iq69r98osi&app=fcd5c66b-da9d-44ba-a410-4f34805c397d&ce=3
+https://beyaztv.daioncdn.net/beyaztv/beyaztv_480p.m3u8?&sid=80irjyy63c7k&app=fcd5c66b-da9d-44ba-a410-4f34805c397d&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/teve2.jpg", Teve2
-https://demiroren.daioncdn.net/teve2/teve2_480p.m3u8?&sid=80iq6wgvjb04&app=6aab838a-437e-4a1b-bbd0-e30f79cdbbbd&ce=3
+https://demiroren.daioncdn.net/teve2/teve2_480p.m3u8?&sid=80irksatk8mz&app=6aab838a-437e-4a1b-bbd0-e30f79cdbbbd&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.jpg", Kanal 7
-https://kanal7.daioncdn.net/kanal7/kanal7_360p.m3u8?&sid=80iq7llxelfq&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3
+https://kanal7.daioncdn.net/kanal7/kanal7_1080p.m3u8?&sid=80irlpk2w72p&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg", Tabii TV
 https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg", DMAX TR
@@ -30,4 +30,4 @@ https://tv-trtspor1.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg", TRT Spor Yildiz
 https://tv-trtspor2.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg", Tabii Spor
-https://trt.daioncdn.net/trt-1/master_1080p.m3u8?&sid=80iq9mfeude4&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2
+https://trt.daioncdn.net/trt-1/master_1440p.m3u8?&sid=80iroiz64r84&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2
