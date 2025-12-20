@@ -47,6 +47,26 @@ kanallar = [
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/showtv.jpg"
     },
     {
+        "isim": "NOW TV", 
+        "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8", 
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/now.jpg"
+    },
+    {
+        "isim": "TV8", 
+        "url": "https://www.tv8.com.tr/canli-yayin", 
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv8.jpg"
+    },
+    {
+        "isim": "Beyaz TV", 
+        "url": "https://www.beyaztv.com.tr/canli-yayin", 
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beyaztv.jpg"
+    },
+    {
+        "isim": "Kanal 7", 
+        "url": "https://www.kanal7.com/canli-izle", 
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.jpg"
+    },
+    {
         "isim": "Tabii TV", 
         "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"
