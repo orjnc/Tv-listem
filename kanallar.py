@@ -4,42 +4,54 @@ import re
 from playwright.sync_api import sync_playwright
 
 def eski_yontem_link(url):
-    """Senin gönderdiğin hızlı regex yöntemi"""
+    """Senin gönderdiğin hızlı regex yöntemi - Akıllandırıldı"""
     try:
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             "Referer": url
         }
         r = requests.get(url, headers=headers, timeout=10)
-        # Sayfadaki m3u8 linkini regex ile ara
-        match = re.search(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', r.text.replace("\\/", "/"))
-        if match:
-            return match.group(1)
+        text = r.text.replace("\\/", "/")
+        # Sayfadaki tüm m3u8 linklerini bul
+        matches = re.findall(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', text)
+        
+        if matches:
+            # ÖNCELİK: Senin Web Video Caster'da bulduğun o zengin (tokenlı) linkleri ara
+            for m in matches:
+                if "daioncdn" in m and ("st=" in m or "dfp" in m):
+                    return m
+            # Yoksa ilk bulduğunu döndür (Eski sistemin)
+            return matches[0]
     except:
         pass
     return None
 
 def tarayici_link_yakala(context, kanal_adi, url):
-    """Star ve Kanal 7 gibi zor kanallar için Playwright"""
+    """Star ve Kanal 7 gibi zor kanallar için Playwright - Akıllandırıldı"""
     page = context.new_page()
     bulunan_link = [url]
 
     def istek_kontrol(request):
-        u = request.url.lower()
-        if ".m3u8" in u and not any(x in u for x in ["ads", "vpaid", "telemetry", "moat"]):
-            bulunan_link[0] = request.url
+        u = request.url
+        # .m3u8 kontrolü (Eski sistemin)
+        if ".m3u8" in u.lower() and not any(x in u.lower() for x in ["ads", "vpaid", "telemetry", "moat"]):
+            # ÖNCELİK: daioncdn ve token içeren linki kap
+            if "daioncdn" in u and ("st=" in u or "dfp" in u):
+                bulunan_link[0] = u
+            # Yoksa ve henüz hiç link bulamadıysak, ilk gördüğünü kaydet (Eski sistemin)
+            elif bulunan_link[0] == url:
+                bulunan_link[0] = u
 
     page.on("request", istek_kontrol)
     try:
-        page.goto(url, wait_until="domcontentloaded", timeout=45000)
-        for _ in range(12):
-            if bulunan_link[0] != url: break
-            time.sleep(1)
+        # domcontentloaded yerine networkidle kullanarak o uzun linklerin oluşmasını bekliyoruz
+        page.goto(url, wait_until="networkidle", timeout=45000)
+        time.sleep(3) 
     except: pass
     page.close()
     return bulunan_link[0]
 
-# --- KANAL LİSTESİ ---
+# --- KANAL LİSTESİ (Senin tam listen) ---
 kanallar = [
     {"isim": "TRT 1", "url": "https://trt.daioncdn.net/trt-1/master.m3u8?app=web", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"},
     {"isim": "ATV", "url": "https://www.atv.com.tr/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"},
@@ -74,14 +86,21 @@ with sync_playwright() as p:
         if not canli_link or ".m3u8" not in canli_link:
             canli_link = tarayici_link_yakala(context, k["isim"], k["url"])
         
-        # --- KRİTİK DÜZENLEME BURASI ---
-        # Linkin sonuna User-Agent ve Referer ekliyoruz. Bu sayede 403 Forbidden hatası çözülür.
-        if "trt.daioncdn.net" in canli_link or "medya.trt.com.tr" in canli_link:
-             # TRT linkleri genelde header sevmez, onları yalın bırakıyoruz
+        # --- REFERER AKILLANDIRMA ---
+        # 403 hatasını kırmak için ana site domainlerini temizliyoruz
+        if "atv" in k["url"] or "a2tv" in k["url"]:
+            ref = "https://www.atv.com.tr/"
+        elif "cnbce" in k["url"]:
+            ref = "https://www.cnbce.com/"
+        else:
+            ref = k["url"]
+
+        # TRT ve Tabii linklerine ekleme yapmıyoruz (Hassaslar, eski sistemdeki gibi kalsın)
+        if any(x in canli_link for x in ["trt.daioncdn", "medya.trt.com.tr", "erbvr.com"]):
              m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
         else:
-             # Diğer tüm kanallara kimlik kartını ekliyoruz
-             m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}|User-Agent=Mozilla/5.0&Referer={k["url"]}\n'
+             # Diğerlerine 403 engelini aşmak için "kimlik kartı" ekle
+             m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}|User-Agent=Mozilla/5.0&Referer={ref}\n'
         
         print(f"✅ {k['isim']} bitti.")
     
