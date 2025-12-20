@@ -1,38 +1,41 @@
 import time
+import requests
+import re
 from playwright.sync_api import sync_playwright
 
-def link_yakala(context, kanal_adi, url):
-    # Eğer doğrudan bir m3u8 linkiyse (TRT gibi) tarayıcıyı hiç yorma
-    if ".m3u8" in url and "atv" not in url and "kanald" not in url and "startv" not in url:
-        return url
-    
+def eski_yontem_link(url):
+    """Senin gönderdiğin hızlı regex yöntemi"""
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Referer": url
+        }
+        r = requests.get(url, headers=headers, timeout=10)
+        # Sayfadaki m3u8 linkini regex ile ara (TLC ve DMAX burada uyanıyor)
+        match = re.search(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', r.text.replace("\\/", "/"))
+        if match:
+            return match.group(1)
+    except:
+        pass
+    return None
+
+def tarayici_link_yakala(context, kanal_adi, url):
+    """Star ve Kanal 7 gibi zor kanallar için Playwright"""
     page = context.new_page()
     bulunan_link = [url]
 
     def istek_kontrol(request):
         u = request.url.lower()
-        # M3U8 uzantısını kontrol et
-        if ".m3u8" in u:
-            # TLC ve DMAX'te linki bozan reklam ve analizleri engelle
-            yasakli_kelimeler = ["ads", "vpaid", "moat", "log", "telemetry", "doubleclick", "proxy", "prebid"]
-            if not any(x in u for x in yasakli_kelimeler):
-                bulunan_link[0] = request.url
+        if ".m3u8" in u and not any(x in u for x in ["ads", "vpaid", "telemetry", "moat"]):
+            bulunan_link[0] = request.url
 
     page.on("request", istek_kontrol)
-    
     try:
-        # Sayfayı yükle (User agent ekledik ki bot olduğumuzu anlamasınlar)
-        page.goto(url, wait_until="domcontentloaded", timeout=60000)
-        
-        # Link yakalanana kadar bekle (max 15 sn), bulunca saniyesinde çık
-        for _ in range(15):
-            # Eğer bulunan link orijinal URL'den farklıysa m3u8 yakalanmış demektir
-            if bulunan_link[0] != url: 
-                break
+        page.goto(url, wait_until="domcontentloaded", timeout=45000)
+        for _ in range(12):
+            if bulunan_link[0] != url: break
             time.sleep(1)
-    except:
-        pass
-    
+    except: pass
     page.close()
     return bulunan_link[0]
 
@@ -62,11 +65,18 @@ with sync_playwright() as p:
     
     m3u_icerik = "#EXTM3U\n"
     for k in kanallar:
-        link = link_yakala(context, k["isim"], k["url"])
-        m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{link}\n'
+        # Önce senin eski hızlı yöntemi dene (TLC/DMAX için)
+        canli_link = eski_yontem_link(k["url"])
+        
+        # Eğer eski yöntem bulamazsa, ağır abi Playwright'ı devreye sok (Star/Kanal7 için)
+        if not canli_link or ".m3u8" not in canli_link:
+            canli_link = tarayici_link_yakala(context, k["isim"], k["url"])
+        
+        m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
         print(f"✅ {k['isim']} bitti.")
     
     browser.close()
 
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(m3u_icerik)
+            
