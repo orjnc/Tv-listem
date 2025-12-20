@@ -53,7 +53,7 @@ kanallar = [
     },
     {
         "isim": "TV8", 
-        "url": "https://www.tv8.com.tr/canli-yayin", 
+        "url": "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv8.jpg"
     },
     {
@@ -63,7 +63,7 @@ kanallar = [
     },
     {
         "isim": "Kanal 7", 
-        "url": "https://www.kanal7.com/canli-izle", 
+        "url": "https://www.kanal7.com/canli-izle/", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.jpg"
     },
     {
