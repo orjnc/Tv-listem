@@ -1,40 +1,30 @@
 import time
 from playwright.sync_api import sync_playwright
 
-def link_yakala(url):
-    # Eğer zaten bir m3u8 linkiyse (TRT, NOW, TV8 gibi) doğrudan döndür
+def link_yakala(context, kanal_adi, url):
     if ".m3u8" in url:
         return url
-        
-    try:
-        with sync_playwright() as p:
-            # GitHub Actions sunucuları için en kararlı başlatma ayarları
-            browser = p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
-            context = browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-            page = context.new_page()
-            
-            m3u8_linkleri = []
-            # Ağ trafiğini (Network) dinle
-            page.on("request", lambda request: m3u8_linkleri.append(request.url) if ".m3u8" in request.url else None)
-
-            # Siteye git
-            page.goto(url, wait_until="commit", timeout=60000)
-            
-            # Web Video Caster gibi bekle: JS'nin linki üretmesi için 15 saniye kritik
-            time.sleep(15) 
-
-            browser.close()
-
-            # Reklam ve analiz linklerini ayıkla, gerçek yayın linkini bul
-            for link in m3u8_linkleri:
-                if "ads" not in link.lower() and "vpaid" not in link.lower() and "moat" not in link.lower():
-                    return link
-    except:
-        pass
     
-    return url
+    page = context.new_page()
+    bulunan_link = [url]
 
-# --- TAM KANAL LİSTESİ ---
+    def istek_kontrol(request):
+        if ".m3u8" in request.url and "ads" not in request.url:
+            bulunan_link[0] = request.url
+
+    page.on("request", istek_kontrol)
+    
+    try:
+        page.goto(url, wait_until="commit", timeout=30000)
+        # Link yakalanana kadar bekle (max 12 sn), bulunca hemen diğerine geç
+        for _ in range(12):
+            if bulunan_link[0] != url: break
+            time.sleep(1)
+    except: pass
+    
+    page.close()
+    return bulunan_link[0]
+
 kanallar = [
     {"isim": "TRT 1", "url": "https://trt.daioncdn.net/trt-1/master.m3u8?app=web", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"},
     {"isim": "ATV", "url": "https://www.atv.com.tr/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"},
@@ -54,16 +44,18 @@ kanallar = [
     {"isim": "Tabii Spor", "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"}
 ]
 
-m3u_icerik = "#EXTM3U\n"
-print("🚀 Tarama başlatıldı, bu işlem kanallar beklendiği için 4-5 dakika sürebilir...")
-
-for k in kanallar:
-    canli_link = link_yakala(k["url"])
-    m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
-    print(f"✅ {k['isim']} hazır.")
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
+    context = browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+    
+    m3u_icerik = "#EXTM3U\n"
+    for k in kanallar:
+        link = link_yakala(context, k["isim"], k["url"])
+        m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{link}\n'
+        print(f"✅ {k['isim']} hazır.")
+    
+    browser.close()
 
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(m3u_icerik)
-
-print("\n🎯 İşlem Tamam! Tüm gizli linkler playlist.m3u dosyasına işlendi.")
-
+    
