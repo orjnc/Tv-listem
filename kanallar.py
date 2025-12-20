@@ -28,7 +28,7 @@ kanallar = [
     },
     {
         "isim": "ATV", 
-        "url":  "https://yayin.canlitv.me/atv/playlist.m3u8" , 
+        "url": "https://www.atv.com.tr/canli-yayin", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"
     },
     {
@@ -38,8 +38,13 @@ kanallar = [
     },
     {
         "isim": "Star TV", 
-        "url": "https://puhutv.com/ntv-canli-yayin", 
+        "url": "https://www.startv.com.tr/canli-yayin", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/star.jpg"
+    },
+    {
+        "isim": "Show TV", 
+        "url": "https://www.showtv.com.tr/canli-yayin", 
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/showtv.jpg"
     },
     {
         "isim": "Tabii TV", 
