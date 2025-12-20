@@ -5,32 +5,16 @@ def link_yakala(url):
     # Link zaten doğrudan m3u8 ise dokunma
     if ".m3u8" in url:
         return url
-    
-    # ATV için özel API yönlendirmesi
-    if "atv.com.tr" in url:
-        target_url = "https://v.atv.com.tr/videodeti/atv"
-    else:
-        target_url = url
-
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-            "Referer": "https://www.atv.com.tr/"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Referer": url
         }
-        r = requests.get(target_url, headers=headers, timeout=10)
-        sayfa_icerigi = r.text.replace("\\/", "/")
-        
-        # Sayfadaki bütün m3u8 linklerini bul
-        links = re.findall(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', sayfa_icerigi)
-        
-        if links:
-            # Star TV özelinde filtre: İçinde 'star' geçen m3u8'i bul
-            if "star" in url:
-                for l in links:
-                    if "star" in l.lower():
-                        return l
-            # Diğer kanallar için ilk bulduğunu ver
-            return links[0]
+        r = requests.get(url, headers=headers, timeout=10)
+        # Sayfadaki m3u8 linkini çek (Kanal D ve diğerleri için)
+        match = re.search(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', r.text.replace("\\/", "/"))
+        if match:
+            return match.group(1)
     except:
         pass
     return url
@@ -44,7 +28,7 @@ kanallar = [
     },
     {
         "isim": "ATV", 
-        "url": "https://www.atv.com.tr/canli-yayin", 
+        "url":  "https://yayin.canlitv.me/atv/playlist.m3u8" , 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"
     },
     {
@@ -54,7 +38,7 @@ kanallar = [
     },
     {
         "isim": "Star TV", 
-        "url": "https://puhutv.com/star-tv-canli-yayin", 
+        "url": "https://puhutv.com/ntv-canli-yayin", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/star.jpg"
     },
     {
@@ -98,4 +82,4 @@ for k in kanallar:
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(m3u_icerik)
 
-print("✅ Liste başarıyla güncellendi. Star TV ve ATV düzeltildi.")
+print("✅ ATV eski çalışan linke döndürüldü ve liste güncellendi.")
