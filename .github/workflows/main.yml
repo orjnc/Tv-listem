@@ -17,10 +17,11 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Tarayici ve Playwright Kur
+      - name: Tarayici ve Tum Sistem Bilesenlerini Kur
         run: |
           pip install playwright requests
           playwright install chromium
+          sudo playwright install-deps chromium # Bu satır olmazsa kod hata verir
 
       - name: Kanallari Tara
         run: python kanallar.py
@@ -30,6 +31,6 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add playlist.m3u
-          git commit -m "Playlist Playwright ile guncellendi" || exit 0
+          git commit -m "Playlist guncellendi" || exit 0
           git push
           
