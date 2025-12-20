@@ -5,6 +5,10 @@ on:
     - cron: '0 */6 * * *'
   workflow_dispatch:
 
+# YAZMA YETKİSİ EKLEDİK (Hata 128'i bu çözer)
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +21,7 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Playwright ve Sistem Bilesenlerini Kur
+      - name: Playwright ve Sistem Kurulumu
         run: |
           pip install playwright requests
           python -m playwright install --with-deps chromium
@@ -31,5 +35,5 @@ jobs:
           git config --local user.name "GitHub Action"
           git add playlist.m3u
           git commit -m "Playlist guncellendi" || exit 0
-          git push
+          git push origin main
           
