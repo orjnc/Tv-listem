@@ -62,6 +62,11 @@ kanallar = [
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beyaztv.jpg"
     },
     {
+        "isim": "Teve2", 
+        "url": "https://www.teve2.com.tr/canli-yayin", 
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/teve2.jpg"
+    },
+    {
         "isim": "Kanal 7", 
         "url": "https://www.kanal7.com/canli-izle/", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.jpg"
