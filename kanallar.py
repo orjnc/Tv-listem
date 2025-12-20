@@ -2,31 +2,16 @@ import requests
 import re
 
 def link_yakala(url):
+    # Link zaten doğrudan m3u8 ise dokunma
     if ".m3u8" in url:
         return url
-    
-    # ATV'ye özel sökücü: Sayfada aramak yerine direkt verinin geldiği merkeze gidiyoruz
-    if "atv.com.tr" in url:
-        try:
-            api_url = "https://v.atv.com.tr/videodeti/atv"
-            headers = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-                "Referer": "https://www.atv.com.tr/"
-            }
-            res = requests.get(api_url, headers=headers, timeout=10).json()
-            # ATV linki JSON içinde 'video_url' anahtarında saklanır
-            if 'video_url' in res:
-                return res['video_url']
-        except:
-            pass
-
-    # Diğer kanallar (Kanal D, DMAX vb.) için standart arama
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             "Referer": url
         }
         r = requests.get(url, headers=headers, timeout=10)
+        # Sayfadaki m3u8 linkini çek (Kanal D ve diğerleri için)
         match = re.search(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', r.text.replace("\\/", "/"))
         if match:
             return match.group(1)
@@ -34,7 +19,7 @@ def link_yakala(url):
         pass
     return url
 
-# --- SENİN TAM KANAL LİSTEN ---
+# --- TAM VE GÜNCEL KANAL LİSTESİ ---
 kanallar = [
     {
         "isim": "TRT 1", 
@@ -43,13 +28,18 @@ kanallar = [
     },
     {
         "isim": "ATV", 
-        "url": "https://www.atv.com.tr/canli-yayin", 
+        "url": "https://www.atv.com.tr/canli-yayin" , 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"
     },
     {
         "isim": "Kanal D", 
         "url": "https://www.kanald.com.tr/canli-yayin", 
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg"
+    },
+    {
+        "isim": "Star TV", 
+        "url": "https://puhutv.com/star-tv-canli-yayin", 
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/startv.jpg"
     },
     {
         "isim": "Tabii TV", 
@@ -92,4 +82,4 @@ for k in kanallar:
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(m3u_icerik)
 
-print("✅ Liste güncellendi. ATV için özel JSON sökücü kullanıldı.")
+print("✅ ATV eski çalışan linke döndürüldü ve liste güncellendi.")
