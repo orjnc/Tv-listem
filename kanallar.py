@@ -1,60 +1,41 @@
-import requests
-import re
-import json
 import time
+from playwright.sync_api import sync_playwright
 
 def link_yakala(url):
+    # Eğer zaten bir m3u8 linkiyse doğrudan döndür (TRT vb. için)
     if ".m3u8" in url:
         return url
         
     try:
-        # Web Video Caster'ın kullandığı Android kimliğini birebir taklit et
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Linux; Android 12; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36",
-            "Referer": url,
-            "Accept": "*/*",
-            "Connection": "keep-alive"
-        }
-
-        # --- TAKTİK 1: BEKLEME VE TEKRARLI DENEME ---
-        # Video oynatıcının arka planda linki oluşturması için 3 deneme yapıyoruz
-        for deneme in range(3):
-            # Eğer ilk deneme değilse, videonun yüklenmesi için 3 saniye bekle
-            if deneme > 0:
-                print(f"⏳ {url} için link bekleniyor (Deneme {deneme+1})...")
-                time.sleep(3)
-
-            # --- TAKTİK 2: ARKA KAPI (API) VE ANA SAYFA TARAMASI ---
-            sorgu_listesi = []
-            if "atv.com.tr" in url:
-                sorgu_listesi.append("https://v.tmgrup.com.tr/getv_test?atv")
-            elif "kanald.com.tr" in url:
-                sorgu_listesi.append("https://www.kanald.com.tr/action/media/get-live-stream")
-            elif "startv.com.tr" in url:
-                sorgu_listesi.append("https://api.dogusdigital.com/video/contents/startv/live")
+        with sync_playwright() as p:
+            # Tarayıcıyı başlat (Görünmez modda)
+            browser = p.chromium.launch(headless=True)
+            context = browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+            page = context.new_page()
             
-            sorgu_listesi.append(url) # Ana sayfayı da listeye ekle
+            m3u8_linkleri = []
+            # Ağ trafiğini dinle: Herhangi bir .m3u8 isteği geçerse yakala
+            page.on("request", lambda request: m3u8_linkleri.append(request.url) if ".m3u8" in request.url else None)
 
-            for hedef in sorgu_listesi:
-                r = requests.get(hedef, headers=headers, timeout=15)
-                # İçeriği temizle ve m3u8 avına çık
-                icerik = r.text.replace("\\/", "/").replace("\\\\", "\\")
-                
-                # Detaylı Regex: WVC'nin yaptığı gibi tüm gizli köşelere bak
-                pattern = r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']'
-                match = re.search(pattern, icerik, re.IGNORECASE)
-                
-                if match:
-                    link = match.group(1)
-                    if "ads" not in link.lower() and "vpaid" not in link.lower():
-                        return link
+            print(f"📡 {url} taranıyor, video yüklenmesi bekleniyor...")
+            # Sayfaya git ve temel yapının yüklenmesini bekle
+            page.goto(url, wait_until="domcontentloaded", timeout=60000)
+            
+            # 15 Saniye Bekle: Web Video Caster mantığı. JavaScript'in m3u8 üretmesi için gereken süre.
+            time.sleep(15) 
 
+            browser.close()
+
+            # Reklam ve analiz linklerini filtrele
+            for link in m3u8_linkleri:
+                if "ads" not in link.lower() and "vpaid" not in link.lower() and "moat" not in link.lower():
+                    return link
     except Exception as e:
         print(f"❌ Hata ({url}): {e}")
-        
+    
     return url
 
-# --- KANAL LİSTESİ ---
+# --- BÜTÜN KANALLARIN LİSTESİ ---
 kanallar = [
     {"isim": "TRT 1", "url": "https://trt.daioncdn.net/trt-1/master.m3u8?app=web", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"},
     {"isim": "ATV", "url": "https://www.atv.com.tr/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"},
@@ -75,14 +56,14 @@ kanallar = [
 ]
 
 m3u_icerik = "#EXTM3U\n"
-print("🚀 Gecikmeli 'Network Hunter' Başlatıldı...")
+print("💎 Kristal Netliğinde Tarama Başlatıldı. Bu işlem biraz sürebilir...")
 
 for k in kanallar:
     canli_link = link_yakala(k["url"])
     m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
-    print(f"✅ {k['isim']} bitti.")
+    print(f"✔️ {k['isim']} yakalandı.")
 
 with open("playlist.m3u", "w", encoding="utf-8") as f:
     f.write(m3u_icerik)
 
-print("\n🎯 Playlist güncellendi. Eğer hala bazı linkler web sitesi olarak dönüyorsa, o kanalın JS şifrelemesi çok ağırdır.")
+print("\n🎯 İşlem Tamam! Tüm gizli linkler playlist.m3u dosyasına kaydedildi.")
