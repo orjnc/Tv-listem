@@ -25,23 +25,23 @@
         .ad-sidebar { height: 180px; margin-top: auto; }
         .ad-player { min-height: 250px; margin: 20px 0; }
 
-        /* YENİ: Kategori Barı Stili */
+        /* Kategori Barı Stili */
         .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 0 15px 20px 15px; white-space: nowrap; scrollbar-width: none; }
         .category-container::-webkit-scrollbar { display: none; }
         .cat-btn {
-    background: #1a1a1a;
-    color: var(--gray);
-    border: 1px solid #333;
-    padding: 10px 22px !important; /* Boşlukları zorla uygula */
-    border-radius: 100px !important; /* Tam yuvarlaklık için yüksek değer ve zorlama */
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: 0.3s;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 80px; /* Butonlar çok daralmasın */
+            background: #1a1a1a;
+            color: var(--gray);
+            border: 1px solid #333;
+            padding: 10px 22px !important;
+            border-radius: 100px !important;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
         }
         
         .cat-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
@@ -142,6 +142,7 @@
             <button class="cat-btn" onclick="filterCategory('Ulusal', this)">Ulusal</button>
             <button class="cat-btn" onclick="filterCategory('Spor', this)">Spor</button>
             <button class="cat-btn" onclick="filterCategory('Haber', this)">Haber</button>
+            <button class="cat-btn" onclick="filterCategory('Müzik', this)">Müzik</button>
             <button class="cat-btn" onclick="filterCategory('Belgesel', this)">Belgesel</button>
             <button class="cat-btn" onclick="filterCategory('Ekonomi', this)">Ekonomi</button>
             <button class="cat-btn" onclick="filterCategory('Sinema', this)">Sinema</button>
@@ -207,6 +208,10 @@
         function renderGrid(data) {
             const container = document.getElementById('grid-container');
             container.innerHTML = "";
+            if(data.length === 0) {
+                container.innerHTML = `<div class="text-center w-100 p-5 text-muted">Kanal bulunamadı.</div>`;
+                return;
+            }
             data.forEach(k => {
                 const isFav = favorites.includes(k.ad) ? 'active' : '';
                 container.innerHTML += `
@@ -220,7 +225,6 @@
             });
         }
 
-        // YENİ: Kategori Filtreleme Fonksiyonu
         function filterCategory(cat, element) {
             document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
             element.classList.add('active');
@@ -229,7 +233,10 @@
                 renderGrid(allChannels);
                 document.getElementById('list-title').innerText = "TV Channels";
             } else {
-                const filtered = allChannels.filter(k => k.kategori === cat);
+                // Büyük/küçük harf duyarlılığını kaldırmak için toLowerCase kullanıyoruz
+                const filtered = allChannels.filter(k => 
+                    k.kategori && k.kategori.toLowerCase() === cat.toLowerCase()
+                );
                 renderGrid(filtered);
                 document.getElementById('list-title').innerText = cat + " Kanalları";
             }
@@ -242,7 +249,15 @@
             else favorites.push(name);
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
             if (document.getElementById('btn-fav').classList.contains('active')) showFavorites();
-            else renderGrid(allChannels);
+            else {
+                // Mevcut kategori filtrelemesini koruyarak gridi güncelle
+                const activeCat = document.querySelector('.cat-btn.active').innerText;
+                if(activeCat === "Hepsi") renderGrid(allChannels);
+                else {
+                    const filtered = allChannels.filter(k => k.kategori && k.kategori.toLowerCase() === activeCat.toLowerCase());
+                    renderGrid(filtered);
+                }
+            }
         }
 
         function playChannel(url, ad, fromHash = false) {
@@ -286,6 +301,11 @@
             document.getElementById('search-section').style.display = "none";
             document.getElementById('player-box').style.display = "none";
             document.getElementById('main-content').style.display = "block";
+            
+            // "Hepsi" butonunu aktif et
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.cat-btn').classList.add('active');
+            
             renderGrid(allChannels);
             setActive('btn-home');
             video.pause();
@@ -316,7 +336,7 @@
 
         function doSearch() {
             const val = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allChannels.filter(k => k.ad.toLowerCase().includes(val));
+            const filtered = allChannels.filter(k => k.ad.toLowerCase().includes(val) || (k.kategori && k.kategori.toLowerCase().includes(val)));
             renderList(filtered, 'search-results');
         }
 
