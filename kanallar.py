@@ -1,85 +1,54 @@
-import time
-import requests
-import re
+import time, requests, re, json
 from playwright.sync_api import sync_playwright
 
-def youtube_link_yakala(kanal_url):
-    """YouTube üzerinden yayın yapan kanallar için m3u8 çekici"""
+# --- AYARLAR VE SABIKALILAR (Tarayıcı gerektiren inatçı kanallar) ---
+SABIKALILAR = ["atv", "cnbce", "a2tv", "aspor", "showtv", "ntv", "szctv", "ekoltv", "haberglobal", "kanal-d", "startv"]
+
+def youtube_link_coz(kanal_url):
+    """YouTube linkinden direkt m3u8 adresini ayıklar"""
     try:
-        # YouTube linkinden canlı yayın m3u8 adresini ayıklayan basit regex
         r = requests.get(kanal_url, timeout=10)
         match = re.search(r'hlsManifestUrl["\']:\s*["\'](https?://[^"\']*?\.m3u8)', r.text)
-        if match:
-            return match.group(1)
-    except: pass
-    return None
+        return match.group(1) if match else None
+    except: return None
 
-def eski_yontem_link(url):
-    """Hızlı regex yöntemi - Altın link önceliği"""
-    if "youtube.com" in url or "youtu.be" in url:
-        return youtube_link_yakala(url)
-        
+def hizli_regex_link(url):
+    """Tarayıcı açmadan önce hızlıca link arar"""
+    if "youtube" in url: return youtube_link_coz(url)
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-            "Referer": url
-        }
+        headers = {"User-Agent": "Mozilla/5.0", "Referer": url}
         r = requests.get(url, headers=headers, timeout=10)
         text = r.text.replace("\\/", "/")
         matches = re.findall(r'["\'](https?://[^"\']*?\.m3u8[^"\']*?)["\']', text)
-        
-        if matches:
-            # ÖNCELİK 1: daioncdn + token (Altın Link)
-            for m in matches:
-                if "daioncdn" in m and any(x in m for x in ["st=", "dfp", "ppid", "app="]):
-                    return m
-            # ÖNCELİK 2: Herhangi bir daioncdn veya kaliteli CDN
-            for m in matches:
-                if any(cdn in m for cdn in ["daioncdn", "duhnet", "ercdn"]):
-                    return m
-            return matches[0]
-    except: pass
-    return None
+        for m in matches:
+            if "daioncdn" in m and any(x in m for x in ["st=", "dfp", "ppid"]): return m
+        return matches[0] if matches else None
+    except: return None
 
-def tarayici_link_yakala(context, kanal_adi, url):
-    """Playwright - 40 Saniye Sabırlı Takip ve YouTube Desteği"""
-    if "youtube.com" in url or "youtu.be" in url:
-        yt_link = youtube_link_yakala(url)
-        return yt_link if yt_link else url
-
+def tarayici_avci(context, kanal_adi, url):
+    """En zorlu kanallar için Playwright devreye girer (Max 20sn)"""
     page = context.new_page()
     bulunan_link = [url]
-
+    
     def istek_kontrol(request):
         u = request.url
-        if ".m3u8" in u.lower() and not any(x in u.lower() for x in ["ads", "vpaid", "telemetry"]):
-            # Kalite hiyerarşisi
-            yeni_altin = "daioncdn" in u and any(x in u for x in ["st=", "dfp", "ppid"])
-            su_anki_altin = "daioncdn" in bulunan_link[0] and "st=" in bulunan_link[0]
-
-            if yeni_altin:
-                bulunan_link[0] = u
-            elif "daioncdn" in u and not su_anki_altin:
-                bulunan_link[0] = u
-            elif bulunan_link[0] == url:
-                bulunan_link[0] = u
+        if ".m3u8" in u.lower() and "daioncdn" in u:
+            bulunan_link[0] = u
 
     page.on("request", istek_kontrol)
     try:
-        page.goto(url, wait_until="networkidle", timeout=60000)
+        page.goto(url, wait_until="networkidle", timeout=25000)
         time.sleep(3)
         page.mouse.click(50, 50) 
-        
-        # 40 Saniye pusuda bekle
-        for _ in range(40):
-            if "daioncdn" in bulunan_link[0] and "st=" in bulunan_link[0]:
-                break
+        # Link yakalanana kadar kısa süreli bekleme
+        for _ in range(15):
+            if "daioncdn" in bulunan_link[0] and "st=" in bulunan_link[0]: break
             time.sleep(1)
     except: pass
     finally: page.close()
     return bulunan_link[0]
 
-# --- KANAL LİSTESİ (YouTube linkleri güncellenebilir) ---
+# --- 53 KANALIN TAM LİSTESİ ---
 kanallar = [
     {"isim": "TRT 1", "url": "https://trt.daioncdn.net/trt-1/master.m3u8?app=web", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg"},
     {"isim": "ATV", "url": "https://www.atv.com.tr/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg"},
@@ -136,39 +105,38 @@ kanallar = [
     {"isim": "Dream Türk", "url": "https://www.dreamturk.com.tr/canli-yayin-izle", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dreamturk.jpg"},
 ]
 
+# --- ANA DÖNGÜ ---
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
-    context = browser.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+    context = browser.new_context(user_agent="Mozilla/5.0")
     
-    m3u_icerik = "#EXTM3U\n"
+    final_data = []
+
     for k in kanallar:
-        # YouTube, Regex veya Tarayıcı ile link yakala
-        canli_link = eski_yontem_link(k["url"])
+        print(f"🔄 {k['isim']} işleniyor...")
+        canli_link = None
         
-        # Eğer link hala bulunamadıysa veya sadece kanalın sitesi döndüyse tarayıcıyı ZORLA
-        if not canli_link or ".m3u8" not in canli_link or canli_link == k["url"]:
-            canli_link = tarayici_link_yakala(context, k["isim"], k["url"])
+        # 1. Aşama: Hızlı Kontrol (Regex veya YouTube)
+        if not any(s in k['url'].lower() for s in SABIKALILAR):
+            canli_link = hizli_regex_link(k['url'])
         
-        # Referer Ayarı
-        if "atv" in k["url"] or "a2tv" in k["url"] or "aspor" in k["url"]:
-            ref = "https://www.atv.com.tr/"
-        elif "cnbce" in k["url"]:
-            ref = "https://www.cnbce.com/"
-        elif "youtube" in canli_link:
-            ref = "https://www.youtube.com/"
-        else:
-            ref = k["url"]
-
-        # TRT ve Tabii linklerine ekleme yapmıyoruz
-        if any(x in canli_link for x in ["trt.daioncdn", "medya.trt.com.tr", "erbvr.com"]):
-             m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}\n'
-        else:
-             m3u_icerik += f'#EXTINF:-1 tvg-logo="{k["logo"]}", {k["isim"]}\n{canli_link}|User-Agent=Mozilla/5.0&Referer={ref}\n'
+        # 2. Aşama: Eğer link bulunamadıysa Tarayıcıyı aç
+        if not canli_link or ".m3u8" not in canli_link or canli_link == k['url']:
+            canli_link = tarayici_avci(context, k['isim'], k['url'])
         
+        # Referer ve Format Ayarı
+        ref = "https://www.atv.com.tr/" if any(x in k['url'] for x in ["atv", "a2", "aspor"]) else k['url']
+        
+        final_data.append({
+            "ad": k['isim'],
+            "logo": k['logo'],
+            "url": canli_link,
+            "ref": ref
+        })
         print(f"✅ {k['isim']} bitti.")
-    
-    browser.close()
 
-with open("playlist.m3u", "w", encoding="utf-8") as f:
-    f.write(m3u_icerik)
-    
+    # Sonucu JSON olarak kaydet (Web sitemiz bunu okuyacak)
+    with open("kanallar.json", "w", encoding="utf-8") as f:
+        json.dump(final_data, f, ensure_ascii=False, indent=4)
+
+    browser.close()
