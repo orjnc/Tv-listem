@@ -18,41 +18,38 @@
         .menu-item i { color: var(--accent); font-size: 1.2rem; width: 25px; }
         .menu-item:hover { background: rgba(255, 0, 92, 0.1); }
 
-        /* Reklam Alanları Stili */
+        /* Reklam Alanları */
         .ad-box { background: #1a1a1a; border: 1px dashed #333; border-radius: 15px; margin: 15px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .ad-label { position: absolute; top: 2px; left: 8px; font-size: 8px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
         .ad-banner { min-height: 60px; }
         .ad-sidebar { height: 180px; margin-top: auto; }
         .ad-player { min-height: 250px; margin: 20px 0; }
 
-        /* Header */
+        /* YENİ: Kategori Barı Stili */
+        .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 0 15px 20px 15px; white-space: nowrap; scrollbar-width: none; }
+        .category-container::-webkit-scrollbar { display: none; }
+        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; transition: 0.3s; cursor: pointer; }
+        .cat-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+        /* Header & Promo */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: sticky; top: 0; background: var(--bg); z-index: 1000; }
         .logo { font-weight: 800; font-size: 1.5rem; color: var(--accent); }
         .logo span { color: white; }
-
-        /* Slider */
         .promo-slider { padding: 0 15px; margin-bottom: 25px; }
         .promo-card { background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=800&q=80'); height: 180px; border-radius: 20px; display: flex; align-items: flex-end; padding: 20px; border: 1px solid #333; }
 
         /* Grid View */
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
         .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #222; transition: 0.2s; cursor: pointer; position: relative; }
-        .channel-square:active { transform: scale(0.95); border-color: var(--accent); }
-        .square-logo { width: 50%; height: 50%; object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
-        .square-name { font-size: 0.75rem; font-weight: 600; text-align: center; }
-
         .fav-star { position: absolute; top: 8px; right: 8px; font-size: 0.9rem; color: #444; z-index: 5; transition: 0.3s; }
         .fav-star.active { color: #ffc107; font-weight: 900; }
+        .square-logo { width: 50%; height: 50%; object-fit: contain; margin-bottom: 8px; }
+        .square-name { font-size: 0.75rem; font-weight: 600; text-align: center; }
 
-        .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
-        .list-logo { width: 55px; height: 55px; object-fit: contain; background: #fff; border-radius: 12px; padding: 5px; }
-        .list-info { flex-grow: 1; }
-        .list-prog { font-size: 0.7rem; color: var(--gray); margin-top: 4px; }
-
+        /* Player & Nav */
         #player-box { display: none; padding: 0; position: sticky; top: 60px; z-index: 900; background: #000; }
         video { width: 100%; aspect-ratio: 16/9; }
-
-        .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(10px); border-radius: 25px; display: flex; justify-content: space-around; padding: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 1000; border: 1px solid #333; }
+        .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(10px); border-radius: 25px; display: flex; justify-content: space-around; padding: 12px; z-index: 1000; border: 1px solid #333; }
         .nav-btn { color: #666; font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; }
         .nav-btn.active { color: var(--accent); }
         .nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
@@ -60,6 +57,8 @@
         .overlay { display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1500; }
         #search-section { padding: 15px; display: none; }
         .search-input { background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 15px; padding: 12px 20px; width: 100%; margin-bottom: 20px; }
+        .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
+        .list-logo { width: 55px; height: 55px; object-fit: contain; background: #fff; border-radius: 12px; padding: 5px; }
     </style>
 </head>
 <body>
@@ -72,7 +71,7 @@
             <i class="fas fa-times fs-4" onclick="toggleSidebar()"></i>
         </div>
         <div class="menu-links">
-            <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.7</span></a>
+            <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.8</span></a>
             <a href="javascript:void(0)" onclick="showFavorites(); toggleSidebar();" class="menu-item"><i class="fas fa-star"></i> My Favorites</a>
             <a href="#" class="menu-item"><i class="fas fa-share-nodes"></i> Share App</a>
             <hr style="border-color: #333; margin: 20px 0;">
@@ -123,16 +122,20 @@
             </div>
         </div>
 
+        <div class="category-container" id="category-list">
+            <button class="cat-btn active" onclick="filterCategory('Hepsi', this)">Hepsi</button>
+            <button class="cat-btn" onclick="filterCategory('Ulusal', this)">Ulusal</button>
+            <button class="cat-btn" onclick="filterCategory('Spor', this)">Spor</button>
+            <button class="cat-btn" onclick="filterCategory('Haber', this)">Haber</button>
+            <button class="cat-btn" onclick="filterCategory('Belgesel', this)">Belgesel</button>
+            <button class="cat-btn" onclick="filterCategory('Ekonomi', this)">Ekonomi</button>
+            <button class="cat-btn" onclick="filterCategory('Sinema', this)">Sinema</button>
+        </div>
+
         <div class="ad-box ad-banner">
             <span class="ad-label">Sponsor</span>
             <script type="text/javascript">
-              atOptions = {
-                'key' : '9a007d32e44a32165e3e5e48dfa7c182',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-              };
+              atOptions = { 'key' : '9a007d32e44a32165e3e5e48dfa7c182', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
             </script>
             <script type="text/javascript" src="https://www.highperformanceformat.com/9a007d32e44a32165e3e5e48dfa7c182/invoke.js"></script>
         </div>
@@ -169,7 +172,6 @@
             .then(data => {
                 allChannels = data;
                 renderGrid(data);
-                // Sayfa ilk yüklendiğinde linkte kanal varsa aç
                 checkHash();
             });
 
@@ -182,13 +184,9 @@
             }
         }
 
-        // Geri tuşu takibi
         window.onpopstate = function() {
-            if (window.location.hash === "") {
-                showHome(true);
-            } else {
-                checkHash();
-            }
+            if (window.location.hash === "") showHome(true);
+            else checkHash();
         };
 
         function renderGrid(data) {
@@ -207,47 +205,41 @@
             });
         }
 
+        // YENİ: Kategori Filtreleme Fonksiyonu
+        function filterCategory(cat, element) {
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            
+            if (cat === 'Hepsi') {
+                renderGrid(allChannels);
+                document.getElementById('list-title').innerText = "TV Channels";
+            } else {
+                const filtered = allChannels.filter(k => k.kategori === cat);
+                renderGrid(filtered);
+                document.getElementById('list-title').innerText = cat + " Kanalları";
+            }
+        }
+
         function toggleFav(event, name) {
             event.stopPropagation();
             const index = favorites.indexOf(name);
             if (index > -1) favorites.splice(index, 1);
             else favorites.push(name);
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
-            
             if (document.getElementById('btn-fav').classList.contains('active')) showFavorites();
             else renderGrid(allChannels);
         }
 
-        function showFavorites() {
-            const favList = allChannels.filter(k => favorites.includes(k.ad));
-            renderGrid(favList);
-            document.getElementById('list-title').innerText = "Favorites";
-            setActive('btn-fav');
-            document.getElementById('player-box').style.display = "none";
-            document.getElementById('home-section').style.display = "block";
-            document.getElementById('search-section').style.display = "none";
-            document.querySelector('.promo-slider').style.display = "block";
-            document.querySelector('.ad-banner').style.display = "flex";
-        }
-
         function playChannel(url, ad, fromHash = false) {
-            // Linki güncelle
-            if(!fromHash) {
-                history.pushState({page: 'player'}, ad, "#" + encodeURIComponent(ad));
-            }
-
+            if(!fromHash) history.pushState({page: 'player'}, ad, "#" + encodeURIComponent(ad));
             document.getElementById('player-box').style.display = "block";
-            document.getElementById('home-section').style.display = "none";
-            document.getElementById('search-section').style.display = "none";
-            document.querySelector('.promo-slider').style.display = "none";
-            document.querySelector('.ad-banner').style.display = "none";
+            document.getElementById('main-content').style.display = "none";
             document.getElementById('now-playing').innerText = ad;
             
             const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
             renderList(shuffled, 'suggested-list');
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
-
             if (Hls.isSupported()) {
                 hls.loadSource(url);
                 hls.attachMedia(video);
@@ -265,41 +257,41 @@
                     <div class="list-item" onclick="playChannel('${k.url}', '${k.ad}')">
                         <img src="${k.logo}" class="list-logo" onerror="this.src='https://via.placeholder.com/50'">
                         <div class="list-info">
-                            <div class="d-flex justify-content-between">
-                                <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
-                            </div>
+                            <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
                             <div class="list-prog">program bilgisi yok</div>
                         </div>
                     </div>`;
             });
         }
 
-        function showSearch() {
-            document.getElementById('home-section').style.display = "none";
-            document.querySelector('.promo-slider').style.display = "none";
-            document.querySelector('.ad-banner').style.display = "none";
-            document.getElementById('player-box').style.display = "none";
-            document.getElementById('search-section').style.display = "block";
-            setActive('btn-search');
-        }
-
         function showHome(fromPopState = false) {
-            if(!fromPopState && window.location.hash !== "") {
-                history.pushState({page: 'home'}, "Home", window.location.pathname);
-            }
-            
+            if(!fromPopState && window.location.hash !== "") history.pushState({page: 'home'}, "Home", window.location.pathname);
             document.getElementById('list-title').innerText = "TV Channels";
             document.getElementById('home-section').style.display = "block";
             document.getElementById('search-section').style.display = "none";
             document.getElementById('player-box').style.display = "none";
-            document.querySelector('.promo-slider').style.display = "block";
-            document.querySelector('.ad-banner').style.display = "flex";
+            document.getElementById('main-content').style.display = "block";
             renderGrid(allChannels);
             setActive('btn-home');
-            
-            // Videoyu durdur
             video.pause();
             video.src = "";
+        }
+
+        function showFavorites() {
+            const favList = allChannels.filter(k => favorites.includes(k.ad));
+            renderGrid(favList);
+            document.getElementById('list-title').innerText = "Favorites";
+            setActive('btn-fav');
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('home-section').style.display = "block";
+            document.getElementById('search-section').style.display = "none";
+        }
+
+        function showSearch() {
+            document.getElementById('home-section').style.display = "none";
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('search-section').style.display = "block";
+            setActive('btn-search');
         }
 
         function setActive(id) {
