@@ -1,18 +1,18 @@
 #EXTM3U
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg", TRT 1
-https://trt.daioncdn.net/trt-1/master_1440p.m3u8?&sid=80j9wjukeiz1&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2
+https://trt.daioncdn.net/trt-1/master_1440p.m3u8?&sid=80jhpmm10mys&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg", ATV
-https://securevideotoken.tmgrup.com.tr/webtv/secure?135437&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fatvhd%2Fatvhd.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fatvhd%2Fatvhd.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.atv.com.tr/
+https://securevideotoken.tmgrup.com.tr/webtv/secure?330159&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fatvhd%2Fatvhd.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fatvhd%2Fatvhd.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.atv.com.tr/
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg", Kanal D
 https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&amp;ce=3|User-Agent=Mozilla/5.0&Referer=https://www.kanald.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/star.jpg", Star TV
-https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80ja3f2q36r4&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.startv.com.tr/canli-yayin
+https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80jhwc7y85kg&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.startv.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/showtv.jpg", Show TV
 https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1|User-Agent=Mozilla/5.0&Referer=https://www.showtv.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/now.jpg", NOW TV
 https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8|User-Agent=Mozilla/5.0&Referer=https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv8.jpg", TV8
-https://tv8.daioncdn.net/tv8/tv8_1080p.m3u8?&sid=80ja9a6qwme3&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3|User-Agent=Mozilla/5.0&Referer=https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
+https://tv8.daioncdn.net/tv8/tv8_1080p.m3u8?&sid=80ji258ds8vx&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3|User-Agent=Mozilla/5.0&Referer=https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beyaztv.jpg", Beyaz TV
 https://beyaztv.daioncdn.net/beyaztv/beyaztv.m3u8?app=fcd5c66b-da9d-44ba-a410-4f34805c397d&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.beyaztv.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/teve2.jpg", Teve2
@@ -20,17 +20,21 @@ https://demiroren.daioncdn.net/teve2/teve2.m3u8?ce=3&amp;app=6aab838a-437e-4a1b-
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/360.jpg", 360
 https://turkmedya-live.ercdn.net/tv360/tv360.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.tv360.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/a2.jpg", a2
-https://securevideotoken.tmgrup.com.tr/webtv/secure?416460&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fa2tv%2Fa2tv.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fa2tv%2Fa2tv.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.atv.com.tr/
+https://securevideotoken.tmgrup.com.tr/webtv/secure?520109&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fa2tv%2Fa2tv.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fa2tv%2Fa2tv.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.atv.com.tr/
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.jpg", Kanal 7
-https://kanal7.daioncdn.net/kanal7/kanal7_1080p.m3u8?&sid=80jag3thbkmo&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.kanal7.com/canli-izle/
+https://kanal7.daioncdn.net/kanal7/kanal7_1080p.m3u8?&sid=80ji86xothol&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.kanal7.com/canli-izle/
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg", Tabii TV
-https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8?sid=f5R7On_N9kKQzzRGnn2nww
+https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8?sid=dTox1iUzkkWkKvNxyyHh5A
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fx.jpg", FX
 https://saran-live.ercdn.net/fx/index.m3u8?checkedby:iptvcat.com|User-Agent=Mozilla/5.0&Referer=https://saran-live.ercdn.net/fx/index.m3u8?checkedby:iptvcat.com
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg", DMAX
-https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=dmt6MGd6MXQyZnRwSngydk5aUitMK2FONlQ0Kzk0N1MvbG9DOExSNDNPQT0=|User-Agent=Mozilla/5.0&Referer=https://www.dmax.com.tr/canli-izle
+https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=VUNkZ2x0TytsbjZFUjd4N2lWNDgzNml5elJ1NzQzdEdna0JNRS9Zakdicz0=|User-Agent=Mozilla/5.0&Referer=https://www.dmax.com.tr/canli-izle
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg", TLC
-https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=UnZDQTNraGJhcUlMclFlSmZoR213R0ZRL0ZTWjNkcXc1clBiZEhKdUkwMD0=|User-Agent=Mozilla/5.0&Referer=https://www.tlctv.com.tr/canli-izle
+https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=RVBQK1dINk9WRjVSNmVhdVRFZmtYVkdRdFlhSE5nSGMvN0QxL1NYUnJlWT0=|User-Agent=Mozilla/5.0&Referer=https://www.tlctv.com.tr/canli-izle
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnbce.jpg", CNBC-e
+https://cnbc-e-live.ercdn.net/cnbce/cnbce_low.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.cnbce.com/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt2.jpg", TRT 2
+https://trt.daioncdn.net/trt-1/master.m3u8?app=clean
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnnturk.jpg", CNN TÜRK
 https://live.duhnet.tv//S2/HLS_LIVE/cnnturknp/playlist.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.cnnturk.com/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trthaber.jpg", TRT Haber
@@ -48,7 +52,7 @@ https://ekoltv-live.ercdn.net/ekoltv/ekoltv.m3u8|User-Agent=Mozilla/5.0&Referer=
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/ahaber.jpg", A Haber
 https://www.ahaber.com.tr/video/canli-yayin|User-Agent=Mozilla/5.0&Referer=https://www.ahaber.com.tr/video/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv100.jpg", tv100
-https://tv100.daioncdn.net/tv100/tv100_720p.m3u8?&sid=80jaxal89w8s&app=356e7599-d81d-4357-935a-355a1ad9846e&ce=2|User-Agent=Mozilla/5.0&Referer=https://www.tv100.com/canli-yayin
+https://tv100.daioncdn.net/tv100/tv100_720p.m3u8?&sid=80jipdjluxum&app=356e7599-d81d-4357-935a-355a1ad9846e&ce=2|User-Agent=Mozilla/5.0&Referer=https://www.tv100.com/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tvnet.jpg", tvnet
 https://mn-nl.mncdn.com/tvnet/tvnet/playlist.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.tvnet.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tgrt.jpg", TGRT Haber
@@ -57,11 +61,47 @@ https://canli.tgrthaber.com/tgrt.m3u8|User-Agent=Mozilla/5.0&Referer=https://www
 https://turkmedya-live.ercdn.net/tv24/tv24.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.yirmidort.tv/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/krt.jpg", KRT
 https://www.krttv.com.tr/canli-yayin|User-Agent=Mozilla/5.0&Referer=https://www.krttv.com.tr/canli-yayin
-#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnbce.jpg", CNBC-e
-https://cnbc-e-live.ercdn.net/cnbce/cnbce_low.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.cnbce.com/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tytturk.jpg", TYT Türk
+https://tytturk-live.ercdn.net/tytturk/tytturk.m3u8|User-Agent=Mozilla/5.0&Referer=https://tytturk.com/canli-yayin
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/haberglobal.jpg", Haber Global
+https://haberglobal.com/canli-yayin|User-Agent=Mozilla/5.0&Referer=https://haberglobal.com/canli-yayin
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fbtv.jpg", FB TV
+https://www.fenerbahce.org/fenerbahcetv/canliyayin|User-Agent=Mozilla/5.0&Referer=https://www.fenerbahce.org/fenerbahcetv/canliyayin
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/htspor.jpg", HT Spor
+https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=80jj23r3f0wc&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2|User-Agent=Mozilla/5.0&Referer=https://www.htspor.com/canli-yayin
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/aspor.jpg", A Spor
+https://securevideotoken.tmgrup.com.tr/webtv/secure?522771&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fasporhd%2Fasporhd.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fasporhd%2Fasporhd.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.aspor.com.tr/webtv/canli-yayin
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beinsportshaber.jpg", Bein Sports Haber
+https://beinsports.com.tr/canli-yayin|User-Agent=Mozilla/5.0&Referer=https://beinsports.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg", TRT Spor
 https://tv-trtspor1.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg", TRT Spor Yildiz
 https://tv-trtspor2.medya.trt.com.tr/master.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg", Tabii Spor
 https://trt.daioncdn.net/trt-1/master.m3u8?app=clean
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/sportstv.jpg", Sports TV
+https://live.sportstv.com.tr/hls/low/sportstv.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.sportstv.com.tr/canli/sportstv
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturk.jpg", Powertürk TV
+https://livetv.powerapp.com.tr/powerturkTV/powerturkhd.smil/playlists.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.powerapp.com.tr/tvs/power-tvs/powerturktv/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powertv.jpg", Power TV
+https://livetv.powerapp.com.tr/powerTV/powerhd.smil/playlists.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.powerapp.com.tr/tvs/power-tvs/powertv/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerlove.jpg", Power Love TV
+https://listen.powerapp.com.tr/plove/love.smil/playlist.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.powerapp.com.tr/tvs/power-tvs/powerlovetv/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturkakustik.jpg", PowerTürk Akustik TV
+https://listen.powerapp.com.tr/pturkakustik/akustik.smil/playlist.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.powerapp.com.tr/tvs/power-tvs/powerturkakustiktv/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturkslow.jpg", PowerTürk Slow TV
+https://listen.powerapp.com.tr/pturkslow/slow.smil/playlist.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.powerapp.com.tr/tvs/power-tvs/powertrslowtv/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/pttaptaze.jpg", PowerTürk Taptaze TV
+https://listen.powerapp.com.tr/pturktaptaze/taptaze.smil/playlist.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.powerapp.com.tr/tvs/power-tvs/powerturktaptazetv/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1turk.jpg", Nr1 Türk
+https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/broadcast_5c9e187770143.smil/playlist.m3u8?md5=3qw7FnqXRslD4wpCk0qhZA&expires=1766373226|User-Agent=Mozilla/5.0&Referer=https://www.numberone.com.tr/2015/12/20/number1-turk-tv-canli-yayin/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1.jpg", Nr1
+https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/broadcast_5c9e17cd59e8b.smil/playlist.m3u8?md5=sBnYoBU9XJkaSq49k2C5Wg&expires=1766373284|User-Agent=Mozilla/5.0&Referer=https://www.numberone.com.tr/2015/12/18/nr1-tv-canli-yayin/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1ask.jpg", Nr1 Aşk
+https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/broadcast_5c9e18f9c54e6.smil/playlist.m3u8?md5=uFacG8G9RCn41heIVA8Bbw&expires=1766373345|User-Agent=Mozilla/5.0&Referer=https://www.numberone.com.tr/2017/10/05/nr1-ask-tv-canli-yayin-izle/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1dance.jpg", Nr1 Dance
+https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/broadcast_5c9e2aa89e721.smil/playlist.m3u8?md5=eUxk2YatyvBTxeSmzWgoLQ&expires=1766373406|User-Agent=Mozilla/5.0&Referer=https://www.numberone.com.tr/2017/10/03/number1-dance-ty-canli-yayin-izle/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1rap.jpg", Nr1 Rap
+https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/broadcast_5c9e19877b340.smil/playlist.m3u8?md5=2L95dtyBhnDBRyRn100s8Q&expires=1766373467|User-Agent=Mozilla/5.0&Referer=https://www.numberone.com.tr/2017/10/05/number1-rap-tv-canli-yayin-izle/
+#EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dreamturk.jpg", Dream Türk
+https://live.duhnet.tv/S2/HLS_LIVE/dreamturknp/playlist.m3u8?&live=true&app=com.dreamturk&st=OL5i87VV81Njf4fJZ49tow&e=1766297929|User-Agent=Mozilla/5.0&Referer=https://www.dreamturk.com.tr/canli-yayin-izle
