@@ -89,6 +89,8 @@ kanallar = [
     {"isim": "FX", "url": "https://saran-live.ercdn.net/fx/index.m3u8?checkedby:iptvcat.com", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fx.jpg"},
     {"isim": "DMAX", "url": "https://www.dmax.com.tr/canli-izle", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg"},
     {"isim": "TLC", "url": "https://www.tlctv.com.tr/canli-izle", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg"},
+    {"isim": "CNBC-e", "url": "https://www.cnbce.com/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnbce.jpg"},
+    {"isim": "TRT 2", "url": "https://www.tabii.com/watch/live/trt2?trackId=150007", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt2.jpg"},
     {"isim": "CNN TÜRK", "url": "https://www.cnnturk.com/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnnturk.jpg"},
     {"isim": "TRT Haber", "url": "https://www.trthaber.com/canli-yayin-izle.html", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trthaber.jpg"}, 
     {"isim": "Habertürk", "url": "https://m.haberturk.com/canliyayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/haberturk.jpg"},
@@ -102,10 +104,16 @@ kanallar = [
     {"isim": "TGRT Haber", "url": "https://www.tgrthaber.com/canli", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tgrt.jpg"},
     {"isim": "24 TV", "url": "https://www.yirmidort.tv/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/24.jpg"},
     {"isim": "KRT", "url": "https://www.krttv.com.tr/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/krt.jpg"},
-    {"isim": "CNBC-e", "url": "https://www.cnbce.com/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnbce.jpg"},
+    {"isim": "TYT Türk", "url": "https://tytturk.com/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tytturk.jpg"},
+    {"isim": "Haber Global", "url": "https://haberglobal.com/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/haberglobal.jpg"},
+    {"isim": "FB TV", "url": "https://www.fenerbahce.org/fenerbahcetv/canliyayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fbtv.jpg"},
+    {"isim": "HT Spor", "url": "https://www.htspor.com/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/htspor.jpg"},
+    {"isim": "A Spor", "url": "https://www.aspor.com.tr/webtv/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/aspor.jpg"},
+    {"isim": "Bein Sports Haber", "url": "https://beinsports.com.tr/canli-yayin", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beinsportshaber.jpg"},
     {"isim": "TRT Spor", "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg"},
     {"isim": "TRT Spor Yildiz", "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg"},
-    {"isim": "Tabii Spor", "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"}
+    {"isim": "Tabii Spor", "url": "https://www.tabii.com/tr/watch/live/trtsporyildiz?trackId=150002", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg"},
+    {"isim": "Sports TV", "url": "https://www.sportstv.com.tr/canli/sportstv", "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/sportstv.jpg"},
 ]
 
 with sync_playwright() as p:
