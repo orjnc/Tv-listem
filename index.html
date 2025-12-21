@@ -18,13 +18,6 @@
         .menu-item i { color: var(--accent); font-size: 1.2rem; width: 25px; }
         .menu-item:hover { background: rgba(255, 0, 92, 0.1); }
 
-        /* Reklam Alanları */
-        .ad-box { background: #1a1a1a; border: 1px dashed #333; border-radius: 15px; margin: 15px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .ad-label { position: absolute; top: 2px; left: 8px; font-size: 8px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
-        .ad-banner { min-height: 60px; }
-        .ad-sidebar { height: 180px; margin-top: auto; }
-        .ad-player { min-height: 250px; margin: 20px 0; }
-
         /* Kategori Barı */
         .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 0 15px 20px 15px; white-space: nowrap; scrollbar-width: none; }
         .category-container::-webkit-scrollbar { display: none; }
@@ -36,17 +29,44 @@
         .promo-card { background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8)); height: 180px; border-radius: 20px; display: flex; align-items: flex-end; padding: 20px; border: 1px solid #333; transition: transform 0.3s ease, opacity 0.5s ease; }
         .promo-card:active { transform: scale(0.98); }
 
-        /* Grid & Utils */
+        /* Grid & Logolar - YENİ DÜZENLEME */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: sticky; top: 0; background: var(--bg); z-index: 1000; }
         .logo { font-weight: 800; font-size: 1.5rem; color: var(--accent); }
         .logo span { color: white; }
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
-        .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #222; transition: 0.2s; cursor: pointer; position: relative; }
-        .fav-star { position: absolute; top: 8px; right: 8px; font-size: 0.9rem; color: #444; z-index: 5; transition: 0.3s; }
-        .fav-star.active { color: #ffc107; font-weight: 900; }
-        .square-logo { width: 50%; height: 50%; object-fit: contain; margin-bottom: 8px; }
-        .square-name { font-size: 0.75rem; font-weight: 600; text-align: center; }
+        
+        .channel-square { 
+            background: var(--card); 
+            border-radius: 18px; 
+            aspect-ratio: 1/1; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: 1px solid #222; 
+            transition: 0.3s ease; 
+            cursor: pointer; 
+            position: relative; 
+            overflow: hidden;
+        }
 
+        .channel-square:hover { border-color: var(--accent); background: #1a1a1a; }
+
+        .square-logo { 
+            width: 70%; 
+            height: 70%; 
+            object-fit: contain; 
+            /* Logoların daha net durması için gölge eklendi */
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .channel-square:hover .square-logo { transform: scale(1.15); }
+
+        /* Favori Yıldızı */
+        .fav-star { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.2); z-index: 5; transition: 0.3s; }
+        .fav-star.active { color: #ffc107; }
+
+        /* Arama ve Navigasyon */
         #player-box { display: none; padding: 0; position: sticky; top: 60px; z-index: 900; background: #000; }
         video { width: 100%; aspect-ratio: 16/9; }
         .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(10px); border-radius: 25px; display: flex; justify-content: space-around; padding: 12px; z-index: 1000; border: 1px solid #333; }
@@ -150,6 +170,7 @@
                 checkHash();
             });
 
+        // YENİ RENDER FONKSİYONU - İSİMLER KALDIRILDI
         function renderGrid(data) {
             const container = document.getElementById('grid-container');
             container.innerHTML = "";
@@ -158,9 +179,8 @@
                 container.innerHTML += `
                     <div class="channel-square">
                         <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${k.ad}')"></i>
-                        <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}', false, '${k.kategori}')">
-                            <img src="${k.logo}" class="square-logo" onerror="this.src='https://via.placeholder.com/60'">
-                            <span class="square-name">${k.ad}</span>
+                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}', false, '${k.kategori}')">
+                            <img src="${k.logo}" class="square-logo" onerror="this.src='https://via.placeholder.com/150?text=TV'">
                         </div>
                     </div>`;
             });
