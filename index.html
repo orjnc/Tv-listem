@@ -22,9 +22,9 @@
         .ad-box { background: #1a1a1a; border: 1px dashed #333; border-radius: 15px; margin: 15px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .ad-label { position: absolute; top: 2px; left: 8px; font-size: 8px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
         .ad-close { position: absolute; top: 2px; right: 8px; color: #555; cursor: pointer; font-size: 12px; z-index: 10; }
-        .ad-banner { height: 60px; }
+        .ad-banner { min-height: 80px; }
         .ad-sidebar { height: 180px; margin-top: auto; }
-        .ad-player { height: 250px; margin: 20px 0; }
+        .ad-player { min-height: 250px; margin: 20px 0; }
 
         /* Header */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: sticky; top: 0; background: var(--bg); z-index: 1000; }
@@ -37,10 +37,14 @@
 
         /* Grid View */
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
-        .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #222; transition: 0.2s; cursor: pointer; }
+        .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #222; transition: 0.2s; cursor: pointer; position: relative; }
         .channel-square:active { transform: scale(0.95); border-color: var(--accent); }
         .square-logo { width: 50%; height: 50%; object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
         .square-name { font-size: 0.75rem; font-weight: 600; text-align: center; }
+
+        /* Favori Yıldızı */
+        .fav-star { position: absolute; top: 8px; right: 8px; font-size: 0.9rem; color: #444; z-index: 5; transition: 0.3s; }
+        .fav-star.active { color: #ffc107; font-weight: 900; }
 
         /* List View */
         .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
@@ -73,23 +77,16 @@
             <i class="fas fa-times fs-4" onclick="toggleSidebar()"></i>
         </div>
         <div class="menu-links">
-            <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.4</span></a>
-            <a href="#" class="menu-item"><i class="fas fa-star"></i> Rate</a>
-            <a href="#" class="menu-item"><i class="fas fa-share-nodes"></i> Share</a>
-            <a href="#" class="menu-item"><i class="fas fa-download"></i> Downloads</a>
+            <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.5</span></a>
+            <a href="javascript:void(0)" onclick="showFavorites(); toggleSidebar();" class="menu-item"><i class="fas fa-star"></i> My Favorites</a>
+            <a href="#" class="menu-item"><i class="fas fa-share-nodes"></i> Share App</a>
             <hr style="border-color: #333; margin: 20px 0;">
-            <a href="#" class="menu-item"><i class="fas fa-info-circle"></i> About</a>
             <a href="#" class="menu-item"><i class="fas fa-comment-alt"></i> Contact</a>
-            <a href="#" class="menu-item text-danger"><i class="fas fa-user-minus"></i> Delete Account</a>
         </div>
 
         <div class="ad-box ad-sidebar">
             <span class="ad-label">Advertisement</span>
-            <span class="ad-close" onclick="this.parentElement.style.display='none'">×</span>
-            <div style="color:#444; font-size:12px; text-align:center;">
-                <i class="fas fa-rectangle-ad fs-1 d-block mb-2"></i>
-                REKLAM KODU BURAYA
-            </div>
+            <div style="color:#444; font-size:12px; text-align:center;">Reklam Yayında</div>
         </div>
     </div>
 
@@ -103,18 +100,15 @@
         <video id="video" controls autoplay playsinline></video>
         <div class="p-3">
             <div class="d-flex justify-content-between align-items-center">
-                <h5 id="now-playing" class="m-0">Kanal Adı</h5>
-                <i class="far fa-star fs-4"></i>
+                <h5 id="now-playing" class="m-0 text-truncate">Kanal Adı</h5>
+                <i id="player-fav-icon" class="far fa-star fs-4" onclick="toggleFavFromPlayer()"></i>
             </div>
             <p class="text-muted small mt-1">Canlı Yayın • Ulusal</p>
             
             <div class="ad-box ad-player">
                 <span class="ad-label">Sponsorlu İçerik</span>
-                <span class="ad-close" onclick="this.parentElement.style.display='none'">×</span>
-                <div style="color:#444; font-size:14px; text-align:center;">
-                    <i class="fas fa-rectangle-ad fs-1 d-block mb-2"></i>
-                    BURAYA REKLAM KODU GELECEK (300x250)
-                </div>
+                <script async="async" data-cfasync="false" src="https://pl28307164.effectivegatecpm.com/9fc0e870fbd57fe744d5cb26ca430060/invoke.js"></script>
+                <div id="container-9fc0e870fbd57fe744d5cb26ca430060"></div>
             </div>
 
             <div style="font-size: 0.9rem; font-weight: bold; margin-top: 20px; border-left: 3px solid var(--accent); padding-left: 10px;">ÖNERİLENLER</div>
@@ -137,8 +131,8 @@
 
         <div class="ad-box ad-banner">
             <span class="ad-label">Sponsor</span>
-            <span class="ad-close" onclick="this.parentElement.style.display='none'">×</span>
-            <div style="color:#444; font-size:10px;">BURAYA REKLAM KODU GELECEK</div>
+            <script async="async" data-cfasync="false" src="https://pl28307164.effectivegatecpm.com/9fc0e870fbd57fe744d5cb26ca430060/invoke.js"></script>
+            <div id="container-9fc0e870fbd57fe744d5cb26ca430060"></div>
         </div>
 
         <div id="search-section">
@@ -148,8 +142,8 @@
 
         <div id="home-section">
             <div class="d-flex justify-content-between px-3 mb-3">
-                <span style="font-weight:bold;">TV Channels</span>
-                <span style="color:var(--gray); font-size:0.8rem;">See All</span>
+                <span id="list-title" style="font-weight:bold;">TV Channels</span>
+                <span style="color:var(--gray); font-size:0.8rem;" onclick="showHome()">See All</span>
             </div>
             <div id="grid-container" class="grid-container mb-5 pb-5"></div>
         </div>
@@ -158,12 +152,14 @@
     <div class="bottom-nav">
         <a href="javascript:void(0)" onclick="showHome()" class="nav-btn active" id="btn-home"><i class="fas fa-house"></i><small>HOME</small></a>
         <a href="javascript:void(0)" onclick="showSearch()" class="nav-btn" id="btn-search"><i class="fas fa-search"></i><small>SEARCH</small></a>
-        <a href="#" class="nav-btn"><i class="fas fa-heart"></i><small>FAVORITES</small></a>
+        <a href="javascript:void(0)" onclick="showFavorites()" class="nav-btn" id="btn-fav"><i class="fas fa-heart"></i><small>FAVORITES</small></a>
         <a href="javascript:void(0)" onclick="toggleSidebar()" class="nav-btn"><i class="fas fa-bars"></i><small>MORE</small></a>
     </div>
 
     <script>
         let allChannels = [];
+        let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
+        let currentPlayingName = "";
         const hls = new Hls();
         const video = document.getElementById('video');
 
@@ -178,35 +174,44 @@
             const container = document.getElementById('grid-container');
             container.innerHTML = "";
             data.forEach(k => {
+                const isFav = favorites.includes(k.ad) ? 'active' : '';
                 container.innerHTML += `
-                    <div class="channel-square" onclick="playChannel('${k.url}', '${k.ad}')">
-                        <img src="${k.logo}" class="square-logo" onerror="this.src='https://via.placeholder.com/60?text=TV'">
-                        <span class="square-name">${k.ad}</span>
-                    </div>`;
-            });
-        }
-
-        function renderList(data, targetId) {
-            const container = document.getElementById(targetId);
-            container.innerHTML = "";
-            data.forEach(k => {
-                container.innerHTML += `
-                    <div class="list-item" onclick="playChannel('${k.url}', '${k.ad}')">
-                        <img src="${k.logo}" class="list-logo" onerror="this.src='https://via.placeholder.com/50'">
-                        <div class="list-info">
-                            <div class="d-flex justify-content-between">
-                                <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
-                                <i class="far fa-star text-muted"></i>
-                            </div>
-                            <div class="list-prog">program bilgisi yok</div>
-                            <hr style="margin:5px 0; border-color:#333;">
-                            <div class="list-prog">program bilgisi yok</div>
+                    <div class="channel-square">
+                        <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${k.ad}')"></i>
+                        <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}')">
+                            <img src="${k.logo}" class="square-logo" onerror="this.src='https://via.placeholder.com/60?text=TV'">
+                            <span class="square-name">${k.ad}</span>
                         </div>
                     </div>`;
             });
         }
 
+        function toggleFav(event, name) {
+            event.stopPropagation();
+            const index = favorites.indexOf(name);
+            if (index > -1) favorites.splice(index, 1);
+            else favorites.push(name);
+            localStorage.setItem('myTVfavs', JSON.stringify(favorites));
+            
+            // Ekranı güncelle
+            if (document.getElementById('btn-fav').classList.contains('active')) showFavorites();
+            else renderGrid(allChannels);
+        }
+
+        function showFavorites() {
+            const favList = allChannels.filter(k => favorites.includes(k.ad));
+            renderGrid(favList);
+            document.getElementById('list-title').innerText = "Favorites";
+            setActive('btn-fav');
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('home-section').style.display = "block";
+            document.getElementById('search-section').style.display = "none";
+            document.querySelector('.promo-slider').style.display = "block";
+            document.querySelector('.ad-banner').style.display = "flex";
+        }
+
         function playChannel(url, ad) {
+            currentPlayingName = ad;
             document.getElementById('player-box').style.display = "block";
             document.getElementById('home-section').style.display = "none";
             document.getElementById('search-section').style.display = "none";
@@ -228,17 +233,47 @@
             }
         }
 
+        function renderList(data, targetId) {
+            const container = document.getElementById(targetId);
+            container.innerHTML = "";
+            data.forEach(k => {
+                container.innerHTML += `
+                    <div class="list-item" onclick="playChannel('${k.url}', '${k.ad}')">
+                        <img src="${k.logo}" class="list-logo" onerror="this.src='https://via.placeholder.com/50'">
+                        <div class="list-info">
+                            <div class="d-flex justify-content-between">
+                                <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
+                            </div>
+                            <div class="list-prog">program bilgisi yok</div>
+                        </div>
+                    </div>`;
+            });
+        }
+
         function showSearch() {
             document.getElementById('home-section').style.display = "none";
             document.querySelector('.promo-slider').style.display = "none";
             document.querySelector('.ad-banner').style.display = "none";
             document.getElementById('player-box').style.display = "none";
             document.getElementById('search-section').style.display = "block";
-            document.getElementById('btn-home').classList.remove('active');
-            document.getElementById('btn-search').classList.add('active');
+            setActive('btn-search');
         }
 
-        function showHome() { location.reload(); }
+        function showHome() {
+            document.getElementById('list-title').innerText = "TV Channels";
+            document.getElementById('home-section').style.display = "block";
+            document.getElementById('search-section').style.display = "none";
+            document.getElementById('player-box').style.display = "none";
+            document.querySelector('.promo-slider').style.display = "block";
+            document.querySelector('.ad-banner').style.display = "flex";
+            renderGrid(allChannels);
+            setActive('btn-home');
+        }
+
+        function setActive(id) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
 
         function doSearch() {
             const val = document.getElementById('searchInput').value.toLowerCase();
@@ -254,4 +289,3 @@
     </script>
 </body>
 </html>
-
