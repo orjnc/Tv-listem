@@ -1,18 +1,18 @@
 #EXTM3U
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg", TRT 1
-https://trt.daioncdn.net/trt-1/master_1440p.m3u8?&sid=80j2v9reeexq&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2
+https://trt.daioncdn.net/trt-1/master_1440p.m3u8?&sid=80j4lf96aqj6&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg", ATV
-https://securevideotoken.tmgrup.com.tr/webtv/secure?525345&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fatvhd%2Fatvhd.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fatvhd%2Fatvhd.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.atv.com.tr/
+https://securevideotoken.tmgrup.com.tr/webtv/secure?139817&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fatvhd%2Fatvhd.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fatvhd%2Fatvhd.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.atv.com.tr/
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg", Kanal D
 https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&amp;ce=3|User-Agent=Mozilla/5.0&Referer=https://www.kanald.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/star.jpg", Star TV
-https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80j30eh50jtn&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.startv.com.tr/canli-yayin
+https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80j4s2sbi2r4&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.startv.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/showtv.jpg", Show TV
 https://ciner.daioncdn.net/showtv/showtv.m3u8?ce=3&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&st=RBzhSuGauna0OGld-DJUVA&e=1664766175&tv=1|User-Agent=Mozilla/5.0&Referer=https://www.showtv.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/now.jpg", NOW TV
 https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv_720p.m3u8|User-Agent=Mozilla/5.0&Referer=https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv8.jpg", TV8
-https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.tv8.com.tr/canli-yayin
+https://tv8.daioncdn.net/tv8/tv8_1080p.m3u8?&sid=80j4xuts4rq5&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3|User-Agent=Mozilla/5.0&Referer=https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beyaztv.jpg", Beyaz TV
 https://beyaztv.daioncdn.net/beyaztv/beyaztv.m3u8?app=fcd5c66b-da9d-44ba-a410-4f34805c397d&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.beyaztv.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/teve2.jpg", Teve2
@@ -20,17 +20,17 @@ https://demiroren.daioncdn.net/teve2/teve2.m3u8?ce=3&amp;app=6aab838a-437e-4a1b-
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/360.jpg", 360
 https://turkmedya-live.ercdn.net/tv360/tv360.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.tv360.com.tr/canli-yayin
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/a2.jpg", a2
-https://securevideotoken.tmgrup.com.tr/webtv/secure?508023&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fa2tv%2Fa2tv.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fa2tv%2Fa2tv.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.atv.com.tr/
+https://securevideotoken.tmgrup.com.tr/webtv/secure?740860&url=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fa2tv%2Fa2tv.m3u8&url2=https%3A%2F%2Ftrkvz-live.ercdn.net%2Fa2tv%2Fa2tv.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.atv.com.tr/
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.jpg", Kanal 7
-https://kanal7.daioncdn.net/kanal7/kanal7_1080p.m3u8?&sid=80j34lam1nus&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.kanal7.com/canli-izle/
+https://kanal7.daioncdn.net/kanal7/kanal7_1080p.m3u8?&sid=80j54k8ntggf&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3|User-Agent=Mozilla/5.0&Referer=https://www.kanal7.com/canli-izle/
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg", Tabii TV
-https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8?sid=m6qM_twjqUq-IaEDm-YIYA
+https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8?sid=aGlS_Uvyyk201TTPKIMWTA
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fx.jpg", FX
 https://saran-live.ercdn.net/fx/index.m3u8?checkedby:iptvcat.com|User-Agent=Mozilla/5.0&Referer=https://saran-live.ercdn.net/fx/index.m3u8?checkedby:iptvcat.com
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg", DMAX
-https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=ei9Ud3AySXMycVRoSE9JeTMxdDF6bUpZSTUyb3pKN21BSHBIWGx0TVVEaz0=|User-Agent=Mozilla/5.0&Referer=https://www.dmax.com.tr/canli-izle
+https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=WXhnVVBocFJGV0gxYzJBTGpMcE5RRTFDa0I5MVdGWVFQRGRZM0FyclJ0Yz0=|User-Agent=Mozilla/5.0&Referer=https://www.dmax.com.tr/canli-izle
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg", TLC
-https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=dE1pd1pvZXRDOVM5U1J0c09vT0VHb1BTbk81R0NPYUNERnhycVdHMmIvQT0=|User-Agent=Mozilla/5.0&Referer=https://www.tlctv.com.tr/canli-izle
+https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=bWlBY21FZGRGNE9iRUcyRW5OVWRFMEs3Rm5aM2lrQ080RkRpVmJrU3kwST0=|User-Agent=Mozilla/5.0&Referer=https://www.tlctv.com.tr/canli-izle
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnbce.jpg", CNBC-e
 https://cnbc-e-live.ercdn.net/cnbce/cnbce_low.m3u8|User-Agent=Mozilla/5.0&Referer=https://www.cnbce.com/
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg", TRT Spor
