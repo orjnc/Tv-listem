@@ -28,7 +28,22 @@
         /* YENİ: Kategori Barı Stili */
         .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 0 15px 20px 15px; white-space: nowrap; scrollbar-width: none; }
         .category-container::-webkit-scrollbar { display: none; }
-        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 8px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: 0.3s; cursor: pointer; }
+        .cat-btn {
+    background: #1a1a1a;
+    color: var(--gray);
+    border: 1px solid #333;
+    padding: 10px 22px !important; /* Boşlukları zorla uygula */
+    border-radius: 100px !important; /* Tam yuvarlaklık için yüksek değer ve zorlama */
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: 0.3s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px; /* Butonlar çok daralmasın */
+        }
+        
         .cat-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
 
         /* Header & Promo */
