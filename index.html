@@ -22,7 +22,7 @@
         .ad-box { background: #1a1a1a; border: 1px dashed #333; border-radius: 15px; margin: 15px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .ad-label { position: absolute; top: 2px; left: 8px; font-size: 8px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
         .ad-close { position: absolute; top: 2px; right: 8px; color: #555; cursor: pointer; font-size: 12px; z-index: 10; }
-        .ad-banner { min-height: 80px; }
+        .ad-banner { min-height: 60px; } /* 320x50 için boyutu optimize ettik */
         .ad-sidebar { height: 180px; margin-top: auto; }
         .ad-player { min-height: 250px; margin: 20px 0; }
 
@@ -77,7 +77,7 @@
             <i class="fas fa-times fs-4" onclick="toggleSidebar()"></i>
         </div>
         <div class="menu-links">
-            <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.5</span></a>
+            <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.6</span></a>
             <a href="javascript:void(0)" onclick="showFavorites(); toggleSidebar();" class="menu-item"><i class="fas fa-star"></i> My Favorites</a>
             <a href="#" class="menu-item"><i class="fas fa-share-nodes"></i> Share App</a>
             <hr style="border-color: #333; margin: 20px 0;">
@@ -101,7 +101,7 @@
         <div class="p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <h5 id="now-playing" class="m-0 text-truncate">Kanal Adı</h5>
-                <i id="player-fav-icon" class="far fa-star fs-4" onclick="toggleFavFromPlayer()"></i>
+                <i id="player-fav-icon" class="far fa-star fs-4"></i>
             </div>
             <p class="text-muted small mt-1">Canlı Yayın • Ulusal</p>
             
@@ -131,8 +131,16 @@
 
         <div class="ad-box ad-banner">
             <span class="ad-label">Sponsor</span>
-            <script async="async" data-cfasync="false" src="https://pl28307164.effectivegatecpm.com/9fc0e870fbd57fe744d5cb26ca430060/invoke.js"></script>
-            <div id="container-9fc0e870fbd57fe744d5cb26ca430060"></div>
+            <script type="text/javascript">
+              atOptions = {
+                'key' : '9a007d32e44a32165e3e5e48dfa7c182',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+              };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/9a007d32e44a32165e3e5e48dfa7c182/invoke.js"></script>
         </div>
 
         <div id="search-section">
@@ -159,7 +167,6 @@
     <script>
         let allChannels = [];
         let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
-        let currentPlayingName = "";
         const hls = new Hls();
         const video = document.getElementById('video');
 
@@ -193,7 +200,6 @@
             else favorites.push(name);
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
             
-            // Ekranı güncelle
             if (document.getElementById('btn-fav').classList.contains('active')) showFavorites();
             else renderGrid(allChannels);
         }
@@ -211,7 +217,6 @@
         }
 
         function playChannel(url, ad) {
-            currentPlayingName = ad;
             document.getElementById('player-box').style.display = "block";
             document.getElementById('home-section').style.display = "none";
             document.getElementById('search-section').style.display = "none";
