@@ -11,30 +11,38 @@
         :root { --bg: #000000; --card: #121212; --accent: #ff005c; --text: #ffffff; --gray: #888888; }
         body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
         
-        /* Sidebar (Görsel 1000016582.jpg esintili) */
-        .sidebar { position: fixed; left: -280px; top: 0; height: 100%; width: 280px; background: rgba(18, 18, 18, 0.98); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; padding: 30px 20px; border-right: 1px solid #222; }
+        /* Sidebar */
+        .sidebar { position: fixed; left: -280px; top: 0; height: 100%; width: 280px; background: rgba(18, 18, 18, 0.98); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; padding: 30px 20px; border-right: 1px solid #222; display: flex; flex-direction: column; }
         .sidebar.active { left: 0; }
         .menu-item { display: flex; align-items: center; gap: 15px; padding: 15px; color: var(--text); text-decoration: none; border-radius: 12px; transition: 0.3s; margin-bottom: 5px; }
         .menu-item i { color: var(--accent); font-size: 1.2rem; width: 25px; }
         .menu-item:hover { background: rgba(255, 0, 92, 0.1); }
+
+        /* Reklam Alanları Stili */
+        .ad-box { background: #1a1a1a; border: 1px dashed #333; border-radius: 15px; margin: 15px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .ad-label { position: absolute; top: 2px; left: 8px; font-size: 8px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+        .ad-close { position: absolute; top: 2px; right: 8px; color: #555; cursor: pointer; font-size: 12px; z-index: 10; }
+        .ad-banner { height: 60px; }
+        .ad-sidebar { height: 180px; margin-top: auto; }
+        .ad-player { height: 250px; margin: 20px 0; }
 
         /* Header */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: sticky; top: 0; background: var(--bg); z-index: 1000; }
         .logo { font-weight: 800; font-size: 1.5rem; color: var(--accent); }
         .logo span { color: white; }
 
-        /* Slider (Rastgele Kanallar) */
+        /* Slider */
         .promo-slider { padding: 0 15px; margin-bottom: 25px; }
         .promo-card { background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=800&q=80'); height: 180px; border-radius: 20px; display: flex; align-items: flex-end; padding: 20px; border: 1px solid #333; }
 
-        /* Grid View (Ana Menü - Kare) */
+        /* Grid View */
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
         .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #222; transition: 0.2s; cursor: pointer; }
         .channel-square:active { transform: scale(0.95); border-color: var(--accent); }
         .square-logo { width: 50%; height: 50%; object-fit: contain; margin-bottom: 8px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
         .square-name { font-size: 0.75rem; font-weight: 600; text-align: center; }
 
-        /* List View (Arama & Önerilenler - Geniş) */
+        /* List View */
         .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
         .list-logo { width: 55px; height: 55px; object-fit: contain; background: #fff; border-radius: 12px; padding: 5px; }
         .list-info { flex-grow: 1; }
@@ -64,14 +72,25 @@
             <h4 class="m-0">App Menu</h4>
             <i class="fas fa-times fs-4" onclick="toggleSidebar()"></i>
         </div>
-        <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.4</span></a>
-        <a href="#" class="menu-item"><i class="fas fa-star"></i> Rate</a>
-        <a href="#" class="menu-item"><i class="fas fa-share-nodes"></i> Share</a>
-        <a href="#" class="menu-item"><i class="fas fa-download"></i> Downloads</a>
-        <hr style="border-color: #333; margin: 20px 0;">
-        <a href="#" class="menu-item"><i class="fas fa-info-circle"></i> About</a>
-        <a href="#" class="menu-item"><i class="fas fa-comment-alt"></i> Contact</a>
-        <a href="#" class="menu-item text-danger"><i class="fas fa-user-minus"></i> Delete Account</a>
+        <div class="menu-links">
+            <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.4</span></a>
+            <a href="#" class="menu-item"><i class="fas fa-star"></i> Rate</a>
+            <a href="#" class="menu-item"><i class="fas fa-share-nodes"></i> Share</a>
+            <a href="#" class="menu-item"><i class="fas fa-download"></i> Downloads</a>
+            <hr style="border-color: #333; margin: 20px 0;">
+            <a href="#" class="menu-item"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#" class="menu-item"><i class="fas fa-comment-alt"></i> Contact</a>
+            <a href="#" class="menu-item text-danger"><i class="fas fa-user-minus"></i> Delete Account</a>
+        </div>
+
+        <div class="ad-box ad-sidebar">
+            <span class="ad-label">Advertisement</span>
+            <span class="ad-close" onclick="this.parentElement.style.display='none'">×</span>
+            <div style="color:#444; font-size:12px; text-align:center;">
+                <i class="fas fa-rectangle-ad fs-1 d-block mb-2"></i>
+                REKLAM KODU BURAYA
+            </div>
+        </div>
     </div>
 
     <div class="header">
@@ -88,6 +107,16 @@
                 <i class="far fa-star fs-4"></i>
             </div>
             <p class="text-muted small mt-1">Canlı Yayın • Ulusal</p>
+            
+            <div class="ad-box ad-player">
+                <span class="ad-label">Sponsorlu İçerik</span>
+                <span class="ad-close" onclick="this.parentElement.style.display='none'">×</span>
+                <div style="color:#444; font-size:14px; text-align:center;">
+                    <i class="fas fa-rectangle-ad fs-1 d-block mb-2"></i>
+                    BURAYA REKLAM KODU GELECEK (300x250)
+                </div>
+            </div>
+
             <div style="font-size: 0.9rem; font-weight: bold; margin-top: 20px; border-left: 3px solid var(--accent); padding-left: 10px;">ÖNERİLENLER</div>
             <div id="suggested-list" class="mt-3"></div>
         </div>
@@ -106,6 +135,12 @@
             </div>
         </div>
 
+        <div class="ad-box ad-banner">
+            <span class="ad-label">Sponsor</span>
+            <span class="ad-close" onclick="this.parentElement.style.display='none'">×</span>
+            <div style="color:#444; font-size:10px;">BURAYA REKLAM KODU GELECEK</div>
+        </div>
+
         <div id="search-section">
             <input type="text" id="searchInput" class="search-input" placeholder="Kanal veya kategori ara..." onkeyup="doSearch()">
             <div id="search-results"></div>
@@ -116,8 +151,7 @@
                 <span style="font-weight:bold;">TV Channels</span>
                 <span style="color:var(--gray); font-size:0.8rem;">See All</span>
             </div>
-            <div id="grid-container" class="grid-container mb-5 pb-5">
-                </div>
+            <div id="grid-container" class="grid-container mb-5 pb-5"></div>
         </div>
     </div>
 
@@ -133,7 +167,6 @@
         const hls = new Hls();
         const video = document.getElementById('video');
 
-        // Veriyi Çek ve Başlat
         fetch('kanallar.json?v=' + Date.now())
             .then(res => res.json())
             .then(data => {
@@ -141,7 +174,6 @@
                 renderGrid(data);
             });
 
-        // ANA SAYFA - KARE GÖRÜNÜM
         function renderGrid(data) {
             const container = document.getElementById('grid-container');
             container.innerHTML = "";
@@ -154,7 +186,6 @@
             });
         }
 
-        // LİSTE GÖRÜNÜMÜ (Arama ve Önerilenler)
         function renderList(data, targetId) {
             const container = document.getElementById(targetId);
             container.innerHTML = "";
@@ -180,9 +211,9 @@
             document.getElementById('home-section').style.display = "none";
             document.getElementById('search-section').style.display = "none";
             document.querySelector('.promo-slider').style.display = "none";
+            document.querySelector('.ad-banner').style.display = "none";
             document.getElementById('now-playing').innerText = ad;
             
-            // Önerilenleri Listele (Rastgele 5 tane)
             const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
             renderList(shuffled, 'suggested-list');
             
@@ -200,15 +231,14 @@
         function showSearch() {
             document.getElementById('home-section').style.display = "none";
             document.querySelector('.promo-slider').style.display = "none";
+            document.querySelector('.ad-banner').style.display = "none";
             document.getElementById('player-box').style.display = "none";
             document.getElementById('search-section').style.display = "block";
             document.getElementById('btn-home').classList.remove('active');
             document.getElementById('btn-search').classList.add('active');
         }
 
-        function showHome() {
-            location.reload(); // En temiz sıfırlama
-        }
+        function showHome() { location.reload(); }
 
         function doSearch() {
             const val = document.getElementById('searchInput').value.toLowerCase();
@@ -224,3 +254,4 @@
     </script>
 </body>
 </html>
+
