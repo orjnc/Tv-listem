@@ -93,7 +93,25 @@
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
-        .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border: 1px solid #222; cursor: pointer; position: relative; overflow: hidden; }
+        .channel-square {
+    /* Mevcut width, height, border-radius gibi yerleşim kodlarını elleme */
+    
+    /* NORMAL MOD: Buzlu Cam Efekti */
+    background: rgba(255, 255, 255, 0.1) !important; 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* KOYU MOD: Burada hiçbir şeyi değiştirmiyoruz, siyah kalıyor */
+@media (prefers-color-scheme: dark) {
+    .channel-square {
+        background: #181818 !important; /* Senin orijinal koyu rengin */
+        backdrop-filter: none; 
+        border: 1px solid #222;
+    }
+}
+        
         .square-logo { width: 70%; height: 70%; object-fit: contain; }
         .fav-star { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.2); z-index: 5; }
         .fav-star.active { color: #ffc107; }
