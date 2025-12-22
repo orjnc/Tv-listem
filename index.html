@@ -59,12 +59,36 @@
         /* DEV LOGO SORUNUNU ÇÖZEN PROMO TASARIMI */
         .promo-slider { padding: 0 15px; margin-bottom: 30px; transition: 0.5s; overflow: hidden; }
         .promo-card { 
-            aspect-ratio: 3/4; width: 100%; max-width: 400px; margin: 0 auto; border-radius: 25px; 
-            display: flex; align-items: flex-end; padding: 25px; border: 1px solid rgba(255,255,255,0.1); 
-            background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important;
-            position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background-color: #1a1a1a;
-        }
-        .promo-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); border-radius: 25px; }
+    aspect-ratio: 3/4; 
+    width: 100%; 
+    max-width: 400px; 
+    margin: 0 auto; 
+    border-radius: 25px; 
+    display: flex; 
+    align-items: flex-end; 
+    padding: 25px; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    
+    /* İŞTE BURASI O DEV LOGOYU KÜÇÜLTEN YER */
+    background-size: cover !important; 
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    
+    position: relative; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+    background-color: #1a1a1a;
+    overflow: hidden; /* Dışarı taşan her şeyi keser */
+}
+
+/* Logonun üzerine gelen yazılar okunabilsin diye altına siyah gölge: */
+.promo-card::before { 
+    content: ""; 
+    position: absolute; 
+    inset: 0; 
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); 
+    z-index: 1;
+}
+        
         .promo-card > div { position: relative; z-index: 2; width: 100%; }
         .promo-hidden { display: none !important; }
 
