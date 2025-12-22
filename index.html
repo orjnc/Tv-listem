@@ -63,93 +63,95 @@
         .menu-item i { color: var(--accent); font-size: 1.2rem; width: 25px; }
         .menu-item:hover { background: rgba(255, 0, 92, 0.1); }
         .sidebar-logo { max-height: 42px; width: auto; object-fit: contain; }
+
         /* Kategori Butonları */
-.category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; min-height: 75px; transition: all 0.6s ease; }
+        .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; min-height: 75px; transition: all 0.6s ease; }
+        
+        .cat-btn { 
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff; 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+            padding: 10px 22px !important; 
+            border-radius: 100px !important; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: all 0.5s ease; 
+            flex-shrink: 0; 
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
 
-.cat-btn { 
-    background: rgba(255, 255, 255, 0.1) !important;
-    color: #ffffff; 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    padding: 10px 22px !important; 
-    border-radius: 100px !important; 
-    font-size: 0.85rem; 
-    font-weight: 600; 
-    cursor: pointer; 
-    transition: all 0.5s ease; 
-    flex-shrink: 0; 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
+        @media (prefers-color-scheme: dark) {
+            .cat-btn { 
+                background: #1a1a1a !important; 
+                backdrop-filter: none; 
+                border: 1px solid #333; 
+            }
+        }
+        
+        .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
+        .cat-hidden { display: none; }
 
-@media (prefers-color-scheme: dark) {
-    .cat-btn { 
-        background: #1a1a1a !important; 
-        backdrop-filter: none; 
-        border: 1px solid #333; 
-    }
-}
+        /* Header & Grid */
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 10px 20px; 
+            position: sticky; 
+            top: 0; 
+            height: 70px; 
+            z-index: 2000;
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(181, 0, 200, 0.5) !important; 
+        }
 
-.cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
-.cat-hidden { display: none; }
+        @media (prefers-color-scheme: dark) {
+            .header {
+                background: rgba(0, 0, 0, 0.7) !important;
+            }
+        }
+        
+        .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
+        .channel-square { 
+            border-radius: 18px; 
+            aspect-ratio: 1/1; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1) !important; 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px);
+        }
 
-/* Header & Grid */
-.header { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    padding: 10px 20px; 
-    position: sticky; 
-    top: 0; 
-    height: 70px; 
-    z-index: 2000;
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px); 
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(181, 0, 200, 0.5) !important; 
-}
+        @media (prefers-color-scheme: dark) {
+            .channel-square {
+                background: var(--card) !important; 
+                backdrop-filter: none; 
+                border: 1px solid #222; 
+            }
+        }
+        
+        .square-logo { width: 70%; height: 70%; object-fit: contain; }
+        .fav-star { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.2); z-index: 5; }
+        .fav-star.active { color: #ffc107; }
 
-@media (prefers-color-scheme: dark) {
-    .header {
-        background: rgba(0, 0, 0, 0.7) !important;
-    }
-}
+        /* Player */
+        #player-box { display: none; background: #000; }
+        .video-wrapper { position: sticky; top: 0; z-index: 1100; background: #000; }
+        video { width: 100%; aspect-ratio: 16/9; }
+        .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
-.logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
-.site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
-.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
-.channel-square { 
-    border-radius: 18px; 
-    aspect-ratio: 1/1; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    position: relative; 
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1) !important; 
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px);
-}
-
-@media (prefers-color-scheme: dark) {
-    .channel-square {
-        background: var(--card) !important; 
-        backdrop-filter: none; 
-        border: 1px solid #222; 
-    }
-}
-
-.square-logo { width: 70%; height: 70%; object-fit: contain; }
-.fav-star { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.2); z-index: 5; }
-.fav-star.active { color: #ffc107; }
-
-/* Player */
-#player-box { display: none; background: #000; }
-.video-wrapper { position: sticky; top: 0; z-index: 1100; background: #000; }
-video { width: 100%; aspect-ratio: 16/9; }
-.player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
-                /* Navigasyon */
+        /* Navigasyon */
         .bottom-nav { 
             position: fixed; 
             bottom: 15px; 
@@ -423,241 +425,243 @@ video { width: 100%; aspect-ratio: 16/9; }
             </p>
         </div>
     </div>
-    <script>
-    let allChannels = [];
-    let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
-    const hls = new Hls();
-    const video = document.getElementById('video');
+        <script>
+        let allChannels = [];
+        let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
+        const hls = new Hls();
+        const video = document.getElementById('video');
 
-    function setTheme(mode) {
-        const body = document.body;
-        if (mode === 'normal') { body.classList.add('normal-mode'); localStorage.setItem('themeChoice', 'normal'); }
-        else { body.classList.remove('normal-mode'); localStorage.setItem('themeChoice', 'dark'); }
-    }
+        function setTheme(mode) {
+            const body = document.body;
+            if (mode === 'normal') { body.classList.add('normal-mode'); localStorage.setItem('themeChoice', 'normal'); }
+            else { body.classList.remove('normal-mode'); localStorage.setItem('themeChoice', 'dark'); }
+        }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        setTheme(localStorage.getItem('themeChoice') || 'dark');
-        fetch('kanallar.json?v=' + Date.now())
-            .then(res => res.json())
-            .then(data => { allChannels = data; renderGrid(data); checkHash(); });
-    });
-
-    function renderGrid(data) {
-        const container = document.getElementById('grid-container');
-        if(!container) return;
-        container.innerHTML = "";
-        
-        data.forEach(k => {
-            const isFav = favorites.includes(k.ad) ? 'active' : '';
-            const logoName = k.logo.split('/').pop().replace('.jpg', '.png'); 
-            const kategori = getKategori(k);
-            
-            // GÜVENLİ VERSİYON
-            const div = document.createElement('div');
-            div.className = 'channel-square';
-            div.innerHTML = `
-                <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${escapeHTML(k.ad)}')"></i>
-                <div class="w-100 h-100 d-flex align-items-center justify-content-center">
-                    <img src="logolar/${escapeHTML(logoName)}" class="square-logo" 
-                         onerror="this.onerror=null; this.src='logolar/logo.png'">
-                </div>`;
-            
-            // Tıklama event'ini güvenli şekilde ekle
-            div.querySelector('div').addEventListener('click', () => {
-                playChannel(
-                    escapeHTML(k.url), 
-                    escapeHTML(k.ad), 
-                    false, 
-                    escapeHTML(kategori)
-                );
-            });
-            
-            container.appendChild(div);
+        document.addEventListener('DOMContentLoaded', () => {
+            setTheme(localStorage.getItem('themeChoice') || 'dark');
+            fetch('kanallar.json?v=' + Date.now())
+                .then(res => res.json())
+                .then(data => { allChannels = data; renderGrid(data); checkHash(); });
         });
-    }
 
-    function playChannel(url, ad, fromHash = false, kategori = "Genel") {
-        if(!fromHash) window.location.hash = encodeURIComponent(ad);
-        
-        document.getElementById('player-box').style.display = "block";
-        document.getElementById('main-content').style.display = "none";
-        
-        // Üst başlık ve kategori
-        document.getElementById('now-playing').innerText = ad;
-        document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + kategori;
-        
-        if (Hls.isSupported()) {
-            hls.loadSource(url); hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-        } else { video.src = url; video.play(); }
-
-        // ÖNERİLER: Yeni eklenen her kanal için otomatik çalışır
-        const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
-        const sugList = document.getElementById('suggested-list');
-        if(sugList) {
-            sugList.innerHTML = "";
-            shuffled.forEach(s => {
-                const sugLogo = s.logo.split('/').pop().replace('.jpg', '.png');
-                const sugCat = getKategori(s);
+        function renderGrid(data) {
+            const container = document.getElementById('grid-container');
+            if(!container) return;
+            container.innerHTML = "";
+            
+            data.forEach(k => {
+                const isFav = favorites.includes(k.ad) ? 'active' : '';
+                const logoName = k.logo.split('/').pop().replace('.jpg', '.png'); 
+                const kategori = getKategori(k);
                 
-                const listItem = document.createElement('div');
-                listItem.className = 'list-item';
-                listItem.innerHTML = `
-                    <img src="logolar/${escapeHTML(sugLogo)}" class="list-logo" onerror="this.onerror=null; this.src='logolar/logo.png'"> 
-                    <div class="list-info">
-                        <div class="list-title">${escapeHTML(s.ad)}</div>
-                        <div class="list-category">${escapeHTML(sugCat)}</div>
+                // GÜVENLİ VERSİYON
+                const div = document.createElement('div');
+                div.className = 'channel-square';
+                div.innerHTML = `
+                    <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${escapeHTML(k.ad)}')"></i>
+                    <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+                        <img src="logolar/${escapeHTML(logoName)}" class="square-logo" 
+                             onerror="this.onerror=null; this.src='logolar/logo.png'">
                     </div>`;
-
-                listItem.addEventListener('click', () => {
+                
+                // Tıklama event'ini güvenli şekilde ekle
+                div.querySelector('div').addEventListener('click', () => {
                     playChannel(
-                        escapeHTML(s.url),
-                        escapeHTML(s.ad),
-                        false,
-                        escapeHTML(sugCat)
+                        escapeHTML(k.url), 
+                        escapeHTML(k.ad), 
+                        false, 
+                        escapeHTML(kategori)
                     );
                 });
-
-                sugList.appendChild(listItem);
+                
+                container.appendChild(div);
             });
         }
-    }
-            function renderList(data, targetId) {
-        const container = document.getElementById(targetId);
-        if(!container) return;
-        container.innerHTML = "";
-        data.forEach(k => {
-            const isFav = favorites.includes(k.ad);
-            container.innerHTML += `
-                <div class="list-item" onclick="playChannel('${escapeHTML(k.url)}', '${escapeHTML(k.ad)}')">
-                    <img src="${escapeHTML(k.logo)}" class="list-logo" onerror="this.src='https://via.placeholder.com/150?text=TV'">
-                    <div class="list-info">
-                        <span style="font-weight:bold; font-size:0.9rem;">${escapeHTML(k.ad)}</span>
-                        <div class="small">${escapeHTML(k.kategori)}</div>
-                    </div>
-                    <i class="fa${isFav ? 's' : 'r'} fa-star" onclick="toggleFav(event, '${escapeHTML(k.ad)}')" style="color: ${isFav ? 'gold' : 'white'}; margin-left: auto; padding: 10px;"></i>
-                </div>`;
-        });
-    }
 
-    function showHome() {
-        const catList = document.getElementById('category-list');
-        if(catList) catList.style.display = "flex";
-        window.location.href = "https://orjnc.github.io"; 
-    }
+        function playChannel(url, ad, fromHash = false, kategori = "Genel") {
+            if(!fromHash) window.location.hash = encodeURIComponent(ad);
+            
+            document.getElementById('player-box').style.display = "block";
+            document.getElementById('main-content').style.display = "none";
+            
+            // Üst başlık ve kategori
+            document.getElementById('now-playing').innerText = ad;
+            document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + kategori;
+            
+            if (Hls.isSupported()) {
+                hls.loadSource(url); hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+            } else { video.src = url; video.play(); }
 
-    function showSearch() {
-        document.getElementById('home-section').style.display = "none";
-        document.getElementById('search-section').style.display = "block";
-        document.getElementById('player-box').style.display = "none";
-        document.getElementById('main-content').style.display = "block";
-        const promo = document.getElementById('promo-slider');
-        if (promo) promo.classList.add('promo-hidden');
-        const si = document.getElementById('searchInput');
-        if (si) setTimeout(() => si.focus(), 300);
-    }
+            // ÖNERİLER: Yeni eklenen her kanal için otomatik çalışır
+            const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
+            const sugList = document.getElementById('suggested-list');
+            if(sugList) {
+                sugList.innerHTML = "";
+                shuffled.forEach(s => {
+                    const sugLogo = s.logo.split('/').pop().replace('.jpg', '.png');
+                    const sugCat = getKategori(s);
+                    
+                    const listItem = document.createElement('div');
+                    listItem.className = 'list-item';
+                    listItem.innerHTML = `
+                        <img src="logolar/${escapeHTML(sugLogo)}" class="list-logo" onerror="this.onerror=null; this.src='logolar/logo.png'"> 
+                        <div class="list-info">
+                            <div class="list-title">${escapeHTML(s.ad)}</div>
+                            <div class="list-category">${escapeHTML(sugCat)}</div>
+                        </div>`;
 
-    function showFavorites() {
-        document.getElementById('home-section').style.display = "block";
-        document.getElementById('search-section').style.display = "none";
-        document.getElementById('player-box').style.display = "none";
-        document.getElementById('main-content').style.display = "block";
-        document.getElementById('category-list').style.display = "none";
-        const promo = document.getElementById('promo-slider');
-        if (promo) promo.classList.add('promo-hidden');
-        renderGrid(allChannels.filter(k => favorites.includes(k.ad)));
-    }
+                    listItem.addEventListener('click', () => {
+                        playChannel(
+                            escapeHTML(s.url),
+                            escapeHTML(s.ad),
+                            false,
+                            escapeHTML(sugCat)
+                        );
+                    });
 
-    function doSearch() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        const res = allChannels.filter(k => k.ad.toLowerCase().includes(q) || k.kategori.toLowerCase().includes(q));
-        renderList(res, 'search-results');
-    }
+                    sugList.appendChild(listItem);
+                });
+            }
+        }
 
-    function toggleFav(e, name) {
-        e.stopPropagation();
-        const idx = favorites.indexOf(name);
-        if (idx > -1) favorites.splice(idx, 1); else favorites.push(name);
-        localStorage.setItem('myTVfavs', JSON.stringify(favorites));
-        if (document.getElementById('search-section').style.display === "block") doSearch();
-        else if (document.getElementById('promo-slider').classList.contains('promo-hidden')) showFavorites();
-        else renderGrid(allChannels);
-    }
-
-    function getKategori(kanal) {
-        return (kanal.kategori && kanal.kategori.trim() !== "" && kanal.kategori !== "undefined") 
-               ? kanal.kategori 
-               : "Genel";
-    }
-
-    function filterCategory(cat, btn) {
-        const isAlreadyActive = btn.classList.contains('active');
-        const allBtns = document.querySelectorAll('.cat-btn');
-        const promo = document.getElementById('promo-slider');
-        allBtns.forEach(b => { b.classList.remove('active'); b.classList.remove('cat-hidden'); });
-        if (isAlreadyActive) { promo.classList.remove('promo-hidden'); renderGrid(allChannels); }
-        else { btn.classList.add('active'); promo.classList.add('promo-hidden'); renderGrid(allChannels.filter(k => k.kategori === cat)); }
-    }
-
-    function toggleSidebar() { 
-        document.getElementById('sidebar').classList.toggle('active');
-        const ov = document.getElementById('overlay');
-        ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
-    }
-
-    function checkHash() {
-        const h = window.location.hash.substring(1);
-        if(h) { const c = allChannels.find(k => k.ad === decodeURIComponent(h)); if(c) playChannel(c.url, c.ad, true, c.kategori); }
-    }
-
-    // Kahve bağış fonksiyonları
-    function showDonation() {
-        toggleSidebar();
-        document.getElementById('donationModal').style.display = 'flex';
-    }
-
-    function closeDonation() {
-        document.getElementById('donationModal').style.display = 'none';
-    }
-
-    function donate(amount) {
-        const amounts = {
-            20: { message: "Bir kahve için teşekkürler! ☕", color: "#FF6B35" },
-            50: { message: "3 kahve mükemmel! Sen harikasın! 🚀", color: "#00d4ff" },
-            100: { message: "Akşam yemeği ısmarladığın için çok teşekkürler! 🍔", color: "#FFD700" }
-        };
-        
-        const selected = amounts[amount];
-        alert(`${selected.message}\n\nÖdeme yapmak için yukarıdaki IBAN veya cüzdan adreslerini kullanabilirsin.`);
-        console.log(`Bağış yapıldı: ${amount}₺`);
-        closeDonation();
-    }
-
-    // Modal dışına tıklayınca kapat
-    document.addEventListener('DOMContentLoaded', function() {
-        const modal = document.getElementById('donationModal');
-        if (modal) {
-            modal.addEventListener('click', function(e) {
-                if (e.target.id === 'donationModal') {
-                    closeDonation();
-                }
+        function renderList(data, targetId) {
+            const container = document.getElementById(targetId);
+            if(!container) return;
+            container.innerHTML = "";
+            data.forEach(k => {
+                const isFav = favorites.includes(k.ad);
+                container.innerHTML += `
+                    <div class="list-item" onclick="playChannel('${escapeHTML(k.url)}', '${escapeHTML(k.ad)}')">
+                        <img src="${escapeHTML(k.logo)}" class="list-logo" onerror="this.src='https://via.placeholder.com/150?text=TV'">
+                        <div class="list-info">
+                            <span style="font-weight:bold; font-size:0.9rem;">${escapeHTML(k.ad)}</span>
+                            <div class="small">${escapeHTML(k.kategori)}</div>
+                        </div>
+                        <i class="fa${isFav ? 's' : 'r'} fa-star" onclick="toggleFav(event, '${escapeHTML(k.ad)}')" style="color: ${isFav ? 'gold' : 'white'}; margin-left: auto; padding: 10px;"></i>
+                    </div>`;
             });
         }
-        
-        // Buton hover efektleri
-        document.querySelectorAll('.donate-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-                this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.3)';
-            });
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = 'none';
+
+        function showHome() {
+            const catList = document.getElementById('category-list');
+            if(catList) catList.style.display = "flex";
+            window.location.href = "https://orjnc.github.io"; 
+        }
+
+        function showSearch() {
+            document.getElementById('home-section').style.display = "none";
+            document.getElementById('search-section').style.display = "block";
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('main-content').style.display = "block";
+            const promo = document.getElementById('promo-slider');
+            if (promo) promo.classList.add('promo-hidden');
+            const si = document.getElementById('searchInput');
+            if (si) setTimeout(() => si.focus(), 300);
+        }
+
+        function showFavorites() {
+            document.getElementById('home-section').style.display = "block";
+            document.getElementById('search-section').style.display = "none";
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('main-content').style.display = "block";
+            document.getElementById('category-list').style.display = "none";
+            const promo = document.getElementById('promo-slider');
+            if (promo) promo.classList.add('promo-hidden');
+            renderGrid(allChannels.filter(k => favorites.includes(k.ad)));
+        }
+
+        function doSearch() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            const res = allChannels.filter(k => k.ad.toLowerCase().includes(q) || k.kategori.toLowerCase().includes(q));
+            renderList(res, 'search-results');
+        }
+
+        function toggleFav(e, name) {
+            e.stopPropagation();
+            const idx = favorites.indexOf(name);
+            if (idx > -1) favorites.splice(idx, 1); else favorites.push(name);
+            localStorage.setItem('myTVfavs', JSON.stringify(favorites));
+            if (document.getElementById('search-section').style.display === "block") doSearch();
+            else if (document.getElementById('promo-slider').classList.contains('promo-hidden')) showFavorites();
+            else renderGrid(allChannels);
+        }
+
+        function getKategori(kanal) {
+            return (kanal.kategori && kanal.kategori.trim() !== "" && kanal.kategori !== "undefined") 
+                   ? kanal.kategori 
+                   : "Genel";
+        }
+
+        function filterCategory(cat, btn) {
+            const isAlreadyActive = btn.classList.contains('active');
+            const allBtns = document.querySelectorAll('.cat-btn');
+            const promo = document.getElementById('promo-slider');
+            allBtns.forEach(b => { b.classList.remove('active'); b.classList.remove('cat-hidden'); });
+            if (isAlreadyActive) { promo.classList.remove('promo-hidden'); renderGrid(allChannels); }
+            else { btn.classList.add('active'); promo.classList.add('promo-hidden'); renderGrid(allChannels.filter(k => k.kategori === cat)); }
+        }
+
+        function toggleSidebar() { 
+            document.getElementById('sidebar').classList.toggle('active');
+            const ov = document.getElementById('overlay');
+            ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function checkHash() {
+            const h = window.location.hash.substring(1);
+            if(h) { const c = allChannels.find(k => k.ad === decodeURIComponent(h)); if(c) playChannel(c.url, c.ad, true, c.kategori); }
+        }
+
+        // Kahve bağış fonksiyonları
+        function showDonation() {
+            toggleSidebar();
+            document.getElementById('donationModal').style.display = 'flex';
+        }
+
+        function closeDonation() {
+            document.getElementById('donationModal').style.display = 'none';
+        }
+
+        function donate(amount) {
+            const amounts = {
+                20: { message: "Bir kahve için teşekkürler! ☕", color: "#FF6B35" },
+                50: { message: "3 kahve mükemmel! Sen harikasın! 🚀", color: "#00d4ff" },
+                100: { message: "Akşam yemeği ısmarladığın için çok teşekkürler! 🍔", color: "#FFD700" }
+            };
+            
+            const selected = amounts[amount];
+            alert(`${selected.message}\n\nÖdeme yapmak için yukarıdaki IBAN veya cüzdan adreslerini kullanabilirsin.`);
+            console.log(`Bağış yapıldı: ${amount}₺`);
+            closeDonation();
+        }
+
+        // Modal dışına tıklayınca kapat
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('donationModal');
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target.id === 'donationModal') {
+                        closeDonation();
+                    }
+                });
+            }
+            
+            // Buton hover efektleri
+            document.querySelectorAll('.donate-btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.3)';
+                });
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
             });
         });
-    });
-</script>
-<script src="oneriler.js"></script>
+    </script>
+    <script src="oneriler.js"></script>
+
     <script>
         // Animasyonu tetikleyen sistem
         const observer = new MutationObserver((mutations) => {
