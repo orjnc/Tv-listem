@@ -77,7 +77,41 @@
 
         /* Promo Card */
         .promo-slider { padding: 0 15px; margin-bottom: 30px; transition: 0.5s; }
-        .promo-card { aspect-ratio: 3/4; width: 100%; max-width: 400px; margin: 0 auto; border-radius: 25px; display: flex; align-items: flex-end; padding: 25px; border: 1px solid rgba(255,255,255,0.1); background-size: cover; background-position: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .promo-card { 
+    aspect-ratio: 3/4; 
+    width: 100%; 
+    max-width: 400px; 
+    margin: 0 auto; 
+    border-radius: 25px; 
+    display: flex; 
+    align-items: flex-end; 
+    padding: 25px; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    background-size: cover; 
+    background-position: center; 
+    position: relative; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* EKLEDİĞİMİZ KISIM: */
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+    overflow: hidden;
+}
+
+/* Geçiş anında devreye girecek yeni sınıf */
+/* Mevcut olanı bununla değiştir veya kontrol et */
+.promo-active {
+    animation: promoSwift 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes promoSwift {
+    0% { opacity: 0; transform: scale(0.94) translateY(10px); filter: blur(4px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+}
+
+@keyframes promoSwift {
+    0% { opacity: 0.6; transform: scale(0.96); filter: blur(2px); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+        
         .promo-card > div { position: relative; z-index: 2; width: 100%; }
         .promo-hidden { display: none !important; }
     </style>
@@ -282,5 +316,25 @@
         }
     </script>
     <script src="oneriler.js"></script>
+
+<script>
+// Öneriler değiştikçe animasyonu tetikleyen sistem
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        const pCard = document.getElementById('featured-card');
+        if (pCard) {
+            pCard.classList.remove('promo-active');
+            void pCard.offsetWidth; // Sihirli reset satırı
+            pCard.classList.add('promo-active');
+        }
+    });
+});
+
+const targetNode = document.getElementById('featured-card');
+if (targetNode) {
+    observer.observe(targetNode, { attributes: true, childList: true, subtree: true });
+}
+</script>
+    
 </body>
 </html>
