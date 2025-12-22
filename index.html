@@ -59,7 +59,31 @@
 
         /* Kategori Butonları */
         .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; min-height: 75px; transition: all 0.6s ease; }
-        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 10px 22px !important; border-radius: 100px !important; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.5s ease; flex-shrink: 0; }
+        /* Kategori Butonları */
+.cat-btn { 
+    background: rgba(255, 255, 255, 0.1) !important; /* Normal Mod: Şeffaf beyaz */
+    color: #ffffff; 
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    padding: 10px 22px !important; 
+    border-radius: 100px !important; 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: all 0.5s ease; 
+    flex-shrink: 0; 
+    backdrop-filter: blur(10px); /* Toz bulutu efekti */
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Koyu Modda Butonları Eski Haline Döndür */
+@media (prefers-color-scheme: dark) {
+    .cat-btn { 
+        background: #1a1a1a !important; 
+        backdrop-filter: none; 
+        border: 1px solid #333; 
+    }
+}
+        
         .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
         .cat-hidden { display: none; }
 
@@ -131,7 +155,33 @@
         .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
         /* Navigasyon */
-        .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(10px); border-radius: 25px; display: flex; justify-content: space-around; padding: 12px; z-index: 1000; border: 1px solid #333; }
+.bottom-nav { 
+    position: fixed; 
+    bottom: 15px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 92%; 
+    border-radius: 25px; 
+    display: flex; 
+    justify-content: space-around; 
+    padding: 12px; 
+    z-index: 2500; /* Sidebar'ın altında kalsın */
+    transition: all 0.4s ease;
+
+    /* NORMAL MOD: Buzlu Cam Efekti */
+    background: rgba(255, 255, 255, 0.1) !important; 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* KOYU MOD: Siyah Cam Efekti */
+@media (prefers-color-scheme: dark) {
+    .bottom-nav { 
+        background: rgba(26, 26, 26, 0.8) !important; /* Koyu modda siyah sis */
+        border: 1px solid #333;
+    }
+}
         .nav-btn { color: #666; font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; cursor: pointer; }
         .nav-btn.active { color: var(--accent); }
         .nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
