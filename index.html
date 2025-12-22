@@ -338,7 +338,10 @@
         <div onclick="toggleSidebar()" class="nav-btn"><i class="fas fa-bars"></i><small>MORE</small></div>
     </div>
 
-    <script>
+                renderGrid(allChannels.filter(k => favorites.includes(k.ad)));
+        }
+
+    <script src="Oneriler.js"></script> <script>
         let allChannels = [];
         let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
         const hls = new Hls();
@@ -357,7 +360,8 @@
                 .then(data => { 
                     allChannels = data; 
                     renderGrid(data); 
-                    updatePromo();
+                    // Oneriler.js içindeki fonksiyonu tetikle
+                    if(typeof setupFeatured === 'function') setupFeatured();
                     checkHash(); 
                 }).catch(err => console.error("JSON Yüklenemedi:", err));
         });
@@ -368,13 +372,13 @@
             container.innerHTML = "";
             data.forEach(k => {
                 const isFav = favorites.includes(k.ad) ? 'active' : '';
-                // HATA ÇÖZÜMÜ: Logo yoksa placeholder kullan
-                const logo = k.logo || 'logolar/logo.png';
+                // LOGO HATASI ÇÖZÜMÜ: JSON'daki tam URL'yi kullan
+                const logo = k.logo;
                 container.innerHTML += `
                     <div class="channel-square">
                         <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${k.ad}')"></i>
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}', false, '${k.kategori}')">
-                            <img src="${logo}" class="square-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=TV'">
+                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}', false, '${k.kategori || "TV"}')">
+                            <img src="${logo}" class="square-logo" onerror="this.onerror=null; this.src='logolar/logo.png'">
                         </div>
                     </div>`;
             });
@@ -386,10 +390,72 @@
             container.innerHTML = "";
             data.forEach(k => {
                 const isFav = favorites.includes(k.ad);
-                const logo = k.logo || 'logolar/logo.png';
+                const logo = k.logo;
                 container.innerHTML += `
                     <div class="list-item" onclick="playChannel('${k.url}', '${k.ad}')">
-                        <img src="${logo}" class="list-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=TV'">
+                        <img src="${logo}" class="list-logo" onerror="this.onerror=null; this.src='logolar/logo.png'">
+                        <div class="list-info">
+                            <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
+                            <div class="small">${k.kategori || 'Canlı'}</div>
+                        </div>
+                        <i class="fa${isFav ? 's' : 'r'} fa-star" onclick="toggleFav(event, '${k.ad}')" style="color: ${isFav ? 'gold' : 'white'}; margin-left: auto; padding: 10px;"></i>
+                    </div>`;
+            });
+        }
+
+            <script src="Oneriler.js"></script> <script>
+        let allChannels = [];
+        let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
+        const hls = new Hls();
+        const video = document.getElementById('video');
+
+        function setTheme(mode) {
+            const body = document.body;
+            if (mode === 'normal') { body.classList.add('normal-mode'); localStorage.setItem('themeChoice', 'normal'); }
+            else { body.classList.remove('normal-mode'); localStorage.setItem('themeChoice', 'dark'); }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTheme(localStorage.getItem('themeChoice') || 'dark');
+            fetch('kanallar.json?v=' + Date.now())
+                .then(res => res.json())
+                .then(data => { 
+                    allChannels = data; 
+                    renderGrid(data); 
+                    // Oneriler.js içindeki fonksiyonu tetikle
+                    if(typeof setupFeatured === 'function') setupFeatured();
+                    checkHash(); 
+                }).catch(err => console.error("JSON Yüklenemedi:", err));
+        });
+
+        function renderGrid(data) {
+            const container = document.getElementById('grid-container');
+            if(!container) return;
+            container.innerHTML = "";
+            data.forEach(k => {
+                const isFav = favorites.includes(k.ad) ? 'active' : '';
+                // LOGO HATASI ÇÖZÜMÜ: JSON'daki tam URL'yi kullan
+                const logo = k.logo;
+                container.innerHTML += `
+                    <div class="channel-square">
+                        <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${k.ad}')"></i>
+                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}', false, '${k.kategori || "TV"}')">
+                            <img src="${logo}" class="square-logo" onerror="this.onerror=null; this.src='logolar/logo.png'">
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function renderList(data, targetId) {
+            const container = document.getElementById(targetId);
+            if(!container) return;
+            container.innerHTML = "";
+            data.forEach(k => {
+                const isFav = favorites.includes(k.ad);
+                const logo = k.logo;
+                container.innerHTML += `
+                    <div class="list-item" onclick="playChannel('${k.url}', '${k.ad}')">
+                        <img src="${logo}" class="list-logo" onerror="this.onerror=null; this.src='logolar/logo.png'">
                         <div class="list-info">
                             <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
                             <div class="small">${k.kategori || 'Canlı'}</div>
@@ -408,23 +474,15 @@
             window.scrollTo(0,0);
             const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
             renderList(shuffled, 'suggested-list');
-            if (Hls.isSupported()) { hls.loadSource(url); hls.attachMedia(video); hls.on(Hls.Events.MANIFEST_PARSED, () => video.play()); }
-            else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; video.play(); }
-        }
-
-        function updatePromo() {
-            if(allChannels.length > 0) {
-                const f = allChannels[Math.floor(Math.random()*allChannels.length)];
-                document.getElementById('featured-title').innerText = f.ad;
-                document.getElementById('featured-desc').innerText = f.kategori || "Öne Çıkan Kanal";
-                document.getElementById('featured-card').style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('${f.logo}')`;
+            
+            if (Hls.isSupported()) {
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+                video.play();
             }
-        }
-
-        function playFeatured() {
-            const title = document.getElementById('featured-title').innerText;
-            const chan = allChannels.find(k => k.ad === title);
-            if(chan) playChannel(chan.url, chan.ad, false, chan.kategori);
         }
 
         function showHome() {
@@ -435,8 +493,6 @@
             document.getElementById('category-list').style.display = "flex";
             document.getElementById('promo-slider').classList.remove('promo-hidden');
             renderGrid(allChannels);
-            const allBtns = document.querySelectorAll('.cat-btn');
-            allBtns.forEach(b => b.classList.remove('active'));
         }
 
         function showSearch() {
@@ -461,7 +517,7 @@
 
         function doSearch() {
             const q = document.getElementById('searchInput').value.toLowerCase();
-            const res = allChannels.filter(k => k.ad.toLowerCase().includes(q) || (k.kategori && k.kategori.toLowerCase().includes(q)));
+            const res = allChannels.filter(k => k.ad.toLowerCase().includes(q));
             renderList(res, 'search-results');
         }
 
@@ -470,33 +526,29 @@
             const idx = favorites.indexOf(name);
             if (idx > -1) favorites.splice(idx, 1); else favorites.push(name);
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
-            const isSearch = document.getElementById('search-section').style.display === "block";
-            const isFavPage = !document.getElementById('promo-slider').classList.contains('promo-hidden') && document.getElementById('category-list').style.display === "none";
-            if (isSearch) doSearch();
-            else if (isFavPage) showFavorites();
-            else renderGrid(allChannels);
+            renderGrid(allChannels);
         }
 
         function filterCategory(cat, btn) {
-            const isAlreadyActive = btn.classList.contains('active');
-            const allBtns = document.querySelectorAll('.cat-btn');
             const promo = document.getElementById('promo-slider');
-            allBtns.forEach(b => b.classList.remove('active'));
-            if (isAlreadyActive) { promo.classList.remove('promo-hidden'); renderGrid(allChannels); }
-            else { btn.classList.add('active'); promo.classList.add('promo-hidden'); renderGrid(allChannels.filter(k => k.kategori === cat)); }
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            promo.classList.add('promo-hidden');
+            renderGrid(allChannels.filter(k => k.kategori === cat));
         }
 
         function toggleSidebar() { 
-            document.getElementById('sidebar').classList.toggle('active');
+            const side = document.getElementById('sidebar');
             const ov = document.getElementById('overlay');
+            side.classList.toggle('active');
             ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
         }
 
-                function checkHash() {
+        function checkHash() {
             const h = window.location.hash.substring(1);
             if(h) { 
                 const c = allChannels.find(k => k.ad === decodeURIComponent(h)); 
-                if(c) playChannel(c.url, c.ad, true, (c.kategori || "Canlı")); 
+                if(c) playChannel(c.url, c.ad, true, c.kategori); 
             }
         }
     </script>
