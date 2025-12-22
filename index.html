@@ -93,22 +93,30 @@
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
-        .channel-square {
-    /* Mevcut width, height, border-radius gibi yerleşim kodlarını elleme */
-    
-    /* NORMAL MOD: Buzlu Cam Efekti */
+        .channel-square { 
+    /* SENİN ORİJİNAL YAPIN */
+    border-radius: 18px; 
+    aspect-ratio: 1/1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative; 
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+
+    /* NORMAL MOD: TOZ BULUTU / CAM EFEKTİ */
     background: rgba(255, 255, 255, 0.1) !important; 
     backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* KOYU MOD: Burada hiçbir şeyi değiştirmiyoruz, siyah kalıyor */
+/* KOYU MOD: SİSTEM KOYU MODDA İSE SİYAH KALIR */
 @media (prefers-color-scheme: dark) {
     .channel-square {
-        background: #181818 !important; /* Senin orijinal koyu rengin */
+        background: var(--card) !important; 
         backdrop-filter: none; 
-        border: 1px solid #222;
+        border: 1px solid #222; 
     }
 }
         
