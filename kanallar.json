@@ -133,7 +133,7 @@
     },
     {
         "ad": "Halk TV",
-        "logo": "https://github.com/orjnc/orjnc.github.io/blob/main/logolar/halk.png",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/halk.png",
         "url": "https://halktv.daioncdn.net/halktv/halktv.m3u8?ce=3",
         "kategori": "Haber"
     },
@@ -241,7 +241,7 @@
     },
     {
         "ad": "Powertürk TV",
-        "logo": "https://github.com/orjnc/orjnc.github.io/blob/main/logolar/powerturktv.png",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturktv.png",
         "url": "https://www.powerapp.com.tr/tvs/power-tvs/powerturktv/",
         "kategori": "Müzik"
     },
