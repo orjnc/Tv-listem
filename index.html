@@ -23,16 +23,55 @@
         .sidebar-logo { max-height: 42px; width: auto; object-fit: contain; }
 
         /* KATEGORİ KONTEYNER VE GEÇİŞLER */
-        .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 10px 22px !important; border-radius: 100px !important; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; min-width: 80px; gap: 8px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(0); opacity: 1; }
+        .category-container { 
+            display: flex; 
+            gap: 10px; 
+            overflow-x: auto; 
+            padding: 15px 15px 20px 15px; 
+            white-space: nowrap; 
+            scrollbar-width: none; 
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            justify-content: flex-start; /* Varsayılan sol */
+        }
+        
+        /* Sağ tarafa kayma için yeni sınıf */
+        .category-container.selection-active {
+            justify-content: flex-end;
+        }
+
+        .cat-btn { 
+            background: #1a1a1a; 
+            color: var(--gray); 
+            border: 1px solid #333; 
+            padding: 10px 22px !important; 
+            border-radius: 100px !important; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-width: 80px; 
+            gap: 8px; 
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            transform: translateX(0); 
+            opacity: 1; 
+        }
         
         /* SEÇİLİ KATEGORİ STİLİ VE ANİMASYONU */
-        .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); z-index: 10; }
+        .cat-btn.active { 
+            background: var(--selected-cat) !important; 
+            color: white; 
+            border-color: var(--selected-cat); 
+            z-index: 10;
+            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         .cat-btn .close-cat { display: none; font-size: 0.8rem; opacity: 0.8; }
         .cat-btn.active .close-cat { display: inline-block; animation: fadeIn 0.3s forwards; }
 
         /* GİZLENEN BUTONLAR İÇİN YUMUŞAKLIK */
-        .cat-hidden { opacity: 0; transform: scale(0.8); pointer-events: none; width: 0; margin: 0; padding: 0 !important; border: none; overflow: hidden; }
+        .cat-hidden { opacity: 0; transform: scale(0.5); pointer-events: none; width: 0; margin: 0; padding: 0 !important; border: none; overflow: hidden; }
 
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; position: sticky; top: 0; background: var(--bg); z-index: 1000; height: 70px; }
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
@@ -40,8 +79,8 @@
         .site-logo:active { transform: scale(0.95); }
 
         /* IZGARA GEÇİŞ EFEKTİ */
-        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; transition: opacity 0.4s ease; }
-        .grid-fade-out { opacity: 0; transform: translateY(10px); }
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; transition: opacity 0.5s ease, transform 0.5s ease; }
+        .grid-fade-out { opacity: 0; transform: translateY(20px); }
         
         .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border: 1px solid #222; transition: 0.3s ease; cursor: pointer; position: relative; overflow: hidden; }
         .square-logo { width: 70%; height: 70%; object-fit: contain; }
@@ -76,7 +115,13 @@
             transition: opacity 0.4s ease-in-out; background-size: cover; background-position: center; position: relative;
         }
 
+        /* YENİ ANİMASYONLAR */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(-50px); opacity: 0.5; }
+            to { transform: translateX(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -209,7 +254,7 @@
 
         function renderGrid(data) {
             const container = document.getElementById('grid-container');
-            container.classList.add('grid-fade-out'); // Yumuşak geçiş için önce karart
+            container.classList.add('grid-fade-out'); 
             
             setTimeout(() => {
                 container.innerHTML = "";
@@ -223,8 +268,8 @@
                             </div>
                         </div>`;
                 });
-                container.classList.remove('grid-fade-out'); // Geri getir
-            }, 300);
+                container.classList.remove('grid-fade-out'); 
+            }, 400);
         }
 
         function playChannel(url, ad, fromHash = false, kategori = "Canlı") {
@@ -266,7 +311,9 @@
         
         function showHome() { 
             if(video) video.pause(); 
-            // Reset categories with animation
+            const container = document.getElementById('category-list');
+            container.classList.remove('selection-active');
+            
             document.querySelectorAll('.cat-btn').forEach(b => {
                 b.classList.remove('active');
                 b.classList.remove('cat-hidden');
@@ -276,7 +323,7 @@
             window.location.href = "https://orjnc.github.io"; 
         }
 
-        /* YUMUŞAK GEÇİŞLİ FİLTRELEME MANTIĞI */
+        /* GÜNCELLENMİŞ KAYMA EFEKTLİ FİLTRELEME */
         function filterCategory(cat, btn) {
             const isAlreadyActive = btn.classList.contains('active');
             const allBtns = document.querySelectorAll('.cat-btn');
@@ -284,7 +331,7 @@
             const container = document.getElementById('category-list');
 
             if (isAlreadyActive) {
-                // Kapatma işlemi: Her şeyi geri getir
+                container.classList.remove('selection-active');
                 allBtns.forEach(b => {
                     b.classList.remove('active');
                     b.classList.remove('cat-hidden');
@@ -292,20 +339,19 @@
                 promo.classList.remove('promo-hidden');
                 renderGrid(allChannels);
             } else {
-                // Kategori seçme işlemi
+                // Konteynerın sağa hizalanmasını sağla
+                container.classList.add('selection-active');
+                
                 allBtns.forEach(b => {
                     b.classList.remove('active');
                     if (b !== btn) {
-                        b.classList.add('cat-hidden'); // Diğerlerini küçülterek yok et
+                        b.classList.add('cat-hidden'); 
                     }
                 });
 
-                btn.classList.add('active'); // Seçileni parlat
-                promo.classList.add('promo-hidden'); // Önerileri yukarı kaydırarak gizle
+                btn.classList.add('active'); 
+                promo.classList.add('promo-hidden'); 
                 
-                // Konumu sola kaydır
-                setTimeout(() => { container.scrollLeft = 0; }, 100);
-
                 const filtered = allChannels.filter(k => k.kategori === cat);
                 renderGrid(filtered);
             }
