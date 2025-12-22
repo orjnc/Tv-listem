@@ -1,319 +1,313 @@
 [
     {
         "ad": "TRT 1",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.png",
         "url": "https://trt.daioncdn.net/trt-1/master_1440p.m3u8?&sid=80lvnknldqc8&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2",
         "kategori": "Ulusal"
     },
     {
         "ad": "ATV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/atv.png",
         "url": "https://www.atv.com.tr/canli-yayin",
         "kategori": "Ulusal"
     },
     {
         "ad": "Kanal D",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanald.png",
         "url": "https://demiroren.daioncdn.net/kanald/kanald.m3u8?app=kanald_web&ce=3",
         "kategori": "Ulusal"
     },
     {
         "ad": "Star TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/star.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/star.png",
         "url": "https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80lvqhzj8iwf&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3",
         "kategori": "Ulusal"
     },
     {
         "ad": "Show TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/showtv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/showtv.png",
         "url": "https://ciner.daioncdn.net/showtv/showtv_480p.m3u8?ex=1664766175&st=RBzhSuGauna0OGld-DJUVA&tv=1&sid=80lvrrjlxe69&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&ce=3",
         "kategori": "Ulusal"
     },
     {
         "ad": "NOW TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/now.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/now.png",
         "url": "https://uycyyuuzyh.turknet.ercdn.net/nphindgytw/nowtv/nowtv.m3u8",
         "kategori": "Ulusal"
     },
     {
         "ad": "TV8",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv8.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv8.png",
         "url": "https://tv8.daioncdn.net/tv8/tv8_1080p.m3u8?&sid=80lvtos0r4vz&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
         "kategori": "Ulusal"
     },
     {
         "ad": "Beyaz TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beyaztv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beyaztv.png",
         "url": "https://beyaztv.daioncdn.net/beyaztv/beyaztv.m3u8?app=fcd5c66b-da9d-44ba-a410-4f34805c397d&ce=3",
         "kategori": "Ulusal"
     },
     {
         "ad": "Teve2",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/teve2.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/teve2.png",
         "url": "https://teve2.duhnet.tv/S2/HLS_LIVE/teve2np/playlist.m3u8",
         "kategori": "Ulusal"
     },
     {
         "ad": "360",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/360.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/360.png",
         "url": "https://turkmedya-live.ercdn.net/tv360/tv360.m3u8",
         "kategori": "Ulusal"
     },
     {
         "ad": "a2",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/a2.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/a2.png",
         "url": "https://www.atv.com.tr/a2tv/canli-yayin",
         "kategori": "Ulusal"
     },
     {
         "ad": "Kanal 7",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.png",
         "url": "https://kanal7.daioncdn.net/kanal7/kanal7_1080p.m3u8?&sid=80lvwkmkrr3j&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3",
         "kategori": "Ulusal"
     },
     {
         "ad": "Tabii TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.png",
         "url": "https://ceokzokgtd.erbvr.com/tabiitv/tabiitv.m3u8",
         "kategori": "Ulusal"
     },
     {
         "ad": "FX",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fx.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fx.png",
         "url": "https://saran-live.ercdn.net/fx/index.m3u8?checkedby:iptvcat.com",
         "kategori": "Sinema"
     },
     {
         "ad": "DMAX",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.png",
         "url": "https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3",
         "kategori": "Belgesel"
     },
     {
         "ad": "TLC",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.png",
         "url": "https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3",
         "kategori": "Belgesel"
     },
     {
         "ad": "CNBC-e",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnbce.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnbce.png",
         "url": "https://cnbc-e.daioncdn.net/cnbc-e/cnbc-e_720p.m3u8?ce=2",
         "kategori": "Ekonomi"
     },
     {
         "ad": "TRT 2",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt2.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt2.png",
         "url": "https://beert7sqimrk0bfdupfgn6qew.medya.trt.com.tr/master.m3u8",
         "kategori": "Kültür"
     },
     {
         "ad": "CNN TÜRK",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnnturk.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnnturk.png",
         "url": "https://live.duhnet.tv//S2/HLS_LIVE/cnnturknp/playlist.m3u8",
         "kategori": "Haber"
     },
     {
         "ad": "TRT Haber",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trthaber.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trthaber.png",
         "url": "https://tv-trthaber.medya.trt.com.tr/master.m3u8",
         "kategori": "Haber"
     },
     {
         "ad": "Habertürk",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/haberturk.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/haberturk.png",
         "url": "https://ciner.daioncdn.net/haberturktv/haberturktv.m3u8?ce=3",
         "kategori": "Haber"
     },
     {
         "ad": "NTV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/ntv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/ntv.png",
         "url": "https://www.youtube.com/live/pqq5c6k70kk",
         "kategori": "Haber"
     },
     {
         "ad": "Halk TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/halktv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/halktv.pnh",
         "url": "https://halktv.daioncdn.net/halktv/halktv.m3u8?ce=3",
         "kategori": "Haber"
     },
     {
         "ad": "Sözcü",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/sozcu.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/sozcu.png",
         "url": "https://www.youtube.com/live/ztmY_cCtUl0",
         "kategori": "Haber"
     },
     {
         "ad": "Ekol TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/ekoltv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/ekoltv.png",
         "url": "https://www.ekoltv.com.tr/canli-yayin",
         "kategori": "Haber"
     },
     {
         "ad": "A Haber",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/ahaber.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/ahaber.png",
         "url": "https://www.youtube.com/live/nmY9i63t6qo",
         "kategori": "Haber"
     },
     {
         "ad": "tv100",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv100.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv100.png",
         "url": "https://tv100.daioncdn.net/tv100/tv100_720p.m3u8?ce=2",
         "kategori": "Haber"
     },
     {
         "ad": "tvnet",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tvnet.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tvnet.png",
         "url": "https://mn-nl.mncdn.com/tvnet/tvnet/playlist.m3u8",
         "kategori": "Haber"
     },
     {
         "ad": "TGRT Haber",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tgrt.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tgrthaber.png",
         "url": "https://canli.tgrthaber.com/tgrt.m3u8",
         "kategori": "Haber"
     },
     {
         "ad": "24 TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/24.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/24tv.png",
         "url": "https://turkmedya-live.ercdn.net/tv24/tv24.m3u8",
         "kategori": "Haber"
     },
     {
-        "ad": "KRT",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/krt.jpg",
-        "url": "https://www.youtube.com/live/sKTq8zmzBvo",
-        "kategori": "Haber"
-    },
-    {
         "ad": "TYT Türk",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tytturk.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tytturk.png",
         "url": "https://tytturk-live.ercdn.net/tytturk/tytturk.m3u8",
         "kategori": "Haber"
     },
     {
         "ad": "Haber Global",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/haberglobal.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/haberglobal.png",
         "url": "https://haberglobal.com/canli-yayin",
         "kategori": "Haber"
     },
     {
         "ad": "FB TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fbtv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/fbtv.png",
         "url": "https://www.fenerbahce.org/fenerbahcetv/canliyayin",
         "kategori": "Spor"
     },
     {
         "ad": "HT Spor",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/htspor.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/htspor.png",
         "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ce=2",
         "kategori": "Spor"
     },
     {
         "ad": "A Spor",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/aspor.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/aspor.png",
         "url": "https://www.aspor.com.tr/webtv/canli-yayin",
         "kategori": "Spor"
     },
     {
         "ad": "Bein Sports Haber",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beinsportshaber.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/beinsportshaber.png",
         "url": "https://www.youtube.com/live/9xVXWLwT0vA",
         "kategori": "Spor"
     },
     {
         "ad": "TRT Spor",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trtspor.png",
         "url": "https://tv-trtspor1.medya.trt.com.tr/master.m3u8",
         "kategori": "Spor"
     },
     {
         "ad": "TRT Spor Yildiz",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/refs/heads/main/logolar/trtsporyildiz.png",
         "url": "https://tv-trtspor2.medya.trt.com.tr/master.m3u8",
         "kategori": "Spor"
     },
     {
         "ad": "Tabii Spor",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tabiispor.png",
         "url": "https://beert7sqimrk0bfdupfgn6qew.medya.trt.com.tr/master.m3u8",
         "kategori": "Spor"
     },
     {
         "ad": "Sports TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/sportstv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/sportstv.png",
         "url": "https://www.sportstv.com.tr/canli/sportstv",
         "kategori": "Spor"
     },
     {
         "ad": "Powertürk TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturk.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturk.png",
         "url": "https://www.powerapp.com.tr/tvs/power-tvs/powerturktv/",
         "kategori": "Müzik"
     },
     {
         "ad": "Power TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powertv.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powertv.png",
         "url": "https://www.powerapp.com.tr/tvs/power-tvs/powertv/",
         "kategori": "Müzik"
     },
     {
         "ad": "Power Love TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerlove.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerlove.png",
         "url": "https://www.powerapp.com.tr/tvs/power-tvs/powerlovetv/",
         "kategori": "Müzik"
     },
     {
         "ad": "PowerTürk Akustik TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturkakustik.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturkakustik.png",
         "url": "https://www.powerapp.com.tr/tvs/power-tvs/powerturkakustiktv/",
         "kategori": "Müzik"
     },
     {
         "ad": "PowerTürk Slow TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturkslow.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturkslow.png",
         "url": "https://www.powerapp.com.tr/tvs/power-tvs/powertrslowtv/",
         "kategori": "Müzik"
     },
     {
         "ad": "PowerTürk Taptaze TV",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/pttaptaze.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/powerturktaptaze.png",
         "url": "https://www.powerapp.com.tr/tvs/power-tvs/powerturktaptazetv/",
         "kategori": "Müzik"
     },
     {
         "ad": "Nr1 Türk",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1turk.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1turk.png",
         "url": "https://www.numberone.com.tr/2015/12/20/number1-turk-tv-canli-yayin/",
         "kategori": "Müzik"
     },
     {
         "ad": "Nr1",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1.png",
         "url": "https://www.numberone.com.tr/2015/12/18/nr1-tv-canli-yayin/",
         "kategori": "Müzik"
     },
     {
         "ad": "Nr1 Aşk",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1ask.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1ask.png",
         "url": "https://www.numberone.com.tr/2017/10/05/nr1-ask-tv-canli-yayin-izle/",
         "kategori": "Müzik"
     },
     {
         "ad": "Nr1 Dance",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1dance.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1dance.png",
         "url": "https://www.numberone.com.tr/2017/10/03/number1-dance-ty-canli-yayin-izle/",
         "kategori": "Müzik"
     },
     {
         "ad": "Nr1 Rap",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1rap.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/nr1rap.png",
         "url": "https://www.numberone.com.tr/2017/10/05/number1-rap-tv-canli-yayin-izle/",
         "kategori": "Müzik"
     },
     {
         "ad": "Dream Türk",
-        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dreamturk.jpg",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dreamturk.png",
         "url": "https://www.dreamturk.com.tr/canli-yayin-izle",
         "kategori": "Müzik"
     }
