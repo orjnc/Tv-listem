@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --bg: #000000; --card: #121212; --accent: #ff005c; --text: #ffffff; --gray: #888888; }
+        :root { --bg: #000000; --card: #121212; --accent: #ff005c; --text: #ffffff; --gray: #888888; --selected-cat: #F683BE; }
         body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; margin: 0; }
         
         .sidebar { position: fixed; left: -280px; top: 0; height: 100%; width: 280px; background: rgba(18, 18, 18, 0.98); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; padding: 30px 20px; border-right: 1px solid #222; display: flex; flex-direction: column; }
@@ -20,14 +20,17 @@
         .menu-item i { color: var(--accent); font-size: 1.2rem; width: 25px; }
         .menu-item:hover { background: rgba(255, 0, 92, 0.1); }
 
-        /* SİDEBAR LOGO - SENİN İDEAL DEDİĞİN ÖLÇÜDE BIRAKILDI */
         .sidebar-logo { max-height: 42px; width: auto; object-fit: contain; }
 
-        .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 0 15px 20px 15px; white-space: nowrap; scrollbar-width: none; }
-        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 10px 22px !important; border-radius: 100px !important; font-size: 0.85rem; font-weight: 600; transition: 0.3s; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; min-width: 80px; }
-        .cat-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        /* KATEGORİ KONTEYNER */
+        .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; transition: 0.3s ease; }
+        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 10px 22px !important; border-radius: 100px !important; font-size: 0.85rem; font-weight: 600; transition: 0.3s; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; min-width: 80px; gap: 8px; }
+        
+        /* SEÇİLİ KATEGORİ STİLİ */
+        .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
+        .cat-btn .close-cat { display: none; font-size: 0.8rem; opacity: 0.8; }
+        .cat-btn.active .close-cat { display: inline-block; }
 
-        /* HEADER & LOGO - ANA EKRAN İÇİN DÜZELTİLDİ */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; position: sticky; top: 0; background: var(--bg); z-index: 1000; height: 70px; }
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; transition: 0.2s ease; }
@@ -60,7 +63,7 @@
         .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
         .list-logo { width: 55px; height: 55px; object-fit: contain; }
 
-        .promo-slider { padding: 0 15px; margin-bottom: 25px; }
+        .promo-slider { padding: 0 15px; margin-bottom: 25px; transition: 0.3s ease; }
         .promo-card { 
             height: 200px; border-radius: 20px; display: flex; align-items: flex-end; padding: 20px; border: 1px solid #333; 
             transition: opacity 0.4s ease-in-out; background-size: cover; background-position: center; position: relative;
@@ -106,7 +109,15 @@
     </div>
 
     <div id="main-content">
-        <div class="promo-slider">
+        <div class="category-container" id="category-list">
+            <button class="cat-btn" onclick="filterCategory('Ulusal', this)">Ulusal <i class="fas fa-times close-cat"></i></button>
+            <button class="cat-btn" onclick="filterCategory('Spor', this)">Spor <i class="fas fa-times close-cat"></i></button>
+            <button class="cat-btn" onclick="filterCategory('Haber', this)">Haber <i class="fas fa-times close-cat"></i></button>
+            <button class="cat-btn" onclick="filterCategory('Müzik', this)">Müzik <i class="fas fa-times close-cat"></i></button>
+            <button class="cat-btn" onclick="filterCategory('Belgesel', this)">Belgesel <i class="fas fa-times close-cat"></i></button>
+        </div>
+
+        <div class="promo-slider" id="promo-slider">
             <div class="promo-card" id="featured-card" onclick="playFeatured()" style="cursor: pointer;">
                 <div>
                     <h3 class="m-0" id="featured-title">Yükleniyor...</h3>
@@ -116,15 +127,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="category-container" id="category-list">
-            <button class="cat-btn active" onclick="filterCategory('Hepsi', this)">Hepsi</button>
-            <button class="cat-btn" onclick="filterCategory('Ulusal', this)">Ulusal</button>
-            <button class="cat-btn" onclick="filterCategory('Spor', this)">Spor</button>
-            <button class="cat-btn" onclick="filterCategory('Haber', this)">Haber</button>
-            <button class="cat-btn" onclick="filterCategory('Müzik', this)">Müzik</button>
-            <button class="cat-btn" onclick="filterCategory('Belgesel', this)">Belgesel</button>
         </div>
 
         <div id="search-section">
@@ -247,13 +249,55 @@
         }
 
         window.onpopstate = function() { window.location.href = "https://orjnc.github.io"; };
-        function showHome() { if(video) video.pause(); window.location.href = "https://orjnc.github.io"; }
-        function filterCategory(cat, btn) {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filtered = (cat === 'Hepsi') ? allChannels : allChannels.filter(k => k.kategori === cat);
-            renderGrid(filtered);
+        
+        function showHome() { 
+            if(video) video.pause(); 
+            // Reset categories
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.classList.remove('active');
+                b.style.display = 'inline-flex';
+            });
+            document.getElementById('promo-slider').style.display = 'block';
+            renderGrid(allChannels);
+            window.location.href = "https://orjnc.github.io"; 
         }
+
+        /* YENİ KATEGORİ FİLTRELEME MANTIĞI */
+        function filterCategory(cat, btn) {
+            const isAlreadyActive = btn.classList.contains('active');
+            const allBtns = document.querySelectorAll('.cat-btn');
+            const promo = document.getElementById('promo-slider');
+            const container = document.getElementById('category-list');
+
+            if (isAlreadyActive) {
+                // Kapatma işlemi (X'e basılmış gibi)
+                allBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.style.display = 'inline-flex';
+                });
+                promo.style.display = 'block';
+                renderGrid(allChannels);
+            } else {
+                // Kategori seçme işlemi
+                allBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Diğer kategorileri gizle
+                allBtns.forEach(b => {
+                    if(!b.classList.contains('active')) b.style.display = 'none';
+                });
+
+                // Önerileri gizle
+                promo.style.display = 'none';
+                
+                // Konumu sola kaydır
+                container.scrollLeft = 0;
+
+                const filtered = allChannels.filter(k => k.kategori === cat);
+                renderGrid(filtered);
+            }
+        }
+
         function toggleFav(e, name) {
             e.stopPropagation();
             const idx = favorites.indexOf(name);
@@ -261,18 +305,22 @@
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
             renderGrid(allChannels);
         }
+
         function showSearch() { 
             document.getElementById('home-section').style.display = "none"; 
             document.getElementById('search-section').style.display = "block";
             document.getElementById('player-box').style.display = "none";
             document.getElementById('main-content').style.display = "block";
         }
+
         function showFavorites() { renderGrid(allChannels.filter(k => favorites.includes(k.ad))); }
+
         function toggleSidebar() { 
             document.getElementById('sidebar').classList.toggle('active');
             const ov = document.getElementById('overlay');
             ov.style.display = ov.style.display === 'block' ? 'none' : 'block';
         }
+
         function checkHash() {
             const h = window.location.hash.substring(1);
             if (h) {
