@@ -59,31 +59,7 @@
 
         /* Kategori Butonları */
         .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; min-height: 75px; transition: all 0.6s ease; }
-        /* Kategori Butonları */
-.cat-btn { 
-    background: rgba(255, 255, 255, 0.1) !important; /* Normal Mod: Şeffaf beyaz */
-    color: #ffffff; 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    padding: 10px 22px !important; 
-    border-radius: 100px !important; 
-    font-size: 0.85rem; 
-    font-weight: 600; 
-    cursor: pointer; 
-    transition: all 0.5s ease; 
-    flex-shrink: 0; 
-    backdrop-filter: blur(10px); /* Toz bulutu efekti */
-    -webkit-backdrop-filter: blur(10px);
-}
-
-/* Koyu Modda Butonları Eski Haline Döndür */
-@media (prefers-color-scheme: dark) {
-    .cat-btn { 
-        background: #1a1a1a !important; 
-        backdrop-filter: none; 
-        border: 1px solid #333; 
-    }
-}
-        
+        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 10px 22px !important; border-radius: 100px !important; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.5s ease; flex-shrink: 0; }
         .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
         .cat-hidden { display: none; }
 
@@ -117,33 +93,7 @@
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
-        .channel-square { 
-    /* SENİN ORİJİNAL YAPIN */
-    border-radius: 18px; 
-    aspect-ratio: 1/1; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    position: relative; 
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.3s ease;
-
-    /* NORMAL MOD: TOZ BULUTU / CAM EFEKTİ */
-    background: rgba(255, 255, 255, 0.1) !important; 
-    backdrop-filter: blur(10px); 
-    -webkit-backdrop-filter: blur(10px);
-}
-
-/* KOYU MOD: SİSTEM KOYU MODDA İSE SİYAH KALIR */
-@media (prefers-color-scheme: dark) {
-    .channel-square {
-        background: var(--card) !important; 
-        backdrop-filter: none; 
-        border: 1px solid #222; 
-    }
-}
-        
+        .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border: 1px solid #222; cursor: pointer; position: relative; overflow: hidden; }
         .square-logo { width: 70%; height: 70%; object-fit: contain; }
         .fav-star { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.2); z-index: 5; }
         .fav-star.active { color: #ffc107; }
@@ -155,33 +105,7 @@
         .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
         /* Navigasyon */
-.bottom-nav { 
-    position: fixed; 
-    bottom: 15px; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 92%; 
-    border-radius: 25px; 
-    display: flex; 
-    justify-content: space-around; 
-    padding: 12px; 
-    z-index: 2500; /* Sidebar'ın altında kalsın */
-    transition: all 0.4s ease;
-
-    /* NORMAL MOD: Buzlu Cam Efekti */
-    background: rgba(255, 255, 255, 0.1) !important; 
-    backdrop-filter: blur(15px); 
-    -webkit-backdrop-filter: blur(15px); 
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* KOYU MOD: Siyah Cam Efekti */
-@media (prefers-color-scheme: dark) {
-    .bottom-nav { 
-        background: rgba(26, 26, 26, 0.8) !important; /* Koyu modda siyah sis */
-        border: 1px solid #333;
-    }
-}
+        .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(10px); border-radius: 25px; display: flex; justify-content: space-around; padding: 12px; z-index: 1000; border: 1px solid #333; }
         .nav-btn { color: #666; font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; cursor: pointer; }
         .nav-btn.active { color: var(--accent); }
         .nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
@@ -457,4 +381,31 @@
 
         function checkHash() {
             const h = window.location.hash.substring(1);
-            if(h) { const c = allChannels.find(k => k.ad === decodeURIComponent(h)); if(c) playChannel(c.url, c.ad, true, c.kategori);
+            if(h) { const c = allChannels.find(k => k.ad === decodeURIComponent(h)); if(c) playChannel(c.url, c.ad, true, c.kategori); }
+        }
+    </script>
+    <script src="oneriler.js"></script>
+
+<script>
+// Animasyonu tetikleyen sistem
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.type === "childList" || mutation.attributeName === "style") {
+            const pCard = document.getElementById('featured-card');
+            if (pCard) {
+                pCard.classList.remove('promo-active');
+                void pCard.offsetWidth; // Reflow tetikleyici
+                pCard.classList.add('promo-active');
+            }
+        }
+    });
+});
+
+const targetNode = document.getElementById('featured-card');
+if (targetNode) {
+    observer.observe(targetNode, { attributes: true, childList: true, subtree: true });
+}
+</script>
+
+</body>
+</html>
