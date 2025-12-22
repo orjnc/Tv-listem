@@ -345,18 +345,23 @@
         });
 
         function renderGrid(data) {
-            const container = document.getElementById('grid-container');
-            container.innerHTML = "";
-            data.forEach(k => {
-                const isFav = favorites.includes(k.ad) ? 'active' : '';
-                container.innerHTML += `
-                    <div class="channel-square">
-                        <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${k.ad}')"></i>
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}', false, '${k.kategori}')">
-                            <img src="${k.logo}" class="square-logo" onerror="this.src='https://via.placeholder.com/150?text=TV'">
-                        </div>
-                    </div>`;
-            });
+    const container = document.getElementById('grid-container');
+    if(!container) return; // Hata almamak için kontrol
+    container.innerHTML = "";
+    data.forEach(k => {
+        const isFav = favorites.includes(k.ad) ? 'active' : '';
+        // Logoların senin GitHub klasöründen çekilmesi için yol eklendi
+        // Ayrıca .jpg olanları otomatik .png olarak dener (klasöründe hepsi png görünüyor)
+        const logoName = k.logo.split('/').pop().replace('.jpg', '.png'); 
+        
+        container.innerHTML += `
+            <div class="channel-square">
+                <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${k.ad}')"></i>
+                <div class="w-100 h-100 d-flex align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}', false, '${k.kategori || "TV"}')">
+                    <img src="logolar/${logoName}" class="square-logo" onerror="this.onerror=null; this.src='logolar/logo.png'">
+                </div>
+            </div>`;
+    });
         }
 
         function renderList(data, targetId) {
