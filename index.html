@@ -22,7 +22,7 @@
 
         .sidebar-logo { max-height: 42px; width: auto; object-fit: contain; }
 
-        /* KATEGORİ KONTEYNER */
+        /* KATEGORİ KONTEYNER - RELATIVE YAPILDI */
         .category-container { 
             display: flex; 
             gap: 10px; 
@@ -30,14 +30,9 @@
             padding: 15px 15px 20px 15px; 
             white-space: nowrap; 
             scrollbar-width: none; 
+            position: relative;
+            min-height: 75px;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            justify-content: flex-start;
-        }
-        
-        /* Seçim yapıldığında sağa yaslanma efekti */
-        .category-container.selection-active {
-            justify-content: flex-end;
-            padding-right: 20px;
         }
 
         .cat-btn { 
@@ -57,32 +52,35 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
             opacity: 1;
             flex-shrink: 0;
+            position: relative;
+            left: 0;
         }
         
-        /* SEÇİLİ KATEGORİ - SAĞDA SABİT DURUŞ */
+        /* SEÇİLEN KATEGORİ: HER ZAMAN AYNI KONUMDA */
         .cat-btn.active { 
             background: var(--selected-cat) !important; 
             color: white; 
             border-color: var(--selected-cat); 
-            z-index: 10;
-            margin-right: 0;
-            transform: scale(1); /* Büyüklük değişmeyecek */
+            z-index: 100;
+            position: absolute;
+            right: 15px; /* Ekranın sağından 15px içeriye sabitlendi */
+            top: 15px;
+            min-width: 100px;
         }
 
         .cat-btn .close-cat { display: none; font-size: 0.8rem; opacity: 0.8; }
         .cat-btn.active .close-cat { display: inline-block; animation: fadeIn 0.3s forwards; }
 
-        /* DİĞER BUTONLARIN GİZLENME ANİMASYONU */
+        /* GİZLENENLER */
         .cat-hidden { 
-            opacity: 0; 
-            transform: scale(0); 
+            opacity: 0 !important; 
+            transform: scale(0.5); 
             pointer-events: none; 
-            width: 0; 
-            margin: 0; 
+            width: 0 !important; 
+            margin: 0 !important; 
             padding: 0 !important; 
-            border: none; 
-            overflow: hidden;
-            flex-shrink: 0;
+            border: none !important; 
+            visibility: hidden;
         }
 
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; position: sticky; top: 0; background: var(--bg); z-index: 1000; height: 70px; }
@@ -90,7 +88,6 @@
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; transition: 0.2s ease; }
         .site-logo:active { transform: scale(0.95); }
 
-        /* IZGARA GEÇİŞ EFEKTİ */
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; transition: opacity 0.5s ease, transform 0.5s ease; }
         .grid-fade-out { opacity: 0; transform: translateY(20px); }
         
@@ -318,7 +315,6 @@
         function showHome() { 
             if(video) video.pause(); 
             const container = document.getElementById('category-list');
-            container.classList.remove('selection-active');
             
             document.querySelectorAll('.cat-btn').forEach(b => {
                 b.classList.remove('active');
@@ -329,15 +325,13 @@
             window.location.href = "https://orjnc.github.io"; 
         }
 
-        /* GÜNCELLENMİŞ KAYMA EFEKTLİ FİLTRELEME - SAĞDA SABİTLENME */
+        /* TAM OLARAK AYNI KONUMA SABİTLEME MANTIĞI */
         function filterCategory(cat, btn) {
             const isAlreadyActive = btn.classList.contains('active');
             const allBtns = document.querySelectorAll('.cat-btn');
             const promo = document.getElementById('promo-slider');
-            const container = document.getElementById('category-list');
 
             if (isAlreadyActive) {
-                container.classList.remove('selection-active');
                 allBtns.forEach(b => {
                     b.classList.remove('active');
                     b.classList.remove('cat-hidden');
@@ -345,19 +339,16 @@
                 promo.classList.remove('promo-hidden');
                 renderGrid(allChannels);
             } else {
-                // Konteynerın sağa hizalanmasını sağla
-                container.classList.add('selection-active');
-                
                 allBtns.forEach(b => {
                     if (b !== btn) {
-                        b.classList.add('cat-hidden'); // Diğerlerini küçülterek yok et
+                        b.classList.add('cat-hidden'); 
                     } else {
                         b.classList.remove('cat-hidden');
-                        b.classList.add('active'); // Seçileni parlat
+                        b.classList.add('active'); 
                     }
                 });
 
-                promo.classList.add('promo-hidden'); // Önerileri yukarı kaydırarak gizle
+                promo.classList.add('promo-hidden'); 
                 
                 const filtered = allChannels.filter(k => k.kategori === cat);
                 renderGrid(filtered);
