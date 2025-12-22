@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+    <meta name="color-scheme" content="dark">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>orjnc tv+</title>
@@ -20,16 +21,22 @@
         }
         
         
-        body { 
-    background: var(--bg); color: var(--text); 
-    font-family: 'Inter', sans-serif; 
-    overflow-x: hidden; 
-    margin: 0; 
-    transition: background 0.5s ease;
-    min-height: 100vh; /* Ekranın tamamını kaplamasını sağlar */
-    display: flex;
-    flex-direction: column;
-        }
+        /* Bu kısım sayfanın en dibini her zaman siyah tutar */
+html {
+    background-color: #000000 !important;
+}
+
+body {
+    background-color: #000000 !important;
+    min-height: 100vh; /* Sayfa boyu ne olursa olsun ekranı doldurur */
+}
+
+/* Görseldeki pembe/mor gradyanın alt tarafta kesilmemesi için */
+body.normal-mode { 
+    background: linear-gradient(to bottom, #bd00d1 0%, #000000 100%) !important;
+    background-attachment: fixed !important;
+}
+        
         
         
         .sidebar { position: fixed; left: -280px; top: 0; height: 100%; width: 280px; background: rgba(18, 18, 18, 0.98); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; padding: 30px 20px; border-right: 1px solid #222; display: flex; flex-direction: column; }
