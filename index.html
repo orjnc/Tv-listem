@@ -66,8 +66,17 @@
         .overlay { display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1500; }
         #search-section { padding: 15px; display: none; }
         .search-input { background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 15px; padding: 12px 20px; width: 100%; margin-bottom: 20px; }
+        
+        /* Önerilen Kanallar Listesi Düzenleme */
         .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
-        .list-logo { width: 55px; height: 55px; object-fit: contain; background: #fff; border-radius: 12px; padding: 5px; }
+        .list-logo { 
+            width: 55px; 
+            height: 55px; 
+            object-fit: contain; 
+            background: var(--card); /* Beyaz yerine ana sayfa kutucuk rengi yapıldı */
+            border-radius: 12px; 
+            padding: 5px; 
+        }
 
         /* Promo */
         .promo-slider { padding: 0 15px; margin-bottom: 25px; }
@@ -99,7 +108,7 @@
         <video id="video" controls autoplay playsinline></video>
         <div class="p-3">
             <h5 id="now-playing" class="m-0 text-truncate">Kanal Adı</h5>
-            <p class="text-muted small mt-1" id="player-cat-info">Canlı Yayın</p>
+            <p style="color: white !important;" class="small mt-1" id="player-cat-info">Canlı Yayın</p>
             <div id="suggested-list" class="mt-3"></div>
         </div>
     </div>
@@ -200,14 +209,13 @@
                         <img src="${k.logo}" class="list-logo" onerror="this.src='https://via.placeholder.com/50'">
                         <div class="list-info">
                             <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
-                            <div class="list-prog">${k.kategori}</div>
+                            <div style="color: white !important;" class="list-prog">${k.kategori}</div>
                         </div>
                     </div>`;
             });
         }
 
         function playChannel(url, ad, fromHash = false, kategori = "Canlı") {
-            // "Geri" tuşu mantığı için history kaydı bırakıyoruz
             if(!fromHash) history.pushState({page: 'player'}, ad, "#" + encodeURIComponent(ad));
             
             document.getElementById('player-box').style.display = "block";
@@ -227,20 +235,15 @@
             }
         }
 
-        // --- YENİ EKLENEN KRİTİK FONKSİYONLAR ---
-
-        // 1. GERİ TUŞU TAKİBİ: Kanaldayken geri basılırsa ana siteye atar
+        // GERİ TUŞU VE HOME YÖNLENDİRMELERİ
         window.onpopstate = function(event) {
             window.location.href = "https://orjnc.github.io";
         };
 
-        // 2. HOME BUTONU: Tıklandığında ana siteye atar
         function showHome() {
             if(video) video.pause();
             window.location.href = "https://orjnc.github.io";
         }
-
-        // --- DİĞER FONKSİYONLAR ---
 
         function filterCategory(cat, btn) {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -261,7 +264,6 @@
         function showSearch() {
             document.getElementById('home-section').style.display = "none";
             document.getElementById('search-section').style.display = "block";
-            // Arama ekranındayken oyuncu açıksa kapatmak için:
             document.getElementById('player-box').style.display = "none";
             document.getElementById('main-content').style.display = "block";
         }
