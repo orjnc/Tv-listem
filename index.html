@@ -72,14 +72,23 @@
     position: sticky; 
     top: 0; 
     height: 70px; 
-    z-index: 2000; /* Daha üstte durması için yükselttik */
+    z-index: 2000; 
+    
+    /* TOZ BULUTU EFEKTI (SABİT) */
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
-    /* İSTEDİĞİN TOZ BULUTU EFEKTİ */
-    background: rgba(181, 0, 200, 0.5) !important; /* #b500c8 morunun %50 şeffaf hali */
-    backdrop-filter: blur(15px); /* Arkadaki kanalları buzlu cam gibi bulandırır */
-    -webkit-backdrop-filter: blur(15px); /* iPhone/Safari desteği için */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Çok ince bir sınır çizgisi */
-        }
+    /* NORMAL MOD (Sitenin Kendi Rengi) */
+    background: rgba(181, 0, 200, 0.5) !important; 
+}
+
+/* KOYU MOD TETİKLENDİĞİNDE (Cihaz veya Gövde Sınıfı) */
+@media (prefers-color-scheme: dark) {
+    .header {
+        background: rgba(0, 0, 0, 0.6) !important;
+    }
+}
         
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
