@@ -492,11 +492,11 @@
             ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
         }
 
-        function checkHash() {
+                function checkHash() {
             const h = window.location.hash.substring(1);
             if(h) { 
                 const c = allChannels.find(k => k.ad === decodeURIComponent(h)); 
-                if(c) playChannel(c.url, c.ad, true, c.kategori); 
+                if(c) playChannel(c.url, c.ad, true, (c.kategori || "Canlı")); 
             }
         }
     </script>
