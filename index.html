@@ -315,10 +315,18 @@ body.normal-mode {
     document.getElementById('player-box').style.display = "none";
     document.getElementById('main-content').style.display = "block";
 
-    // Arama ekranında öneriler (promo) panelini gizle
+    // Öneriler (promo) panelini gizle (Daha önce konuştuğumuz kısım)
     const promo = document.getElementById('promo-slider');
     if (promo) {
-        promo.style.display = "none"; // Kesin çözüm için display none
+        promo.style.display = "none";
+    }
+
+    // --- YENİ DETAY: Arama kutusuna odaklan ve klavyeyi aç ---
+    const searchInput = document.getElementById('searchInput'); // Arama kutusunun ID'si
+    if (searchInput) {
+        setTimeout(() => {
+            searchInput.focus();
+        }, 300); // 300ms gecikme, sayfa geçiş animasyonu varsa klavyenin takılmamasını sağlar
     }
         }
         
