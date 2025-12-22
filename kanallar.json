@@ -1,8 +1,8 @@
 [
     {
         "ad": "TRT 1",
-        "logo": "logolar/trt1.png",
-        "url": "https://trt.daioncdn.net/trt-1/master_1440p.m3u8?&sid=80op051160x0&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2",
+        "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/trt1.jpg",
+        "url": "https://trt.daioncdn.net/trt-1/master_1440p.m3u8?&sid=80pgkodzizyk&app=ed3904e8-737b-4a5e-856a-1b0d7a0a94e2&ce=2",
         "ref": "https://trt.daioncdn.net/trt-1/master.m3u8?app=web"
     },
     {
@@ -20,13 +20,13 @@
     {
         "ad": "Star TV",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/star.jpg",
-        "url": "https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80op37wmnwsj&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3",
+        "url": "https://dogus.daioncdn.net/startv/startv_480p.m3u8?&sid=80pgntcm9hvr&app=a20ac41e-bdc3-4aa1-934d-26b484480ac9&ce=3",
         "ref": "https://www.startv.com.tr/canli-yayin"
     },
     {
         "ad": "Show TV",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/showtv.jpg",
-        "url": "https://ciner.daioncdn.net/showtv/showtv_480p.m3u8?ex=1664766175&st=RBzhSuGauna0OGld-DJUVA&tv=1&sid=80op4jbhm03o&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&ce=3",
+        "url": "https://ciner.daioncdn.net/showtv/showtv_480p.m3u8?ex=1664766175&st=RBzhSuGauna0OGld-DJUVA&tv=1&sid=80pgp3btzaly&app=4bc856ef-4c68-4a94-bc87-37dfaaa66558&ce=3",
         "ref": "https://www.showtv.com.tr/canli-yayin"
     },
     {
@@ -38,7 +38,7 @@
     {
         "ad": "TV8",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv8.jpg",
-        "url": "https://tv8.daioncdn.net/tv8/tv8_1080p.m3u8?&sid=80op76hmwkr7&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
+        "url": "https://tv8.daioncdn.net/tv8/tv8_1080p.m3u8?&sid=80pgr1v7y95g&app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3",
         "ref": "https://tv8.daioncdn.net/tv8/tv8.m3u8?app=7ddc255a-ef47-4e81-ab14-c0e5f2949788&ce=3"
     },
     {
@@ -68,7 +68,7 @@
     {
         "ad": "Kanal 7",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/kanal7.jpg",
-        "url": "https://kanal7.daioncdn.net/kanal7/kanal7_1080p.m3u8?&sid=80opa4gp1by4&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3",
+        "url": "https://kanal7.daioncdn.net/kanal7/kanal7_1080p.m3u8?&sid=80pgu1hpb3ee&app=f99587ad-1637-494d-8255-da35b09d17a1&ce=3",
         "ref": "https://www.kanal7.com/canli-izle/"
     },
     {
@@ -86,19 +86,19 @@
     {
         "ad": "DMAX",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/dmax.jpg",
-        "url": "https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=WEJJaDlzRVNFMnZ1UE1WWTdXVFNSNzdBRE8vaHpDT1BsRkVVNTNVWVlMQT0=",
+        "url": "https://dogus.daioncdn.net/dmax/dmax.m3u8?ce=3&app=5a02c599-d17e-4982-9b04-090934d51af7&token=Z3R6bC90am1Bd3kwNjd0MFlWSUxoSHdPb2FJTng0WkREOE45UzZuTkdicz0=",
         "ref": "https://www.dmax.com.tr/canli-izle"
     },
     {
         "ad": "TLC",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tlc.jpg",
-        "url": "https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=TzFvSjE2Qjk0YVV3N3JycTVUMlNUeEk2UG5rL0o0Tm1ialhJR0R0bnBEND0=",
+        "url": "https://dogus.daioncdn.net/tlc/tlc.m3u8?ce=3&app=1aca0aa1-06e3-41ff-a8e5-38d7df475469&token=cTIxdlpNNlR2TStvT3NFMEo5VVE5UUZ3Sm9HalhFRzN5aWpjb1MxRkswOD0=",
         "ref": "https://www.tlctv.com.tr/canli-izle"
     },
     {
         "ad": "CNBC-e",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/cnbce.jpg",
-        "url": "https://cnbc-e.daioncdn.net/cnbc-e/cnbc-e_1080p.m3u8?e=1766447482&st=irMSUb2zVc3af5-5RV8GdA&sid=80ope2g7mp63&app=3a3f6622-1025-4b00-af19-6df611ff07d3&ce=2",
+        "url": "https://cnbc-e.daioncdn.net/cnbc-e/cnbc-e_720p.m3u8?e=1766466014&st=AxHdCZ3Cufnv5FaN1HU2Pg&sid=80pgxy91bo6q&app=3a3f6622-1025-4b00-af19-6df611ff07d3&ce=2",
         "ref": "https://www.cnbce.com/canli-yayin"
     },
     {
@@ -158,7 +158,7 @@
     {
         "ad": "tv100",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/tv100.jpg",
-        "url": "https://tv100.daioncdn.net/tv100/tv100_720p.m3u8?&sid=80opjymhtkf4&app=356e7599-d81d-4357-935a-355a1ad9846e&ce=2",
+        "url": "https://tv100.daioncdn.net/tv100/tv100_720p.m3u8?&sid=80ph3saj86tf&app=356e7599-d81d-4357-935a-355a1ad9846e&ce=2",
         "ref": "https://www.tv100.com/canli-yayin"
     },
     {
@@ -206,7 +206,7 @@
     {
         "ad": "HT Spor",
         "logo": "https://raw.githubusercontent.com/orjnc/Tv-listem/main/logolar/htspor.jpg",
-        "url": "https://ciner.daioncdn.net/ht-spor/ht-spor_720p.m3u8?ex=0&sid=80opphqpggux&app=d5539841-018b-48b4-80fe-8bac2ffc3d5e&ce=2",
+        "url": "https://ciner.daioncdn.net/ht-spor/ht-spor.m3u8?app=web",
         "ref": "https://www.htspor.com/canli-yayin"
     },
     {
