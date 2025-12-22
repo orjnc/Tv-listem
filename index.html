@@ -354,19 +354,27 @@
             setTheme(localStorage.getItem('themeChoice') || 'dark');
             fetch('kanallar.json?v=' + Date.now())
                 .then(res => res.json())
-                .then(data => { allChannels = data; renderGrid(data); checkHash(); });
+                .then(data => { 
+                    allChannels = data; 
+                    renderGrid(data); 
+                    updatePromo();
+                    checkHash(); 
+                }).catch(err => console.error("JSON Yüklenemedi:", err));
         });
 
         function renderGrid(data) {
             const container = document.getElementById('grid-container');
+            if(!container) return;
             container.innerHTML = "";
             data.forEach(k => {
                 const isFav = favorites.includes(k.ad) ? 'active' : '';
+                // HATA ÇÖZÜMÜ: Logo yoksa placeholder kullan
+                const logo = k.logo || 'logolar/logo.png';
                 container.innerHTML += `
                     <div class="channel-square">
                         <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${k.ad}')"></i>
                         <div class="w-100 h-100 d-flex align-items-center justify-content-center" onclick="playChannel('${k.url}', '${k.ad}', false, '${k.kategori}')">
-                            <img src="${k.logo}" class="square-logo" onerror="this.src='https://via.placeholder.com/150?text=TV'">
+                            <img src="${logo}" class="square-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=TV'">
                         </div>
                     </div>`;
             });
@@ -378,12 +386,13 @@
             container.innerHTML = "";
             data.forEach(k => {
                 const isFav = favorites.includes(k.ad);
+                const logo = k.logo || 'logolar/logo.png';
                 container.innerHTML += `
                     <div class="list-item" onclick="playChannel('${k.url}', '${k.ad}')">
-                        <img src="${k.logo}" class="list-logo" onerror="this.src='https://via.placeholder.com/150?text=TV'">
+                        <img src="${logo}" class="list-logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=TV'">
                         <div class="list-info">
                             <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
-                            <div class="small">${k.kategori}</div>
+                            <div class="small">${k.kategori || 'Canlı'}</div>
                         </div>
                         <i class="fa${isFav ? 's' : 'r'} fa-star" onclick="toggleFav(event, '${k.ad}')" style="color: ${isFav ? 'gold' : 'white'}; margin-left: auto; padding: 10px;"></i>
                     </div>`;
@@ -395,21 +404,39 @@
             document.getElementById('player-box').style.display = "block";
             document.getElementById('main-content').style.display = "none";
             document.getElementById('now-playing').innerText = ad;
-            document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + kategori;
+            document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + (kategori || "TV");
             window.scrollTo(0,0);
             const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
             renderList(shuffled, 'suggested-list');
             if (Hls.isSupported()) { hls.loadSource(url); hls.attachMedia(video); hls.on(Hls.Events.MANIFEST_PARSED, () => video.play()); }
-            else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; }
+            else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; video.play(); }
+        }
+
+        function updatePromo() {
+            if(allChannels.length > 0) {
+                const f = allChannels[Math.floor(Math.random()*allChannels.length)];
+                document.getElementById('featured-title').innerText = f.ad;
+                document.getElementById('featured-desc').innerText = f.kategori || "Öne Çıkan Kanal";
+                document.getElementById('featured-card').style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,0.9), transparent), url('${f.logo}')`;
+            }
+        }
+
+        function playFeatured() {
+            const title = document.getElementById('featured-title').innerText;
+            const chan = allChannels.find(k => k.ad === title);
+            if(chan) playChannel(chan.url, chan.ad, false, chan.kategori);
         }
 
         function showHome() {
-    // Önce kategorileri tekrar görünür yap
-    const catList = document.getElementById('category-list');
-    if(catList) catList.style.display = "flex";
-    
-    // Sonra ana sayfaya yönlendir veya içeriği sıfırla
-    window.location.href = "https://orjnc.github.io"; 
+            document.getElementById('home-section').style.display = "block";
+            document.getElementById('search-section').style.display = "none";
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('main-content').style.display = "block";
+            document.getElementById('category-list').style.display = "flex";
+            document.getElementById('promo-slider').classList.remove('promo-hidden');
+            renderGrid(allChannels);
+            const allBtns = document.querySelectorAll('.cat-btn');
+            allBtns.forEach(b => b.classList.remove('active'));
         }
 
         function showSearch() {
@@ -417,29 +444,24 @@
             document.getElementById('search-section').style.display = "block";
             document.getElementById('player-box').style.display = "none";
             document.getElementById('main-content').style.display = "block";
-            const promo = document.getElementById('promo-slider');
-            if (promo) promo.classList.add('promo-hidden');
-            const si = document.getElementById('searchInput');
-            if (si) setTimeout(() => si.focus(), 300);
+            document.getElementById('promo-slider').classList.add('promo-hidden');
+            document.getElementById('category-list').style.display = "none";
+            setTimeout(() => document.getElementById('searchInput').focus(), 300);
         }
 
         function showFavorites() {
-    document.getElementById('home-section').style.display = "block";
-    document.getElementById('search-section').style.display = "none";
-    document.getElementById('player-box').style.display = "none";
-    document.getElementById('main-content').style.display = "block";
-    
-    // KATEGORİLERİ GİZLEME SATIRI:
-    document.getElementById('category-list').style.display = "none";
-    
-    const promo = document.getElementById('promo-slider');
-    if (promo) promo.classList.add('promo-hidden');
-    renderGrid(allChannels.filter(k => favorites.includes(k.ad)));
+            document.getElementById('home-section').style.display = "block";
+            document.getElementById('search-section').style.display = "none";
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('main-content').style.display = "block";
+            document.getElementById('category-list').style.display = "none";
+            document.getElementById('promo-slider').classList.add('promo-hidden');
+            renderGrid(allChannels.filter(k => favorites.includes(k.ad)));
         }
 
         function doSearch() {
             const q = document.getElementById('searchInput').value.toLowerCase();
-            const res = allChannels.filter(k => k.ad.toLowerCase().includes(q) || k.kategori.toLowerCase().includes(q));
+            const res = allChannels.filter(k => k.ad.toLowerCase().includes(q) || (k.kategori && k.kategori.toLowerCase().includes(q)));
             renderList(res, 'search-results');
         }
 
@@ -448,8 +470,10 @@
             const idx = favorites.indexOf(name);
             if (idx > -1) favorites.splice(idx, 1); else favorites.push(name);
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
-            if (document.getElementById('search-section').style.display === "block") doSearch();
-            else if (document.getElementById('promo-slider').classList.contains('promo-hidden')) showFavorites();
+            const isSearch = document.getElementById('search-section').style.display === "block";
+            const isFavPage = !document.getElementById('promo-slider').classList.contains('promo-hidden') && document.getElementById('category-list').style.display === "none";
+            if (isSearch) doSearch();
+            else if (isFavPage) showFavorites();
             else renderGrid(allChannels);
         }
 
@@ -457,7 +481,7 @@
             const isAlreadyActive = btn.classList.contains('active');
             const allBtns = document.querySelectorAll('.cat-btn');
             const promo = document.getElementById('promo-slider');
-            allBtns.forEach(b => { b.classList.remove('active'); b.classList.remove('cat-hidden'); });
+            allBtns.forEach(b => b.classList.remove('active'));
             if (isAlreadyActive) { promo.classList.remove('promo-hidden'); renderGrid(allChannels); }
             else { btn.classList.add('active'); promo.classList.add('promo-hidden'); renderGrid(allChannels.filter(k => k.kategori === cat)); }
         }
@@ -468,7 +492,7 @@
             ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
         }
 
-                        function checkHash() {
+        function checkHash() {
             const h = window.location.hash.substring(1);
             if(h) { 
                 const c = allChannels.find(k => k.ad === decodeURIComponent(h)); 
