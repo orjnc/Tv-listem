@@ -33,7 +33,24 @@
         .list-info span, .list-info div { color: #ffffff !important; }
 
         /* Sidebar & Menu */
-        .sidebar { position: fixed; left: -280px; top: 0; height: 100%; width: 280px; background: rgba(18, 18, 18, 0.98); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; padding: 30px 20px; border-right: 1px solid #222; display: flex; flex-direction: column; }
+        .sidebar { 
+    position: fixed; 
+    left: -280px; 
+    top: 0; 
+    height: 100%; 
+    width: 280px; 
+    /* ARKA PLANI BİRAZ DAHA SIK YAPALIM Kİ ARKASI GÖZÜKMESİN */
+    background: rgba(18, 18, 18, 0.98) !important; 
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    
+    /* EN ÖNEMLİ SATIR: Header 2000 ise bu 3000 olmalı */
+    z-index: 3000 !important; 
+    
+    padding: 30px 20px; 
+    border-right: 1px solid #222; 
+    display: flex; 
+    flex-direction: column; 
+        }
         .sidebar.active { left: 0; }
         .menu-item { display: flex; align-items: center; gap: 15px; padding: 15px; color: var(--text); text-decoration: none; border-radius: 12px; transition: 0.3s; margin-bottom: 5px; cursor: pointer; }
         .menu-item i { color: var(--accent); font-size: 1.2rem; width: 25px; }
@@ -85,7 +102,15 @@
         .nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
         
         #main-content { padding-bottom: 120px; }
-        .overlay { display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1500; }
+        .overlay { 
+    display:none; 
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0,0,0,0.8); 
+    /* Header (2000) ile Sidebar (3000) arasında kalmalı */
+    z-index: 2500 !important; 
+        }
+        
         #search-section { padding: 15px; display: none; }
         .search-input { background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 15px; padding: 12px 20px; width: 100%; margin-bottom: 20px; }
         .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
