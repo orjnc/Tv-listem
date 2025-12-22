@@ -382,18 +382,51 @@
             });
         }
 
-        function playChannel(url, ad, fromHash = false, kategori = "Canlı") {
-            if(!fromHash) history.pushState({page: 'player'}, ad, "#" + encodeURIComponent(ad));
-            document.getElementById('player-box').style.display = "block";
-            document.getElementById('main-content').style.display = "none";
-            document.getElementById('now-playing').innerText = ad;
-            document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + kategori;
-            window.scrollTo(0,0);
-            const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
-            renderList(shuffled, 'suggested-list');
-            if (Hls.isSupported()) { hls.loadSource(url); hls.attachMedia(video); hls.on(Hls.Events.MANIFEST_PARSED, () => video.play()); }
-            else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; }
+        function playChannel(url, ad, fromHash = false, kategori = "TV") {
+    if(!fromHash) window.location.hash = encodeURIComponent(ad);
+    
+    // Oynatıcı kutusunu ve ana içeriği yönet
+    document.getElementById('player-box').style.display = "block";
+    document.getElementById('main-content').style.display = "none";
+    
+    // Ana Oynatıcı başlığı ve hemen altına kategoriyi yazdır
+    document.getElementById('now-playing').innerText = ad;
+    document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + kategori;
+    
+    // Video oynatıcıyı başlat
+    if (Hls.isSupported()) {
+        hls.loadSource(url); 
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+    } else { 
+        video.src = url; 
+        video.play(); 
+    }
+
+    // ÖNERİLER LİSTESİ VE KATEGORİ EKLEME
+    const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
+    const sugList = document.getElementById('suggested-list');
+    
+    if(sugList) {
+        sugList.innerHTML = "";
+        shuffled.forEach(s => {
+            // Logo yolu temizleme (daha önce yaptığımız gibi)
+            const sugLogo = s.logo.split('/').pop().replace('.jpg', '.png');
+            // JSON'da kategori yoksa varsayılan olarak "TV" yazdırır
+            const sugCat = s.kategori || "TV"; 
+            
+            sugList.innerHTML += `
+                <div class="list-item" onclick="playChannel('${s.url}','${s.ad}', false, '${sugCat}')">
+                    <img src="logolar/${sugLogo}" class="list-logo" onerror="this.onerror=null; this.src='logolar/logo.png'"> 
+                    <div class="list-info">
+                        <div class="list-title">${s.ad}</div>
+                        <div class="list-category">${sugCat}</div>
+                    </div>
+                </div>`;
+        });
+    }
         }
+        
 
         function showHome() {
     // Önce kategorileri tekrar görünür yap
