@@ -47,7 +47,23 @@
         .cat-hidden { display: none; }
 
         /* Header & Grid */
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; position: sticky; top: 0; background: transparent; z-index: 1000; height: 70px; }
+        .header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px 20px; 
+    position: sticky; 
+    top: 0; 
+    height: 70px; 
+    z-index: 2000; /* Daha üstte durması için yükselttik */
+
+    /* İSTEDİĞİN TOZ BULUTU EFEKTİ */
+    background: rgba(181, 0, 200, 0.5) !important; /* #b500c8 morunun %50 şeffaf hali */
+    backdrop-filter: blur(15px); /* Arkadaki kanalları buzlu cam gibi bulandırır */
+    -webkit-backdrop-filter: blur(15px); /* iPhone/Safari desteği için */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Çok ince bir sınır çizgisi */
+        }
+        
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
         .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
