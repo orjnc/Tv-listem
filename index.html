@@ -11,7 +11,90 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    #player-box {
+    padding-bottom: 120px !important;
+    min-height: 100vh;
+}
+
+/* ========== YENİ EKLENEN MOBİL CSS ========== */
+/* MOBİL OPTİMİZASYON */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+        padding: 0 10px !important;
+    }
+    
+    .channel-square {
+        border-radius: 12px !important;
+    }
+    
+    .site-logo {
+        max-height: 40px !important;
+    }
+    
+    .header {
+        padding: 10px 15px !important;
+    }
+    
+    .category-container {
+        padding: 10px !important;
+        gap: 8px !important;
+    }
+    
+    .cat-btn {
+        padding: 8px 16px !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .bottom-nav {
+        width: 95% !important;
+        bottom: 10px !important;
+        padding: 10px !important;
+        border-radius: 20px !important;
+    }
+    
+    .nav-btn {
+        font-size: 1rem !important;
+    }
+    
+    .nav-btn small {
+        font-size: 0.55rem !important;
+    }
+}
+
+/* TABLET */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr) !important;
+    }
+}
+
+/* YÜKLEME ANİMASYONU */
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 12px;
+}
+/* ========== MOBİL CSS SONU ========== */
+    
+</style>
     <style>
+    <script>
+// HTML escape fonksiyonu - GÜVENLİK İÇİN ÇOK ÖNEMLİ
+function escapeHTML(str) {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+</script>
         :root { --bg: #000000; --card: #121212; --accent: #ff005c; --text: #ffffff; --gray: #888888; --selected-cat: #F683BE; }
         
         /* Genel Arka Plan Ayarları */
@@ -264,6 +347,9 @@
             <hr style="border-color: #333; margin: 10px 0;">
             <div onclick="setTheme('dark')" class="menu-item"><i class="fas fa-moon"></i> <span>Koyu Mod</span></div>
             <div onclick="setTheme('normal')" class="menu-item"><i class="fas fa-palette"></i> <span>Normal Mod</span></div>
+            <div onclick="showDonation()" class="menu-item" style="color: #FF6B35;">
+    <i class="fas fa-coffee"></i> <span>Kahve Ismarla ☕</span>
+            </div>
             <hr style="border-color: #333; margin: 10px 0;">
             <div class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.8</span></div>
         </div>
@@ -344,27 +430,39 @@
                 .then(data => { allChannels = data; renderGrid(data); checkHash(); });
         });
 
-                // ANA EKRAN: Tüm kanalları genel yapıya göre dizer
-        function renderGrid(data) {
-            const container = document.getElementById('grid-container');
-            if(!container) return;
-            container.innerHTML = "";
-            data.forEach(k => {
-                const isFav = favorites.includes(k.ad) ? 'active' : '';
-                const logoName = k.logo.split('/').pop().replace('.jpg', '.png'); 
-                const kategori = getKategori(k); // Kategori kontrolü
-
-                container.innerHTML += `
-                    <div class="channel-square">
-                        <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${k.ad}')"></i>
-                        <div class="w-100 h-100 d-flex align-items-center justify-content-center" 
-                             onclick="playChannel('${k.url}', '${k.ad}', false, '${kategori}')">
-                            <img src="logolar/${logoName}" class="square-logo" 
-                                 onerror="this.onerror=null; this.src='logolar/logo.png'">
-                        </div>
-                    </div>`;
-            });
-        }
+            function renderGrid(data) {
+    const container = document.getElementById('grid-container');
+    if(!container) return;
+    container.innerHTML = "";
+    
+    data.forEach(k => {
+        const isFav = favorites.includes(k.ad) ? 'active' : '';
+        const logoName = k.logo.split('/').pop().replace('.jpg', '.png'); 
+        const kategori = getKategori(k);
+        
+        // GÜVENLİ VERSİYON
+        const div = document.createElement('div');
+        div.className = 'channel-square';
+        div.innerHTML = `
+            <i class="fas fa-star fav-star ${isFav}" onclick="toggleFav(event, '${escapeHTML(k.ad)}')"></i>
+            <div class="w-100 h-100 d-flex align-items-center justify-content-center">
+                <img src="logolar/${escapeHTML(logoName)}" class="square-logo" 
+                     onerror="this.onerror=null; this.src='logolar/logo.png'">
+            </div>`;
+        
+        // Tıklama event'ini güvenli şekilde ekle
+        div.querySelector('div').addEventListener('click', () => {
+            playChannel(
+                escapeHTML(k.url), 
+                escapeHTML(k.ad), 
+                false, 
+                escapeHTML(kategori)
+            );
+        });
+        
+        container.appendChild(div);
+    });
+            }
 
         // OYNATICI: Kategori bilgisini otomatik alt satıra ekler
         function playChannel(url, ad, fromHash = false, kategori = "Genel") {
@@ -391,17 +489,25 @@
                     const sugLogo = s.logo.split('/').pop().replace('.jpg', '.png');
                     const sugCat = getKategori(s); // Dinamik kategori çekimi
                     
-                    sugList.innerHTML += `
-                        <div class="list-item" onclick="playChannel('${s.url}','${s.ad}', false, '${sugCat}')">
-                            <img src="logolar/${sugLogo}" class="list-logo" onerror="this.onerror=null; this.src='logolar/logo.png'"> 
-                            <div class="list-info" style="display: flex; flex-direction: column; margin-left: 10px;">
-                                <span style="font-weight: bold; color: white;">${s.ad}</span>
-                                <span style="font-size: 12px; color: #aaa;">${sugCat}</span>
-                            </div>
-                        </div>`;
-                });
-            }
-        }
+                    const listItem = document.createElement('div');
+listItem.className = 'list-item';
+listItem.innerHTML = `
+    <img src="logolar/${escapeHTML(sugLogo)}" class="list-logo" onerror="this.onerror=null; this.src='logolar/logo.png'"> 
+    <div class="list-info">
+        <div class="list-title">${escapeHTML(s.ad)}</div>
+        <div class="list-category">${escapeHTML(sugCat)}</div>
+    </div>`;
+
+listItem.addEventListener('click', () => {
+    playChannel(
+        escapeHTML(s.url),
+        escapeHTML(s.ad),
+        false,
+        escapeHTML(sugCat)
+    );
+});
+
+sugList.appendChild(listItem);
         
 
         function renderList(data, targetId) {
@@ -567,6 +673,106 @@ if (targetNode) {
     observer.observe(targetNode, { attributes: true, childList: true, subtree: true });
 }
 </script>
+    // Kahve bağış fonksiyonları
+function showDonation() {
+    toggleSidebar(); // Sidebar'ı kapat
+    document.getElementById('donationModal').style.display = 'flex';
+}
 
+function closeDonation() {
+    document.getElementById('donationModal').style.display = 'none';
+}
+
+function donate(amount) {
+    const amounts = {
+        20: { message: "Bir kahve için teşekkürler! ☕", color: "#FF6B35" },
+        50: { message: "3 kahve mükemmel! Sen harikasın! 🚀", color: "#00d4ff" },
+        100: { message: "Akşam yemeği ısmarladığın için çok teşekkürler! 🍔", color: "#FFD700" }
+    };
+    
+    const selected = amounts[amount];
+    
+    // Feedback göster
+    alert(`${selected.message}\n\nÖdeme yapmak için yukarıdaki IBAN veya cüzdan adreslerini kullanabilirsin.`);
+    
+    // Analytics veya log tutma
+    console.log(`Bağış yapıldı: ${amount}₺`);
+    
+    // Modal'ı kapat (opsiyonel)
+    closeDonation();
+}
+
+// Modal dışına tıklayınca kapat
+document.getElementById('donationModal').addEventListener('click', function(e) {
+    if (e.target.id === 'donationModal') {
+        closeDonation();
+    }
+});
+
+// Buton hover efektleri
+document.querySelectorAll('.donate-btn').forEach(btn => {
+    btn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+        this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.3)';
+    });
+    btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = 'none';
+    });
+});
+ 
+    <!-- Kahve Bağış Modal'ı -->
+<div id="donationModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
+    <div style="background: var(--card); border-radius:20px; padding:30px; max-width:500px; width:90%; border:2px solid var(--accent);">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h4 style="color:#FF6B35; margin:0;"><i class="fas fa-coffee"></i> Bana Kahve Ismarla</h4>
+            <i class="fas fa-times" onclick="closeDonation()" style="cursor:pointer; font-size:1.2rem;"></i>
+        </div>
+        
+        <p style="color:var(--text); margin-bottom:25px;">Bu ücretsiz TV servisini geliştirmeye ve sunmaya devam edebilmem için desteğine ihtiyacım var! 🚀</p>
+        
+        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:30px;">
+            <button onclick="donate(20)" class="donate-btn" style="background:#2a2a2a; border:2px solid #444; border-radius:12px; padding:15px; color:white; cursor:pointer; transition:0.3s;">
+                <div style="font-size:1.5rem;">☕</div>
+                <div style="font-weight:bold;">20₺</div>
+                <small>1 Kahve</small>
+            </button>
+            
+            <button onclick="donate(50)" class="donate-btn" style="background:#2a2a2a; border:2px solid #FF6B35; border-radius:12px; padding:15px; color:white; cursor:pointer; transition:0.3s;">
+                <div style="font-size:1.5rem;">☕☕☕</div>
+                <div style="font-weight:bold;">50₺</div>
+                <small>3 Kahve</small>
+            </button>
+            
+            <button onclick="donate(100)" class="donate-btn" style="background:#2a2a2a; border:2px solid #00d4ff; border-radius:12px; padding:15px; color:white; cursor:pointer; transition:0.3s;">
+                <div style="font-size:1.5rem;">🍔</div>
+                <div style="font-weight:bold;">100₺</div>
+                <small>Akşam Yemeği</small>
+            </button>
+        </div>
+        
+        <div style="background:#1a1a1a; border-radius:12px; padding:20px; margin-top:20px;">
+            <h6 style="color:var(--accent); margin-top:0;">Manuel Ödeme Seçenekleri:</h6>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <div>
+                    <strong style="color:#FF6B35;">Papara:</strong>
+                    <input type="text" value="1234567890" readonly style="width:100%; background:#000; border:1px solid #333; color:white; padding:8px; border-radius:8px; margin-top:5px; cursor:pointer;" onclick="this.select()">
+                </div>
+                <div>
+                    <strong style="color:#00d4ff;">İş Bankası:</strong>
+                    <input type="text" value="TRXX XXXX XXXX XXXX XXXX XXXX" readonly style="width:100%; background:#000; border:1px solid #333; color:white; padding:8px; border-radius:8px; margin-top:5px; cursor:pointer;" onclick="this.select()">
+                </div>
+                <div>
+                    <strong style="color:#FFD700;">Bitcoin (BTC):</strong>
+                    <input type="text" value="bc1qxxxxxxxxxxxxxxxxxxxxxxxxxx" readonly style="width:100%; background:#000; border:1px solid #333; color:white; padding:8px; border-radius:8px; margin-top:5px; cursor:pointer;" onclick="this.select()">
+                </div>
+            </div>
+        </div>
+        
+        <p style="font-size:0.8rem; color:var(--gray); margin-top:20px; text-align:center;">
+            Her destek benim için çok değerli. Teşekkür ederim! ❤️
+        </p>
+    </div>
+</div>   
 </body>
 </html>
