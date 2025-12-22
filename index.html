@@ -14,127 +14,72 @@
     <style>
         :root { --bg: #000000; --card: #121212; --accent: #ff005c; --text: #ffffff; --gray: #888888; --selected-cat: #F683BE; }
         
-        body.normal-mode { 
-    background: linear-gradient(to bottom, #bd00d1 0%, #000000 100%) !important;
-    background-attachment: fixed !important; /* Arka planı ekrana çiviler, kaymaz */
-    background-size: cover !important; /* Her yeri kaplamasını garanti eder */
+        /* Genel Arka Plan Ayarları */
+        html { background-color: #000000 !important; }
+        body { 
+            background-color: #000000 !important; 
+            color: #ffffff !important; 
+            min-height: 100vh; 
+            margin: 0; 
+            font-family: 'Inter', sans-serif;
         }
-        
-        
-        /* Bu kısım sayfanın en dibini her zaman siyah tutar */
-html {
-    background-color: #000000 !important;
-}
 
-body {
-    background-color: #000000 !important;
-    color: #ffffff !important; /* Tüm yazıların beyaz olmasını sağlar */
-    min-height: 100vh;
-    margin: 0;
-}
+        body.normal-mode { 
+            background: linear-gradient(to bottom, #bd00d1 0%, #000000 100%) !important;
+            background-attachment: fixed !important;
+            background-size: cover !important;
+        }
 
-/* Kategori ve Kanal isimlerinin de beyaz kaldığından emin olalım */
-.list-info span, .list-info div {
-    color: #ffffff !important;
-}
-        
-}
+        .list-info span, .list-info div { color: #ffffff !important; }
 
-/* Görseldeki pembe/mor gradyanın alt tarafta kesilmemesi için */
-body.normal-mode { 
-    background: linear-gradient(to bottom, #bd00d1 0%, #000000 100%) !important;
-    background-attachment: fixed !important;
-}
-        
-        
-        
+        /* Sidebar & Menu */
         .sidebar { position: fixed; left: -280px; top: 0; height: 100%; width: 280px; background: rgba(18, 18, 18, 0.98); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2000; padding: 30px 20px; border-right: 1px solid #222; display: flex; flex-direction: column; }
         .sidebar.active { left: 0; }
         .menu-item { display: flex; align-items: center; gap: 15px; padding: 15px; color: var(--text); text-decoration: none; border-radius: 12px; transition: 0.3s; margin-bottom: 5px; cursor: pointer; }
         .menu-item i { color: var(--accent); font-size: 1.2rem; width: 25px; }
         .menu-item:hover { background: rgba(255, 0, 92, 0.1); }
-        .menu-item.active-mode { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 0, 92, 0.3); }
-
         .sidebar-logo { max-height: 42px; width: auto; object-fit: contain; }
 
-        .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; position: relative; min-height: 75px; transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 10px 22px !important; border-radius: 100px !important; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; min-width: 80px; gap: 8px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); opacity: 1; flex-shrink: 0; position: relative; left: 0; }
-        .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); z-index: 100; position: absolute; right: 15px; top: 15px; min-width: 100px; }
-        .cat-btn .close-cat { display: none; font-size: 0.8rem; opacity: 0.8; }
-        .cat-btn.active .close-cat { display: inline-block; animation: fadeIn 0.3s forwards; }
-        .cat-hidden { opacity: 0 !important; transform: scale(0.5); pointer-events: none; width: 0 !important; margin: 0 !important; padding: 0 !important; border: none !important; visibility: hidden; }
+        /* Kategori Butonları */
+        .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; min-height: 75px; transition: all 0.6s ease; }
+        .cat-btn { background: #1a1a1a; color: var(--gray); border: 1px solid #333; padding: 10px 22px !important; border-radius: 100px !important; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.5s ease; flex-shrink: 0; }
+        .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
+        .cat-hidden { display: none; }
 
+        /* Header & Grid */
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; position: sticky; top: 0; background: transparent; z-index: 1000; height: 70px; }
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
-        .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; transition: 0.2s ease; }
-        .site-logo:active { transform: scale(0.95); }
-
-        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; transition: opacity 0.5s ease, transform 0.5s ease; }
-        .grid-fade-out { opacity: 0; transform: translateY(20px); }
-        .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border: 1px solid #222; transition: 0.3s ease; cursor: pointer; position: relative; overflow: hidden; }
+        .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
+        .channel-square { background: var(--card); border-radius: 18px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; border: 1px solid #222; cursor: pointer; position: relative; overflow: hidden; }
         .square-logo { width: 70%; height: 70%; object-fit: contain; }
         .fav-star { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.2); z-index: 5; }
         .fav-star.active { color: #ffc107; }
 
-        #player-box { display: none; padding: 0; background: #000; }
+        /* Player */
+        #player-box { display: none; background: #000; }
         .video-wrapper { position: sticky; top: 0; z-index: 1100; background: #000; }
         video { width: 100%; aspect-ratio: 16/9; }
-        .player-info-sticky { position: sticky; top: 56.25vw; z-index: 1090; background: #000; padding: 15px 20px; border-bottom: 2px solid #222; }
+        .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
+        /* Navigasyon */
         .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(10px); border-radius: 25px; display: flex; justify-content: space-around; padding: 12px; z-index: 1000; border: 1px solid #333; }
-        .nav-btn { color: #666; font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; }
+        .nav-btn { color: #666; font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; cursor: pointer; }
         .nav-btn.active { color: var(--accent); }
         .nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
         
-        #main-content, #suggested-list { padding-bottom: 120px; }
+        #main-content { padding-bottom: 120px; }
         .overlay { display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 1500; }
         #search-section { padding: 15px; display: none; }
         .search-input { background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 15px; padding: 12px 20px; width: 100%; margin-bottom: 20px; }
         .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
         .list-logo { width: 55px; height: 55px; object-fit: contain; }
 
-        /* 3:4 PROMO TASARIMI */
-        .promo-slider { padding: 0 15px; margin-bottom: 30px; transition: all 0.5s ease; max-height: 500px; overflow: hidden; }
-        .promo-hidden { max-height: 0; margin-bottom: 0; opacity: 0; transform: translateY(-20px); }
-        .promo-card { 
-            aspect-ratio: 3/4;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-            border-radius: 25px; 
-            display: flex; 
-            align-items: flex-end; 
-            padding: 25px; 
-            border: 1px solid rgba(255,255,255,0.1); 
-            transition: opacity 0.4s ease-in-out, transform 0.3s ease; 
-            background-size: cover; 
-            background-position: center; 
-            position: relative; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        /* Bu kısmı index.html içindeki mevcut olanla değiştir */
-.promo-card { 
-    aspect-ratio: 3/4;
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-    border-radius: 25px; 
-    display: flex; 
-    align-items: flex-end; 
-    padding: 25px; 
-    border: 1px solid rgba(255,255,255,0.1); 
-    transition: opacity 0.6s ease-in-out, transform 0.3s ease; /* Opaklık süresini biraz artırdık */
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; /* Bunu ekle */
-    position: relative; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    background-color: #1a1a1a; /* Resim gelene kadar boş kalmasın */
-}
-        
+        /* Promo Card */
+        .promo-slider { padding: 0 15px; margin-bottom: 30px; transition: 0.5s; }
+        .promo-card { aspect-ratio: 3/4; width: 100%; max-width: 400px; margin: 0 auto; border-radius: 25px; display: flex; align-items: flex-end; padding: 25px; border: 1px solid rgba(255,255,255,0.1); background-size: cover; background-position: center; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .promo-card > div { position: relative; z-index: 2; width: 100%; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .promo-hidden { display: none !important; }
     </style>
 </head>
 <body>
@@ -149,17 +94,17 @@ body.normal-mode {
         <div class="menu-links">
             <a href="javascript:void(0)" onclick="showFavorites(); toggleSidebar();" class="menu-item"><i class="fas fa-star"></i> Favorilerim</a>
             <hr style="border-color: #333; margin: 10px 0;">
-            <div id="dark-mode-btn" onclick="setTheme('dark')" class="menu-item"><i class="fas fa-moon"></i> <span>Koyu Mod</span></div>
-            <div id="normal-mode-btn" onclick="setTheme('normal')" class="menu-item"><i class="fas fa-palette"></i> <span>Normal Mod</span></div>
+            <div onclick="setTheme('dark')" class="menu-item"><i class="fas fa-moon"></i> <span>Koyu Mod</span></div>
+            <div onclick="setTheme('normal')" class="menu-item"><i class="fas fa-palette"></i> <span>Normal Mod</span></div>
             <hr style="border-color: #333; margin: 10px 0;">
-            <a href="#" class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.8</span></a>
+            <div class="menu-item"><i class="fas fa-code-branch"></i> Version <span class="ms-auto small text-muted">1.0.8</span></div>
         </div>
     </div>
 
     <div class="header">
         <i class="fas fa-bars fs-4" onclick="toggleSidebar()"></i>
         <div class="logo-container">
-            <a href="https://orjnc.github.io"><img src="logolar/logo.png" alt="orjnc tv+" class="site-logo"></a>
+            <a href="javascript:void(0)" onclick="showHome()"><img src="logolar/logo.png" alt="orjnc tv+" class="site-logo"></a>
         </div>
         <i class="fas fa-tv fs-4" style="color: var(--accent);"></i>
     </div>
@@ -168,18 +113,18 @@ body.normal-mode {
         <div class="video-wrapper"><video id="video" controls autoplay playsinline></video></div>
         <div class="player-info-sticky">
             <h5 id="now-playing" class="m-0 text-truncate">Kanal Adı</h5>
-            <p style="color: white !important;" class="small mt-1 mb-0" id="player-cat-info">Canlı Yayın</p>
+            <p class="small mt-1 mb-0" id="player-cat-info">Canlı Yayın</p>
         </div>
         <div class="p-3"><div id="suggested-list"></div></div>
     </div>
 
     <div id="main-content">
         <div class="category-container" id="category-list">
-            <button class="cat-btn" onclick="filterCategory('Ulusal', this)">Ulusal <i class="fas fa-times close-cat"></i></button>
-            <button class="cat-btn" onclick="filterCategory('Spor', this)">Spor <i class="fas fa-times close-cat"></i></button>
-            <button class="cat-btn" onclick="filterCategory('Haber', this)">Haber <i class="fas fa-times close-cat"></i></button>
-            <button class="cat-btn" onclick="filterCategory('Müzik', this)">Müzik <i class="fas fa-times close-cat"></i></button>
-            <button class="cat-btn" onclick="filterCategory('Belgesel', this)">Belgesel <i class="fas fa-times close-cat"></i></button>
+            <button class="cat-btn" onclick="filterCategory('Ulusal', this)">Ulusal</button>
+            <button class="cat-btn" onclick="filterCategory('Spor', this)">Spor</button>
+            <button class="cat-btn" onclick="filterCategory('Haber', this)">Haber</button>
+            <button class="cat-btn" onclick="filterCategory('Müzik', this)">Müzik</button>
+            <button class="cat-btn" onclick="filterCategory('Belgesel', this)">Belgesel</button>
         </div>
 
         <div class="promo-slider" id="promo-slider">
@@ -188,7 +133,7 @@ body.normal-mode {
                     <h3 class="m-0" id="featured-title" style="font-weight: 800;">Yükleniyor...</h3>
                     <div class="d-flex gap-2 mt-2 align-items-center">
                         <span class="badge bg-danger">LIVE</span>
-                        <span id="featured-desc" class="small" style="opacity: 0.9;">Lütfen bekleyin...</span>
+                        <span id="featured-desc" class="small">Lütfen bekleyin...</span>
                     </div>
                 </div>
             </div>
@@ -200,16 +145,16 @@ body.normal-mode {
         </div>
 
         <div id="home-section">
-            <div class="px-3 mb-3 d-flex justify-content-between"><span style="font-weight:bold;">TV Channels</span></div>
+            <div class="px-3 mb-3"><span style="font-weight:bold;">TV Channels</span></div>
             <div id="grid-container" class="grid-container"></div>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <a href="javascript:void(0)" onclick="showHome()" class="nav-btn active" id="btn-home"><i class="fas fa-house"></i><small>HOME</small></a>
-        <a href="javascript:void(0)" onclick="showSearch()" class="nav-btn" id="btn-search"><i class="fas fa-search"></i><small>SEARCH</small></a>
-        <a href="javascript:void(0)" onclick="showFavorites()" class="nav-btn" id="btn-fav"><i class="fas fa-heart"></i><small>FAV</small></a>
-        <a href="javascript:void(0)" onclick="toggleSidebar()" class="nav-btn"><i class="fas fa-bars"></i><small>MORE</small></a>
+        <div onclick="showHome()" class="nav-btn active" id="btn-home"><i class="fas fa-house"></i><small>HOME</small></div>
+        <div onclick="showSearch()" class="nav-btn" id="btn-search"><i class="fas fa-search"></i><small>SEARCH</small></div>
+        <div onclick="showFavorites()" class="nav-btn" id="btn-fav"><i class="fas fa-heart"></i><small>FAV</small></div>
+        <div onclick="toggleSidebar()" class="nav-btn"><i class="fas fa-bars"></i><small>MORE</small></div>
     </div>
 
     <script>
@@ -220,25 +165,15 @@ body.normal-mode {
 
         function setTheme(mode) {
             const body = document.body;
-            if (mode === 'normal') {
-                body.classList.add('normal-mode');
-                localStorage.setItem('themeChoice', 'normal');
-            } else {
-                body.classList.remove('normal-mode');
-                localStorage.setItem('themeChoice', 'dark');
-            }
+            if (mode === 'normal') { body.classList.add('normal-mode'); localStorage.setItem('themeChoice', 'normal'); }
+            else { body.classList.remove('normal-mode'); localStorage.setItem('themeChoice', 'dark'); }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             setTheme(localStorage.getItem('themeChoice') || 'dark');
-            
             fetch('kanallar.json?v=' + Date.now())
                 .then(res => res.json())
-                .then(data => {
-                    allChannels = data;
-                    renderGrid(data);
-                    checkHash();
-                });
+                .then(data => { allChannels = data; renderGrid(data); checkHash(); });
         });
 
         function renderGrid(data) {
@@ -256,6 +191,24 @@ body.normal-mode {
             });
         }
 
+        function renderList(data, targetId) {
+            const container = document.getElementById(targetId);
+            if(!container) return;
+            container.innerHTML = "";
+            data.forEach(k => {
+                const isFav = favorites.includes(k.ad);
+                container.innerHTML += `
+                    <div class="list-item" onclick="playChannel('${k.url}', '${k.ad}')">
+                        <img src="${k.logo}" class="list-logo" onerror="this.src='https://via.placeholder.com/150?text=TV'">
+                        <div class="list-info">
+                            <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
+                            <div class="small">${k.kategori}</div>
+                        </div>
+                        <i class="fa${isFav ? 's' : 'r'} fa-star" onclick="toggleFav(event, '${k.ad}')" style="color: ${isFav ? 'gold' : 'white'}; margin-left: auto; padding: 10px;"></i>
+                    </div>`;
+            });
+        }
+
         function playChannel(url, ad, fromHash = false, kategori = "Canlı") {
             if(!fromHash) history.pushState({page: 'player'}, ad, "#" + encodeURIComponent(ad));
             document.getElementById('player-box').style.display = "block";
@@ -263,45 +216,33 @@ body.normal-mode {
             document.getElementById('now-playing').innerText = ad;
             document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + kategori;
             window.scrollTo(0,0);
-            
             const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
             renderList(shuffled, 'suggested-list');
-
-            if (Hls.isSupported()) {
-                hls.loadSource(url);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = url;
-            }
+            if (Hls.isSupported()) { hls.loadSource(url); hls.attachMedia(video); hls.on(Hls.Events.MANIFEST_PARSED, () => video.play()); }
+            else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; }
         }
 
-        function renderList(data, targetId) {
-    const container = document.getElementById(targetId);
-    container.innerHTML = "";
-    data.forEach(k => {
-        const isFav = favorites.includes(k.ad); // Favorilerde mi kontrol et
-        container.innerHTML += `
-            <div class="list-item" onclick="playChannel('${k.url}', '${k.ad}')">
-                <img src="${k.logo}" class="list-logo" onerror="this.src='https://via.placeholder.com/150?text=TV'">
-                <div class="list-info">
-                    <span style="font-weight:bold; font-size:0.9rem;">${k.ad}</span>
-                    <div style="color: white !important;">${k.kategori}</div>
-                </div>
-                <i class="fa${isFav ? 's' : 'r'} fa-star fav-icon" onclick="toggleFav(event, '${k.ad}')" style="color: ${isFav ? 'gold' : 'white'};"></i>
-            </div>`;
-    });
+        function showHome() { window.location.href = "https://orjnc.github.io"; }
+
+        function showSearch() {
+            document.getElementById('home-section').style.display = "none";
+            document.getElementById('search-section').style.display = "block";
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('main-content').style.display = "block";
+            const promo = document.getElementById('promo-slider');
+            if (promo) promo.classList.add('promo-hidden');
+            const si = document.getElementById('searchInput');
+            if (si) setTimeout(() => si.focus(), 300);
         }
 
-        function showHome() {
-    window.location.href = "https://orjnc.github.io";
-        }
-        
-
-        function toggleSidebar() { 
-            document.getElementById('sidebar').classList.toggle('active');
-            const ov = document.getElementById('overlay');
-            ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
+        function showFavorites() {
+            document.getElementById('home-section').style.display = "block";
+            document.getElementById('search-section').style.display = "none";
+            document.getElementById('player-box').style.display = "none";
+            document.getElementById('main-content').style.display = "block";
+            const promo = document.getElementById('promo-slider');
+            if (promo) promo.classList.add('promo-hidden');
+            renderGrid(allChannels.filter(k => favorites.includes(k.ad)));
         }
 
         function doSearch() {
@@ -310,71 +251,34 @@ body.normal-mode {
             renderList(res, 'search-results');
         }
 
-        function showSearch() {
-    // Bölümleri ayarla
-    document.getElementById('home-section').style.display = "none";
-    document.getElementById('search-section').style.display = "block";
-    document.getElementById('player-box').style.display = "none";
-    document.getElementById('main-content').style.display = "block";
-
-    // Öneriler (promo) panelini gizle
-    const promo = document.getElementById('promo-slider');
-    if (promo) {
-        promo.style.display = "none";
-    }
-
-    // Arama yaparken favori butonlarının çalışması için listeyi hazırla
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        setTimeout(() => searchInput.focus(), 300);
-    }
-        }
-        
-
-    // --- YENİ DETAY: Arama kutusuna odaklan ve klavyeyi aç ---
-    const searchInput = document.getElementById('searchInput'); // Arama kutusunun ID'si
-    if (searchInput) {
-        setTimeout(() => {
-            searchInput.focus();
-        }, 300); // 300ms gecikme, sayfa geçiş animasyonu varsa klavyenin takılmamasını sağlar
-    }
-        }
-        
-
         function toggleFav(e, name) {
             e.stopPropagation();
             const idx = favorites.indexOf(name);
             if (idx > -1) favorites.splice(idx, 1); else favorites.push(name);
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
-            renderGrid(allChannels);
-        }
-
-        function showFavorites() {
-            renderGrid(allChannels.filter(k => favorites.includes(k.ad)));
+            if (document.getElementById('search-section').style.display === "block") doSearch();
+            else if (document.getElementById('promo-slider').classList.contains('promo-hidden')) showFavorites();
+            else renderGrid(allChannels);
         }
 
         function filterCategory(cat, btn) {
             const isAlreadyActive = btn.classList.contains('active');
             const allBtns = document.querySelectorAll('.cat-btn');
             const promo = document.getElementById('promo-slider');
+            allBtns.forEach(b => { b.classList.remove('active'); b.classList.remove('cat-hidden'); });
+            if (isAlreadyActive) { promo.classList.remove('promo-hidden'); renderGrid(allChannels); }
+            else { btn.classList.add('active'); promo.classList.add('promo-hidden'); renderGrid(allChannels.filter(k => k.kategori === cat)); }
+        }
 
-            if (isAlreadyActive) {
-                allBtns.forEach(b => { b.classList.remove('active'); b.classList.remove('cat-hidden'); });
-                promo.classList.remove('promo-hidden');
-                renderGrid(allChannels);
-            } else {
-                allBtns.forEach(b => { if (b !== btn) { b.classList.add('cat-hidden'); } else { b.classList.remove('cat-hidden'); b.classList.add('active'); } });
-                promo.classList.add('promo-hidden'); 
-                renderGrid(allChannels.filter(k => k.kategori === cat));
-            }
+        function toggleSidebar() { 
+            document.getElementById('sidebar').classList.toggle('active');
+            const ov = document.getElementById('overlay');
+            ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
         }
 
         function checkHash() {
             const h = window.location.hash.substring(1);
-            if(h) {
-                const c = allChannels.find(k => k.ad === decodeURIComponent(h));
-                if(c) playChannel(c.url, c.ad, true, c.kategori);
-            }
+            if(h) { const c = allChannels.find(k => k.ad === decodeURIComponent(h)); if(c) playChannel(c.url, c.ad, true, c.kategori); }
         }
     </script>
     <script src="oneriler.js"></script>
