@@ -1,4 +1,3 @@
-// TÜM ÖNERİLER BURADA TOPLANIYOR
 const oneriListesi = [
     {
         title: "UZAK ŞEHİR",
@@ -21,7 +20,6 @@ const oneriListesi = [
 ];
 
 let aktifSira = 0;
-let slideInterval;
 
 function setupFeatured() {
     const card = document.getElementById('featured-card');
@@ -30,43 +28,39 @@ function setupFeatured() {
 
     if (!card || oneriListesi.length === 0) return;
 
-    // Listeden sıradaki veriyi al
     const veri = oneriListesi[aktifSira];
 
-    // Fade efekti için hafifçe şeffaflaştır (Opsiyonel)
-    card.style.opacity = "0.8";
+    // Fade efekti
+    card.style.opacity = "0.3";
 
     setTimeout(() => {
         title.innerText = veri.title;
         desc.innerText = veri.desc;
-        card.style.backgroundImage = `linear-gradient(to bottom, transparent, rgba(0,0,0,0.9)), url('${veri.image}')`;
-        card.style.backgroundSize = "cover";
-        card.style.backgroundPosition = "center";
+        card.style.backgroundImage = `url('${veri.image}')`;
         card.style.opacity = "1";
-    }, 300);
+    }, 400);
 
-    // Bir sonraki sefere diğerine geç (Döngü)
     aktifSira = (aktifSira + 1) % oneriListesi.length;
 }
 
 function playFeatured() {
-    // Tıklandığında o an ekranda hangi veri varsa (bir önceki index) onu açar
-    let suAnkiIndex = (aktifSira === 0) ? oneriListesi.length - 1 : aktifSira - 1;
-    const veri = oneriListesi[suAnkiIndex];
+    let idx = (aktifSira === 0) ? oneriListesi.length - 1 : aktifSira - 1;
+    const veri = oneriListesi[idx];
     
-    // allChannels index.html'de global olduğu için burada çalışır
-    const channel = allChannels.find(k => k.ad === veri.targetChannel);
-    if (channel) {
-        playChannel(channel.url, channel.ad, false, channel.kategori);
+    // index.html'deki allChannels'ı kullanır
+    if (typeof allChannels !== 'undefined') {
+        const channel = allChannels.find(k => k.ad === veri.targetChannel);
+        if (channel) {
+            playChannel(channel.url, channel.ad, false, channel.kategori);
+        }
     }
 }
 
-// Başlatma
+// Başlatıcı
 document.addEventListener('DOMContentLoaded', () => {
-    // 1 saniye bekle ki kanallar yüklensin
+    // 1.5 saniye bekle (Kanalların yüklenmesi için zaman tanı)
     setTimeout(() => {
         setupFeatured();
-        // Her 5 saniyede bir değiştir
-        slideInterval = setInterval(setupFeatured, 5000);
-    }, 1000);
+        setInterval(setupFeatured, 5000);
+    }, 1500);
 });
