@@ -22,7 +22,7 @@
 
         .sidebar-logo { max-height: 42px; width: auto; object-fit: contain; }
 
-        /* KATEGORİ KONTEYNER VE GEÇİŞLER */
+        /* KATEGORİ KONTEYNER */
         .category-container { 
             display: flex; 
             gap: 10px; 
@@ -30,13 +30,14 @@
             padding: 15px 15px 20px 15px; 
             white-space: nowrap; 
             scrollbar-width: none; 
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            justify-content: flex-start; /* Varsayılan sol */
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            justify-content: flex-start;
         }
         
-        /* Sağ tarafa kayma için yeni sınıf */
+        /* Seçim yapıldığında sağa yaslanma efekti */
         .category-container.selection-active {
             justify-content: flex-end;
+            padding-right: 20px;
         }
 
         .cat-btn { 
@@ -54,24 +55,35 @@
             min-width: 80px; 
             gap: 8px; 
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            transform: translateX(0); 
-            opacity: 1; 
+            opacity: 1;
+            flex-shrink: 0;
         }
         
-        /* SEÇİLİ KATEGORİ STİLİ VE ANİMASYONU */
+        /* SEÇİLİ KATEGORİ - SAĞDA SABİT DURUŞ */
         .cat-btn.active { 
             background: var(--selected-cat) !important; 
             color: white; 
             border-color: var(--selected-cat); 
             z-index: 10;
-            animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-right: 0;
+            transform: scale(1); /* Büyüklük değişmeyecek */
         }
 
         .cat-btn .close-cat { display: none; font-size: 0.8rem; opacity: 0.8; }
         .cat-btn.active .close-cat { display: inline-block; animation: fadeIn 0.3s forwards; }
 
-        /* GİZLENEN BUTONLAR İÇİN YUMUŞAKLIK */
-        .cat-hidden { opacity: 0; transform: scale(0.5); pointer-events: none; width: 0; margin: 0; padding: 0 !important; border: none; overflow: hidden; }
+        /* DİĞER BUTONLARIN GİZLENME ANİMASYONU */
+        .cat-hidden { 
+            opacity: 0; 
+            transform: scale(0); 
+            pointer-events: none; 
+            width: 0; 
+            margin: 0; 
+            padding: 0 !important; 
+            border: none; 
+            overflow: hidden;
+            flex-shrink: 0;
+        }
 
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; position: sticky; top: 0; background: var(--bg); z-index: 1000; height: 70px; }
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
@@ -115,13 +127,7 @@
             transition: opacity 0.4s ease-in-out; background-size: cover; background-position: center; position: relative;
         }
 
-        /* YENİ ANİMASYONLAR */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        @keyframes slideInRight {
-            from { transform: translateX(-50px); opacity: 0.5; }
-            to { transform: translateX(0); opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -323,7 +329,7 @@
             window.location.href = "https://orjnc.github.io"; 
         }
 
-        /* GÜNCELLENMİŞ KAYMA EFEKTLİ FİLTRELEME */
+        /* GÜNCELLENMİŞ KAYMA EFEKTLİ FİLTRELEME - SAĞDA SABİTLENME */
         function filterCategory(cat, btn) {
             const isAlreadyActive = btn.classList.contains('active');
             const allBtns = document.querySelectorAll('.cat-btn');
@@ -343,14 +349,15 @@
                 container.classList.add('selection-active');
                 
                 allBtns.forEach(b => {
-                    b.classList.remove('active');
                     if (b !== btn) {
-                        b.classList.add('cat-hidden'); 
+                        b.classList.add('cat-hidden'); // Diğerlerini küçülterek yok et
+                    } else {
+                        b.classList.remove('cat-hidden');
+                        b.classList.add('active'); // Seçileni parlat
                     }
                 });
 
-                btn.classList.add('active'); 
-                promo.classList.add('promo-hidden'); 
+                promo.classList.add('promo-hidden'); // Önerileri yukarı kaydırarak gizle
                 
                 const filtered = allChannels.filter(k => k.kategori === cat);
                 renderGrid(filtered);
