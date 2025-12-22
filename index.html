@@ -84,14 +84,26 @@
             position: relative; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .promo-card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
-            border-radius: 25px;
-            z-index: 1;
-        }
+        /* Bu kısmı index.html içindeki mevcut olanla değiştir */
+.promo-card { 
+    aspect-ratio: 3/4;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 25px; 
+    display: flex; 
+    align-items: flex-end; 
+    padding: 25px; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    transition: opacity 0.6s ease-in-out, transform 0.3s ease; /* Opaklık süresini biraz artırdık */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; /* Bunu ekle */
+    position: relative; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background-color: #1a1a1a; /* Resim gelene kadar boş kalmasın */
+}
+        
         .promo-card > div { position: relative; z-index: 2; width: 100%; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
