@@ -45,7 +45,35 @@ body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
 }
+/* 2. ADIM: METİN VE KART GÖRÜNÜMÜ SABİTLEME */
 
+/* Tüm metin etiketlerini tek seferde temaya bağla */
+.category-item, .channel-name, .sidebar h4, .nav-link, p, span, h1, h2, h3 {
+    color: var(--text) !important;
+    transition: color 0.3s ease;
+}
+
+/* Kategori listesindeki ikonlar için */
+.category-item i {
+    color: var(--text);
+    opacity: 0.8;
+}
+
+/* Kanal kartlarının arka planı (Karanlıkta koyu, Normalde hafif şeffaf) */
+.channel-card {
+    background: var(--card) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s, background 0.3s;
+}
+
+/* Sidebar (Yan Menü) Arka Planı */
+.sidebar {
+    background-color: var(--card) !important;
+    backdrop-filter: blur(10px); /* Modern bir görünüm için cam efekti */
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+        
+        
         .list-info span, .list-info div { color: #ffffff !important; }
 
         /* Sidebar & Menu */
