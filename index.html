@@ -479,10 +479,8 @@ function doSearch() {
         if(themeMeta) themeMeta.setAttribute('content', '#000000'); 
     }
 }
+// --- TEMA VE BAŞLANGIÇ SİSTEMİ ---
 
-// --- OTOMATİK TEMA TAKİP VE BAŞLANGIÇ AYARLARI ---
-
-// 1. Telefonun modu uygulama açıkken değişirse anında tepki verir
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
     if (!localStorage.getItem('themeChoice')) {
         const newMode = event.matches ? "dark" : "normal";
@@ -490,20 +488,16 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', eve
     }
 });
 
-// 2. Uygulama ilk açıldığında çalışacak kısım
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('themeChoice');
-    
     if (savedTheme) {
-        // Eğer kullanıcı daha önce menüden seçim yaptıysa onu hatırlar
         setTheme(savedTheme);
     } else {
-        // Kullanıcı hiç seçim yapmadıysa telefon o an hangi moddaysa öyle açılır
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         setTheme(prefersDark ? 'dark' : 'normal');
-    });
+    }
 
-    // Kanal verilerini çeken orijinal kodun (Burası değişmedi)
+    // Kanalları çeken kod (Burası bozulduğu için site açılmıyordu)
     fetch('kanallar.json?v=' + Date.now())
         .then(res => res.json())
         .then(data => { 
@@ -511,20 +505,10 @@ document.addEventListener('DOMContentLoaded', () => {
             renderCategories(data); 
             renderGrid(data); 
             checkHash(); 
-        });
+        })
+        .catch(err => console.error("Kanallar yüklenemedi:", err));
 });
              
-            
-            fetch('kanallar.json?v=' + Date.now())
-                .then(res => res.json())
-                .then(data => { 
-                    allChannels = data; 
-                    renderCategories(data); 
-                    renderGrid(data); 
-                    checkHash(); 
-                });
-        });
-
         function renderCategories(data) {
             const catContainer = document.getElementById('category-list');
             const categories = ['Tümü', ...new Set(data.map(k => getSafeCategory(k)))];
