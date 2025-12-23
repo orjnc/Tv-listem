@@ -502,6 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         setTheme(prefersDark ? 'dark' : 'normal');
     }
+    }); //
 
     // Kanal verilerini çeken orijinal kodun (Burası değişmedi)
     fetch('kanallar.json?v=' + Date.now())
