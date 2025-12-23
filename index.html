@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta id="theme-meta" name="theme-color" content="#000000">
+    <meta id="theme-meta" name="theme-color" content="#230c40">
     <meta name="color-scheme" content="dark">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -511,18 +511,22 @@ function doSearch() {
     if (mode === 'normal') { 
         body.classList.add('normal-mode'); 
         localStorage.setItem('themeChoice', 'normal');
-        // Üst bar artık mor arka planın başlangıç rengiyle aynı:
-        if(themeMeta) themeMeta.setAttribute('content', '#1a0b2e'); 
+        
+        // Burayı yeni renginle güncelledik:
+        if(themeMeta) themeMeta.setAttribute('content', '#230c40'); 
+        
         body.style.color = '#ffffff';
     } 
     else { 
         body.classList.remove('normal-mode'); 
         localStorage.setItem('themeChoice', 'dark');
-        // Koyu modda üst bar siyah:
+        
+        // Karanlık modda siyah kalmaya devam eder:
         if(themeMeta) themeMeta.setAttribute('content', '#000000'); 
+        
         body.style.color = '#ffffff';
     }
-} 
+        }
              
              // 1. Telefonun modu uygulama açıkken değişirse anında tepki verir
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
