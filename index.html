@@ -319,7 +319,19 @@
     </div>
 
     <script>
-                let allChannels = [];
+                // --- KANAL YÖNETİM MASASI ---
+        // Yeni kanal eklediğinizde ismini buradaki uygun listeye eklemeniz yeterli.
+        const KATEGORI_HARITASI = {
+            "Ulusal": ["TRT 1", "ATV", "KANAL D", "STAR TV", "SHOW TV", "NOW TV", "TV8", "BEYAZ TV", "TEVE2", "360", "A2", "KANAL 7", "TABİİ TV"],
+            "Haber": ["CNN TÜRK", "TRT HABER", "HABERTÜRK", "NTV", "HALK TV", "SÖZCÜ", "EKOL TV", "A HABER", "TV100", "TVNET", "TGRT HABER", "24 TV", "KRT", "TYT TÜRK", "HABER GLOBAL", "A PARA", "BLOOMBERG", "TELE1"],
+            "Spor": ["FB TV", "HT SPOR", "A SPOR", "BEIN SPORTS HABER", "TRT SPOR", "TRT SPOR YILDIZ", "TABİİ SPOR", "SPORTS TV", "TJK"],
+            "Müzik": ["POWERTÜRK", "POWER TV", "POWER LOVE", "POWERTÜRK AKUSTİK", "POWERTÜRK SLOW", "POWERTÜRK TAPTAZE", "NR1 TÜRK", "NR1", "NR1 AŞK", "NR1 DANCE", "NR1 RAP", "DREAM TÜRK", "KRAL", "MÜZİK"],
+            "Belgesel": ["DMAX", "TLC", "TRT 2", "BELGESEL", "WILD", "NATIONAL"],
+            "Sinema": ["FX", "CNBC-E", "SİNEMA", "FİLM", "MOVIE", "AKSİYON"]
+        };
+        
+    
+        let allChannels = [];
         let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
         const hls = new Hls();
         const video = document.getElementById('video');
@@ -331,9 +343,24 @@
             return 'logolar/' + filename.toLowerCase() + '.png';
         }
 
-        function getSafeCategory(k) {
-            if (!k.kategori || k.kategori.trim() === "") return "Genel";
-            return k.kategori;
+                function getSafeCategory(k) {
+            // Eğer JSON'da kategori varsa onu kullan
+            if (k.kategori && k.kategori !== "undefined" && k.kategori.trim() !== "") {
+                return k.kategori;
+            }
+
+            const kanalAdi = k.ad.toUpperCase();
+
+            // Yönetim masasındaki listeleri tek tek kontrol et
+            for (const [kategori, kanallar] of Object.entries(KATEGORI_HARITASI)) {
+                if (kanallar.some(anahtar => kanalAdi.includes(anahtar.toUpperCase()))) {
+                    return kategori;
+                }
+            }
+
+            return "Genel"; // Eşleşme olmazsa Genel kategorisine atar
+                }
+        
         }
 
         function setTheme(mode) {
