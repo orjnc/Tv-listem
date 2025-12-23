@@ -164,24 +164,18 @@
         .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
         /* Navigasyon */
-       <div class="bottom-nav">
-    <a href="https://orjnc.github.io/" class="nav-btn active" id="btn-home">
-        <i class="fas fa-house"></i>
-        <small>ANASAYFA</small>
-    </a>
-    <div onclick="showSearch()" class="nav-btn" id="btn-search">
-        <i class="fas fa-search"></i>
-        <small>ARA</small>
-    </div>
-    <div onclick="showFavorites()" class="nav-btn" id="btn-fav">
-        <i class="fas fa-heart"></i>
-        <small>FAVORİLER</small>
-    </div>
-    <div onclick="toggleSidebar()" class="nav-btn">
-        <i class="fas fa-bars"></i>
-        <small>DAHA FAZLA</small>
-    </div>
-</div>
+         Bottom-nav { 
+    position: fixed; 
+    bottom: 15px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 92%; 
+    border-radius: 25px; 
+    display: flex; 
+    justify-content: space-around; 
+    padding: 12px; 
+    z-index: 2500; /* Sidebar'ın altında kalsın */
+    transition: all 0.4s ease;
         
 
     /* NORMAL MOD: Buzlu Cam Efekti */
