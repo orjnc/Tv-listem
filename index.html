@@ -454,4 +454,47 @@
             const idx = favorites.indexOf(name);
             if (idx > -1) favorites.splice(idx, 1); else favorites.push(name);
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
-            renderGrid
+            renderGrid(allChannels);
+        }
+
+        function toggleSidebar() { 
+            document.getElementById('sidebar').classList.toggle('active');
+            const ov = document.getElementById('overlay');
+            ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function checkHash() {
+            const h = window.location.hash.substring(1);
+            if(h) { 
+                const decodedName = decodeURIComponent(h);
+                const c = allChannels.find(k => k.ad === decodedName); 
+                if(c) playChannel(c.url, c.ad, true, getSafeCategory(c)); 
+            }
+        }
+        
+    </script>
+    <script src="oneriler.js"></script>
+
+<script>
+// Animasyonu tetikleyen sistem
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.type === "childList" || mutation.attributeName === "style") {
+            const pCard = document.getElementById('featured-card');
+            if (pCard) {
+                pCard.classList.remove('promo-active');
+                void pCard.offsetWidth; // Reflow tetikleyici
+                pCard.classList.add('promo-active');
+            }
+        }
+    });
+});
+const targetNode = document.getElementById('featured-card');
+if (targetNode) {
+    observer.observe(targetNode, { attributes: true, childList: true, subtree: true });
+}
+</script>
+
+</body>
+</html>
+        
