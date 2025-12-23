@@ -463,21 +463,29 @@ function doSearch() {
 
         function setTheme(mode) {
     const body = document.body;
-    const themeMeta = document.getElementById('theme-meta'); // Adres çubuğu rengini kontrol eden araç
+    const themeMeta = document.getElementById('theme-meta');
 
     if (mode === 'normal') { 
         body.classList.add('normal-mode'); 
         localStorage.setItem('themeChoice', 'normal');
-        // Normal modda senin istediğin mor:
         if(themeMeta) themeMeta.setAttribute('content', '#B900CA'); 
     }
     else { 
         body.classList.remove('normal-mode'); 
         localStorage.setItem('themeChoice', 'dark');
-        // Koyu modda siyah:
         if(themeMeta) themeMeta.setAttribute('content', '#000000'); 
     }
-        }
+}
+
+// OTOMATİK TAKİP SİSTEMİ: Telefonun modu değişirse anında tepki verir
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+    // Eğer kullanıcı elle bir seçim yapmamışsa otomatik değiştirir
+    if (!localStorage.getItem('themeChoice')) {
+        const newMode = event.matches ? "dark" : "normal";
+        setTheme(newMode);
+    }
+});
+             
 
         document.addEventListener('DOMContentLoaded', () => {
             setTheme(localStorage.getItem('themeChoice') || 'dark');
