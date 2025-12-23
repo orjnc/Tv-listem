@@ -13,21 +13,38 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --bg: #000000; --card: #121212; --accent: #ff005c; --text: #ffffff; --gray: #888888; --selected-cat: #F683BE; }
-        
-        /* Genel Arka Plan Ayarları */
-        /* Güncellenmiş hali */
-html { background-color: var(--bg); }
-body { 
-    background-color: var(--bg); /* 'important' gitti, değişken geldi */
-    ...
-    }
+        /* 1. RENK DEĞİŞKENLERİ */
+:root { 
+    --bg: #000000; 
+    --card: #121212; 
+    --accent: #ff005c; 
+    --text: #ffffff; 
+    --gray: #888888; 
+    --selected-cat: #F683BE; 
+}
 
-        body.normal-mode { 
-            background: linear-gradient(to bottom, #bd00d1 0%, #000000 100%) !important;
-            background-attachment: fixed !important;
-            background-size: cover !important;
-        }
+/* 2. NORMAL MOD (RENKLİ MOD) AYARLARI */
+body.normal-mode {
+    --bg: linear-gradient(135deg, #1a0b2e 0%, #4a148c 100%);
+    --card: rgba(255, 255, 255, 0.1); 
+    --text: #ffffff; 
+    --gray: #cccccc;
+}
+
+/* 3. ANA GÖVDE AYARLARI */
+html { 
+    background-color: var(--bg); 
+}
+
+body { 
+    background: var(--bg) !important; 
+    background-attachment: fixed !important;
+    background-size: cover !important;
+    color: var(--text) !important; /* Yazıları değişkene bağladık ki okunsun */
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
 
         .list-info span, .list-info div { color: #ffffff !important; }
 
