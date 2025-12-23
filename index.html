@@ -83,6 +83,23 @@
         border: 1px solid #333; 
     }
 }
+
+         /* Ekranın ortasındaki gereksiz eski ikonları ve yazıları gizler */
+#home-section > i, 
+#home-section > small, 
+#home-section > br,
+#main-content > i,
+#main-content > small,
+center {
+    display: none !important;
+}
+
+/* Arama sayfasındaki benzer fazlalıkları da temizler */
+#search-section > i,
+#search-section > small,
+#search-section > br {
+    display: none !important;
+}
         
         .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
         .cat-hidden { display: none; }
@@ -347,6 +364,7 @@
         <div onclick="toggleSidebar()" class="nav-btn"><i class="fas fa-bars"></i><small>MORE</small></div>
     </div>
 
+    
          <script>
              // Tıklanan butonu beyaz (aktif) yapma fonksiyonu
 function updateNavActive(id) {
