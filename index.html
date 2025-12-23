@@ -16,13 +16,16 @@
         :root { --bg: #000000; --card: #121212; --accent: #ff005c; --text: #ffffff; --gray: #888888; --selected-cat: #F683BE; }
         
         /* Genel Arka Plan Ayarları */
-        html { background-color: #000000 !important; }
-        body { 
-            background-color: #000000 !important; 
-            color: #ffffff !important; 
-            min-height: 100vh; 
-            margin: 0; 
-            font-family: 'Inter', sans-serif;
+        /* Güncellenmiş hali */
+html { background-color: var(--bg); }
+body { 
+    background-color: var(--bg); 
+    color: var(--text); 
+    min-height: 100vh; 
+    margin: 0; 
+    font-family: 'Inter', sans-serif;
+}
+        
         }
 
         body.normal-mode { 
@@ -477,24 +480,40 @@ function doSearch() {
     }
 }
 
-// OTOMATİK TAKİP SİSTEMİ: Telefonun modu değişirse anında tepki verir
+// --- OTOMATİK TEMA TAKİP VE BAŞLANGIÇ AYARLARI ---
+
+// 1. Telefonun modu uygulama açıkken değişirse anında tepki verir
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    // Eğer kullanıcı elle bir seçim yapmamışsa otomatik değiştirir
     if (!localStorage.getItem('themeChoice')) {
         const newMode = event.matches ? "dark" : "normal";
         setTheme(newMode);
     }
 });
-             
 
-        document.addEventListener('DOMContentLoaded', () => {
+// 2. Uygulama ilk açıldığında çalışacak kısım
+document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('themeChoice');
+    
     if (savedTheme) {
+        // Eğer kullanıcı daha önce menüden seçim yaptıysa onu hatırlar
         setTheme(savedTheme);
     } else {
+        // Kullanıcı hiç seçim yapmadıysa telefon o an hangi moddaysa öyle açılır
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         setTheme(prefersDark ? 'dark' : 'normal');
     }
+
+    // Kanal verilerini çeken orijinal kodun (Burası değişmedi)
+    fetch('kanallar.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => { 
+            allChannels = data; 
+            renderCategories(data); 
+            renderGrid(data); 
+            checkHash(); 
+        });
+});
+             
             
             fetch('kanallar.json?v=' + Date.now())
                 .then(res => res.json())
