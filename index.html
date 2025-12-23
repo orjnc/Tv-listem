@@ -32,6 +32,15 @@
 
         .list-info span, .list-info div { color: #ffffff !important; }
 
+        /* Aktif butonun ikon ve metin rengini beyaz yapar */
+.nav-btn.active { 
+    color: #ffffff !important; 
+}
+.nav-btn.active i, .nav-btn.active small { 
+    color: #ffffff !important; 
+}
+        
+        
         /* Sidebar & Menu */
         .sidebar { 
     position: fixed; 
@@ -155,18 +164,25 @@
         .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
         /* Navigasyon */
-.bottom-nav { 
-    position: fixed; 
-    bottom: 15px; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 92%; 
-    border-radius: 25px; 
-    display: flex; 
-    justify-content: space-around; 
-    padding: 12px; 
-    z-index: 2500; /* Sidebar'ın altında kalsın */
-    transition: all 0.4s ease;
+       <div class="bottom-nav">
+    <a href="https://orjnc.github.io/" class="nav-btn active" id="btn-home">
+        <i class="fas fa-house"></i>
+        <small>ANASAYFA</small>
+    </a>
+    <div onclick="showSearch()" class="nav-btn" id="btn-search">
+        <i class="fas fa-search"></i>
+        <small>ARA</small>
+    </div>
+    <div onclick="showFavorites()" class="nav-btn" id="btn-fav">
+        <i class="fas fa-heart"></i>
+        <small>FAVORİLER</small>
+    </div>
+    <div onclick="toggleSidebar()" class="nav-btn">
+        <i class="fas fa-bars"></i>
+        <small>DAHA FAZLA</small>
+    </div>
+</div>
+        
 
     /* NORMAL MOD: Buzlu Cam Efekti */
     background: rgba(255, 255, 255, 0.1) !important; 
@@ -319,6 +335,44 @@
     </div>
 
          <script>
+            // Arama ekranını açar ve butonu beyaz yapar
+function showSearch() {
+    document.getElementById('player-box').style.display = "none";
+    document.getElementById('home-section').style.display = "none";
+    document.getElementById('category-list').style.display = "none";
+    document.getElementById('promo-slider').style.display = "none";
+    document.getElementById('search-section').style.display = "block";
+    updateNavActive('btn-search');
+}
+
+// Favoriler ekranını açar ve butonu beyaz yapar
+function showFavorites() {
+    const favChannels = allChannels.filter(k => favorites.includes(k.ad));
+    document.getElementById('player-box').style.display = "none";
+    document.getElementById('search-section').style.display = "none";
+    document.getElementById('home-section').style.display = "block";
+    document.getElementById('category-list').style.display = "none";
+    document.getElementById('promo-slider').style.display = "none";
+    renderGrid(favChannels); // Sadece favorileri listeler
+    updateNavActive('btn-fav');
+}
+
+// Tıklanan butonu beyaz (active) yapar, diğerlerini griye çeker
+function updateNavActive(id) {
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    const target = document.getElementById(id);
+    if(target) target.classList.add('active');
+}
+
+// Arama kutusuna yazılanı sonuçlara döker
+function doSearch() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const res = allChannels.filter(k => k.ad.toLowerCase().includes(q));
+    renderList(res, 'search-results');
+}
+             
+
+             
         // --- KANAL YÖNETİM MASASI ---
         const KATEGORI_HARITASI = {
             "Ulusal": ["TRT 1", "ATV", "KANAL D", "STAR TV", "SHOW TV", "NOW TV", "TV8", "BEYAZ TV", "TEVE2", "360", "A2", "KANAL 7", "TABİİ TV"],
