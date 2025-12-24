@@ -88,7 +88,7 @@ body {
     transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
     
     /* EN ÖNEMLİ SATIR: Header 2000 ise bu 3000 olmalı */
-    z-index: 3000 !important; 
+    z-index: 5000 !important; 
     
     padding: 30px 20px; 
     border-right: 1px solid #222; 
@@ -148,7 +148,6 @@ center {
         .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
         .cat-hidden { display: none; }
 
-        /* Header & Grid */
         .header { 
     display: flex; 
     justify-content: space-between; 
@@ -157,9 +156,10 @@ center {
     position: sticky; 
     top: 0; 
     height: 70px; 
-    z-index: 2000; /* Sidebar'ın arkasında kalması için */
-    
-    /* TOZ BULUTU (BLUR) HER İKİ MODDA DA SABİT */
+    /* Z-INDEX 4000 YAPTIK: Videonun (1100) üstüne çıktı, Sidebar'ın (3000) da üstüne çıktı. */
+    z-index: 4000; 
+
+    /* SENİN ORİJİNAL EFEKTLERİN (AYNEN KORUNDU) */
     backdrop-filter: blur(15px); 
     -webkit-backdrop-filter: blur(15px); 
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -168,12 +168,13 @@ center {
     background: rgba(37, 12, 68, 0.7) !important; 
 }
 
-/* 2. KOYU MOD: Otomatik Siyah Cam Efekti */
+/* 2. KOYU MOD: Otomatik Siyah Cam Efekti (AYNEN KORUNDU) */
 @media (prefers-color-scheme: dark) {
     .header {
-        background: rgba(0, 0, 0, 0.7) !important; /* Moru tamamen öldürüp siyah sis yapar */
+        background: rgba(0, 0, 0, 0.7) !important; 
     }
 }
+        
         
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
@@ -211,7 +212,7 @@ center {
 
         /* Player */
         #player-box { display: none; background: #000; }
-        .video-wrapper { position: sticky; top: 0; z-index: 1100; background: #000; }
+        .video-wrapper { position: relative; top: 0; z-index: 900 !important; background: #000; }
         video { width: 100%; aspect-ratio: 16/9; }
         .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
