@@ -180,6 +180,47 @@ body:not(.normal-mode) .sidebar {
     background: rgba(0,0,0,0.2) !important;
     backdrop-filter: blur(3px);
 }
+
+        /* --- MODERN TEMA SWITCH --- */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 22px;
+}
+
+.switch input { 
+    opacity: 0; width: 0; height: 0; 
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(255,255,255,0.2);
+    transition: .3s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent); /* Açıkken senin vurgu rengin yanar */
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}
         
 
         /* Kategori Butonları */
@@ -545,12 +586,17 @@ body:not(.normal-mode) .cat-btn:not(.active) {
             
             <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 5px;">
             
-            <div onclick="setTheme('dark'); toggleSidebar();" class="menu-item">
-                <i class="fas fa-moon"></i> <span>Koyu Mod</span>
+            <div class="menu-item d-flex justify-content-between align-items-center" style="cursor: default;">
+    <div class="d-flex align-items-center gap-3">
+        <i class="fas fa-moon"></i>
+        <span>Karanlık Mod</span>
+    </div>
+    <label class="switch">
+        <input type="checkbox" id="theme-switch" onchange="toggleTheme(this)" checked>
+        <span class="slider"></span>
+    </label>
             </div>
-            <div onclick="setTheme('normal'); toggleSidebar();" class="menu-item">
-                <i class="fas fa-palette"></i> <span>Normal Mod (Buzlu Cam)</span>
-            </div>
+            
             
             <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 5px;">
             
@@ -789,29 +835,38 @@ document.addEventListener('DOMContentLoaded', () => {
 });
              
              
-             function setTheme(mode) {
+             // TEMA DEĞİŞTİRME FONKSİYONU (SİDEBAR'I KAPATMAZ)
+function toggleTheme(checkbox) {
     const body = document.body;
     const themeMeta = document.getElementById('theme-meta');
 
-    if (mode === 'normal') { 
-        body.classList.add('normal-mode'); 
-        localStorage.setItem('themeChoice', 'normal');
-        
-        // NORMAL MOD: Senin belirlediğin mor tonu (#230c40)
-        if(themeMeta) themeMeta.setAttribute('content', '#230c40'); 
-        
-        body.style.color = '#ffffff';
-    } 
-    else { 
-        body.classList.remove('normal-mode'); 
-        localStorage.setItem('themeChoice', 'dark');
-        
-        // KOYU MOD: Adres çubuğu dahil her yer ZİFİRİ SİYAH (#000000)
-        if(themeMeta) themeMeta.setAttribute('content', '#000000'); 
-        
-        body.style.color = '#ffffff';
+    if (checkbox.checked) {
+        // KARANLIK MOD AKTİF (Koyu Tema)
+        body.classList.remove('normal-mode');
+        if(themeMeta) themeMeta.content = "#000000";
+        localStorage.setItem('user-theme', 'dark');
+    } else {
+        // KARANLIK MOD KAPALI (Normal Mod / Buzlu Cam Tema)
+        body.classList.add('normal-mode');
+        if(themeMeta) themeMeta.content = "#230c40";
+        localStorage.setItem('user-theme', 'normal');
     }
-             }
+}
+
+// SAYFA YÜKLENDİĞİNDE TERCİHİ HATIRLATMA SİSTEMİ
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('user-theme');
+    const themeSwitch = document.getElementById('theme-switch');
+    
+    // Eğer kullanıcı daha önce Normal Mod'u (Açık Tema) seçtiyse
+    if (savedTheme === 'normal') {
+        document.body.classList.add('normal-mode');
+        if(themeSwitch) themeSwitch.checked = false; // Switch'i kapalı konuma getir
+        const themeMeta = document.getElementById('theme-meta');
+        if(themeMeta) themeMeta.content = "#230c40";
+    }
+});
+             
              
 
              
