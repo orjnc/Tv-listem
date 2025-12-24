@@ -208,14 +208,25 @@ center {
         video { width: 100%; aspect-ratio: 16/9; }
         .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
-/* KOYU MOD SEÇİLDİĞİNDE: Üst Menü Siyah Olsun */
+/* Header - Buzlu Cam Efekti */
+.header {
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+}
+
+/* NORMAL MODDA Header */
+body.normal-mode .header {
+    background: rgba(35, 12, 64, 0.7) !important; /* Mor şeffaf */
+}
+
 body:not(.normal-mode) .header {
-    background: #000000 !important;
-    border-bottom: 1px solid #1a1a1a !important;
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: blur(15px) !important;
 }
         
         
-        /* Navigasyon - TAM KONTROL */
+        /* Navigasyon - Buzlu Cam Efekti */
 .bottom-nav { 
     position: fixed; 
     bottom: 15px; 
@@ -229,20 +240,23 @@ body:not(.normal-mode) .header {
     z-index: 2500; 
     transition: all 0.4s ease;
 
-    /* VARSAYILAN: Buzlu Cam Efekti (Normal Mod) */
-    background: rgba(255, 255, 255, 0.1) !important; 
+    /* Ortak Buzlu Cam Ayarları */
     backdrop-filter: blur(15px); 
     -webkit-backdrop-filter: blur(15px); 
-    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* KOYU MOD SEÇİLDİĞİNDE: Navigasyon Bar Siyah Olsun */
-body:not(.normal-mode) .bottom-nav {
-    background: #000000 !important;
-    border: 1px solid #1a1a1a !important;
-    backdrop-filter: none !important;
+/* NORMAL MODDA: Mor/Beyazımsı Cam */
+body.normal-mode .bottom-nav {
+    background: rgba(255, 255, 255, 0.1) !important; 
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
-        
+
+/* KOYU MODDA: Siyah Cam (Blur Efektli) */
+body:not(.normal-mode) .bottom-nav {
+    background: rgba(0, 0, 0, 0.7) !important; /* Tam siyah değil, %70 şeffaf siyah */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
         .nav-btn { color: #666; font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; cursor: pointer; }
         .nav-btn.active { color: var(--accent); }
         .nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
