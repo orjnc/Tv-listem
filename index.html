@@ -13,43 +13,143 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-
-       /* 1. RENK VE TEMA DEĞİŞKENLERİ */
+        /* 1. RENK DEĞİŞKENLERİ */
 :root { 
     --bg: #000000; 
-    --card: rgba(255, 255, 255, 0.05); 
+    --card: #121212; 
     --accent: #ff005c; 
     --text: #ffffff; 
     --gray: #888888; 
     --selected-cat: #F683BE; 
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --header-bg: rgba(0, 0, 0, 0.7);
 }
 
+/* 2. NORMAL MOD (RENKLİ MOD) AYARLARI */
 body.normal-mode {
     --bg: linear-gradient(135deg, #1a0b2e 0%, #4a148c 100%);
     --card: rgba(255, 255, 255, 0.1); 
     --text: #ffffff; 
     --gray: #cccccc;
-    --glass-border: rgba(255, 255, 255, 0.15);
-    --header-bg: rgba(35, 12, 64, 0.7);
 }
 
-/* 2. ANA GÖVDE VE KAYDIRMA AYARLARI */
-html { background-color: #000; height: 100%; }
+/* 3. ANA GÖVDE AYARLARI */
+html { 
+    background-color: var(--bg); 
+}
+
 body { 
     background: var(--bg) !important; 
     background-attachment: fixed !important;
     background-size: cover !important;
-    color: var(--text) !important;
+    color: var(--text) !important; /* Yazıları değişkene bağladık ki okunsun */
     min-height: 100vh;
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    -webkit-font-smoothing: antialiased;
+}
+/* 2. ADIM: METİN VE KART GÖRÜNÜMÜ SABİTLEME */
+
+/* Tüm metin etiketlerini tek seferde temaya bağla */
+.category-item, .channel-name, .sidebar h4, .nav-link, p, span, h1, h2, h3 {
+    color: var(--text) !important;
+    transition: color 0.3s ease;
 }
 
-/* 3. HEADER & BOTTOM NAV (CAM TASARIMI) */
-.header { 
+/* Kategori listesindeki ikonlar için */
+.category-item i {
+    color: var(--text);
+    opacity: 0.8;
+}
+
+/* Kanal kartlarının arka planı (Karanlıkta koyu, Normalde hafif şeffaf) */
+.channel-card {
+    background: var(--card) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.2s, background 0.3s;
+}
+
+/* Sidebar (Yan Menü) Arka Planı */
+.sidebar {
+    background-color: var(--card) !important;
+    backdrop-filter: blur(10px); /* Modern bir görünüm için cam efekti */
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+        
+        
+        .list-info span, .list-info div { color: #ffffff !important; }
+
+        /* Sidebar & Menu */
+        .sidebar { 
+    position: fixed; 
+    left: -280px; 
+    top: 0; 
+    height: 100%; 
+    width: 280px; 
+    /* ARKA PLANI BİRAZ DAHA SIK YAPALIM Kİ ARKASI GÖZÜKMESİN */
+    background: rgba(18, 18, 18, 0.98) !important; 
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    
+    /* EN ÖNEMLİ SATIR: Header 2000 ise bu 3000 olmalı */
+    z-index: 3000 !important; 
+    
+    padding: 30px 20px; 
+    border-right: 1px solid #222; 
+    display: flex; 
+    flex-direction: column; 
+        }
+        .sidebar.active { left: 0; }
+        .menu-item { display: flex; align-items: center; gap: 15px; padding: 15px; color: var(--text); text-decoration: none; border-radius: 12px; transition: 0.3s; margin-bottom: 5px; cursor: pointer; }
+        .menu-item i { color: var(--accent); font-size: 1.2rem; width: 25px; }
+        .menu-item:hover { background: rgba(255, 0, 92, 0.1); }
+        .sidebar-logo { max-height: 42px; width: auto; object-fit: contain; }
+
+        /* Kategori Butonları */
+        .category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px 15px 20px 15px; white-space: nowrap; scrollbar-width: none; min-height: 75px; transition: all 0.6s ease; }
+        /* Kategori Butonları */
+.cat-btn { 
+    background: rgba(255, 255, 255, 0.1) !important; /* Normal Mod: Şeffaf beyaz */
+    color: #ffffff; 
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    padding: 10px 22px !important; 
+    border-radius: 100px !important; 
+    font-size: 0.85rem; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: all 0.5s ease; 
+    flex-shrink: 0; 
+    backdrop-filter: blur(10px); /* Toz bulutu efekti */
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Koyu Modda Butonları Eski Haline Döndür */
+@media (prefers-color-scheme: dark) {
+    .cat-btn { 
+        background: #1a1a1a !important; 
+        backdrop-filter: none; 
+        border: 1px solid #333; 
+    }
+}
+
+         /* Ekranın ortasındaki gereksiz eski ikonları ve yazıları gizler */
+#home-section > i, 
+#home-section > small, 
+#home-section > br,
+#main-content > i,
+#main-content > small,
+center {
+    display: none !important;
+}
+
+/* Arama sayfasındaki benzer fazlalıkları da temizler */
+#search-section > i,
+#search-section > small,
+#search-section > br {
+    display: none !important;
+}
+        
+        .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
+        .cat-hidden { display: none; }
+
+        /* Header & Grid */
+        .header { 
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
@@ -57,13 +157,65 @@ body {
     position: sticky; 
     top: 0; 
     height: 70px; 
-    z-index: 2000; 
-    backdrop-filter: blur(20px); 
-    -webkit-backdrop-filter: blur(20px); 
-    border-bottom: 1px solid var(--glass-border);
-    background: var(--header-bg) !important; 
+    z-index: 2000; /* Sidebar'ın arkasında kalması için */
+    
+    /* TOZ BULUTU (BLUR) HER İKİ MODDA DA SABİT */
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* 1. NORMAL MOD: Senin Mor Rengin */
+    background: rgba(37, 12, 68, 0.7) !important; 
 }
 
+/* 2. KOYU MOD: Otomatik Siyah Cam Efekti */
+@media (prefers-color-scheme: dark) {
+    .header {
+        background: rgba(0, 0, 0, 0.7) !important; /* Moru tamamen öldürüp siyah sis yapar */
+    }
+}
+        
+        .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
+        .channel-square { 
+    /* SENİN ORİJİNAL YAPIN */
+    border-radius: 18px; 
+    aspect-ratio: 1/1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative; 
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+
+    /* NORMAL MOD: TOZ BULUTU / CAM EFEKTİ */
+    background: rgba(255, 255, 255, 0.1) !important; 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* KOYU MOD: SİSTEM KOYU MODDA İSE SİYAH KALIR */
+@media (prefers-color-scheme: dark) {
+    .channel-square {
+        background: var(--card) !important; 
+        backdrop-filter: none; 
+        border: 1px solid #222; 
+    }
+}
+        
+        .square-logo { width: 70%; height: 70%; object-fit: contain; }
+        .fav-star { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.2); z-index: 5; }
+        .fav-star.active { color: #ffc107; }
+
+        /* Player */
+        #player-box { display: none; background: #000; }
+        .video-wrapper { position: sticky; top: 0; z-index: 1100; background: #000; }
+        video { width: 100%; aspect-ratio: 16/9; }
+        .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
+
+        /* Navigasyon */
 .bottom-nav { 
     position: fixed; 
     bottom: 15px; 
@@ -74,139 +226,96 @@ body {
     display: flex; 
     justify-content: space-around; 
     padding: 12px; 
-    z-index: 2500; 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background: rgba(20, 20, 20, 0.7) !important;
-    border: 1px solid var(--glass-border);
-}
-body.normal-mode .bottom-nav { background: rgba(255, 255, 255, 0.1) !important; }
+    z-index: 2500; /* Sidebar'ın altında kalsın */
+    transition: all 0.4s ease;
 
-/* 4. PLAYER (STICKY VE KAYMA DENEYİMİ) */
-#player-box { 
-    display: none; 
-    background: transparent !important; 
-    padding-bottom: 120px !important;
+    /* NORMAL MOD: Buzlu Cam Efekti */
+    background: rgba(255, 255, 255, 0.1) !important; 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px); 
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.video-wrapper { 
-    position: sticky; 
-    top: 0; 
-    z-index: 2200; 
-    background: #000; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+/* KOYU MOD: Siyah Cam Efekti */
+@media (prefers-color-scheme: dark) {
+    .bottom-nav { 
+        background: rgba(26, 26, 26, 0.8) !important; /* Koyu modda siyah sis */
+        border: 1px solid #333;
+    }
 }
-
-video { width: 100%; aspect-ratio: 16/9; display: block; }
-
-.player-info-sticky { 
-    position: sticky; 
-    top: 0; /* JS ile video yüksekliği sonrası yapışması için */
-    margin-top: 0;
-    z-index: 2100; 
-    padding: 15px 20px; 
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-bottom: 1px solid var(--glass-border);
-    background: rgba(0, 0, 0, 0.6) !important;
-}
-body.normal-mode .player-info-sticky { background: rgba(26, 11, 46, 0.7) !important; }
-
-/* 5. KANAL LİSTESİ VE KARTLAR (GLASSMORPHISM) */
-.list-item { 
-    background: var(--card) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border) !important;
-    border-radius: 20px; 
-    padding: 15px; 
-    display: flex; 
-    align-items: center; 
-    gap: 15px; 
-    margin-bottom: 12px; 
-    transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.list-item:active { transform: scale(0.96); opacity: 0.8; }
-
-.channel-square { 
-    border-radius: 22px; 
-    aspect-ratio: 1/1; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    position: relative; 
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background: var(--card) !important;
-    border: 1px solid var(--glass-border);
-    transition: all 0.3s ease;
-}
-
-.square-logo, .list-logo { width: 65%; height: 65%; object-fit: contain; }
-
-/* 6. SİDEBAR VE OVERLAY */
-.sidebar { 
-    position: fixed; 
-    left: -280px; 
-    top: 0; 
-    height: 100%; 
-    width: 280px; 
-    background: rgba(18, 18, 18, 0.96) !important; 
-    z-index: 3000 !important; 
-    padding: 30px 20px; 
-    border-right: 1px solid var(--glass-border); 
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-    backdrop-filter: blur(15px);
-}
-body.normal-mode .sidebar { background: rgba(35, 12, 64, 0.96) !important; }
-
-.overlay { 
+        .nav-btn { color: #666; font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; cursor: pointer; }
+        .nav-btn.active { color: var(--accent); }
+        .nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
+        
+        #main-content { padding-bottom: 120px; }
+        .overlay { 
     display:none; 
     position: fixed; 
     inset: 0; 
-    background: rgba(0,0,0,0.7); 
+    background: rgba(0,0,0,0.8); 
+    /* Header (2000) ile Sidebar (3000) arasında kalmalı */
     z-index: 2500 !important; 
-    backdrop-filter: blur(5px); 
-}
-
-/* 7. DİĞER FONKSİYONEL CSS'LER */
-.category-container { display: flex; gap: 10px; overflow-x: auto; padding: 15px; scrollbar-width: none; }
-.cat-btn { 
-    background: var(--card) !important; 
-    color: #fff; 
-    border: 1px solid var(--glass-border); 
-    padding: 10px 22px !important; 
-    border-radius: 100px !important; 
-    font-size: 0.85rem; 
-    font-weight: 600; 
-    backdrop-filter: blur(10px);
-}
-.cat-btn.active { background: var(--selected-cat) !important; color: #fff; border-color: var(--selected-cat); }
-
-.promo-card { 
-    aspect-ratio: 3/4; width: 100%; max-width: 400px; margin: 0 auto; 
-    border-radius: 30px; display: flex; align-items: flex-end; padding: 25px; 
-    border: 1px solid var(--glass-border); background-size: cover; 
-    background-position: center; position: relative; overflow: hidden;
-}
-
-.fav-star { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.2); z-index: 5; }
-.fav-star.active { color: #ffc107; }
-
-.nav-btn { color: rgba(255,255,255,0.4); font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; cursor: pointer; }
-.nav-btn.active { color: #ffffff !important; }
-.nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
-
-.search-input { background: var(--card); border: 1px solid var(--glass-border); color: white; border-radius: 20px; padding: 15px 20px; width: 100%; margin-bottom: 20px; backdrop-filter: blur(10px); }
-
-#home-section > i, #home-section > small, #home-section > br, #main-content > i, #main-content > small, center, #search-section > i, #search-section > small, #search-section > br {
-    display: none !important;
-}
-
-.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 15px; }
+        }
         
+        #search-section { padding: 15px; display: none; }
+        .search-input { background: #1a1a1a; border: 1px solid #333; color: white; border-radius: 15px; padding: 12px 20px; width: 100%; margin-bottom: 20px; }
+        .list-item { background: var(--card); border-radius: 15px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 12px; border: 1px solid #222; cursor: pointer; }
+        .list-logo { width: 55px; height: 55px; object-fit: contain; }
+
+        /* Promo Card */
+        .promo-slider { padding: 0 15px; margin-bottom: 30px; transition: 0.5s; }
+        .promo-card { 
+    aspect-ratio: 3/4; 
+    width: 100%; 
+    max-width: 400px; 
+    margin: 0 auto; 
+    border-radius: 25px; 
+    display: flex; 
+    align-items: flex-end; 
+    padding: 25px; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    background-size: cover; 
+    background-position: center; 
+    position: relative; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* EKLEDİĞİMİZ KISIM: */
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+    overflow: hidden;
+}
+
+/* Geçiş anında devreye girecek yeni sınıf */
+/* Mevcut olanı bununla değiştir veya kontrol et */
+.promo-active {
+    animation: promoSwift 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+        @keyframes promoSwift {
+    0% { 
+        opacity: 0; 
+        transform: scale(0.95) translateY(5px); 
+        filter: blur(5px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+        filter: blur(0); 
+    }
+        }
+         
+        .promo-card > div { position: relative; z-index: 2; width: 100%; }
+        .promo-hidden { display: none !important; }
+        /* Player açıkken en alttaki kanalın rahat görünmesi için boşluk */
+#player-box {
+    padding-bottom: 120px !important;
+    min-height: 100vh;
+}
+
+        /* Tıklanan (aktif olan) butonun ikon ve metin rengini beyaz yapar */
+.nav-btn.active, 
+.nav-btn.active i, 
+.nav-btn.active small { 
+    color: #ffffff !important; 
+    opacity: 1 !important;
+}
         
     </style>
 </head>
