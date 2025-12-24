@@ -25,10 +25,8 @@
 body.normal-mode .player-info-sticky {
     background-color: #230c40 !important;
     position: sticky !important;
-    top: 275px !important;
-    z-index: 1100 !important;
-}
-        
+    top: 275px !important; /* Burası yarım kalmış olabilir, 275px olmalı */
+}       
         
         
         /* 1. RENK DEĞİŞKENLERİ */
@@ -259,10 +257,14 @@ body.normal-mode #sticky-player-header {
 
 .video-wrapper {
     position: sticky !important;
-    top: 70px !important; 
+    top: 70px !important;
     z-index: 1100 !important;
     background: #000 !important;
+    /* Ekstra güvenlik: */
+    width: 100%;
+    overflow: hidden;
 }
+        
 
 video { width: 100%; aspect-ratio: 16/9; }
 
