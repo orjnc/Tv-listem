@@ -1,7 +1,7 @@
 const oneriListesi = [
     { title: "UZAK ŞEHİR", desc: "Bu Akşam 20:00'da Kanal D'de!", image: "https://i.imgur.com/reWzIZ1.jpeg", targetChannel: "Kanal D" },
     { title: "BERGEN", desc: "Bu Akşam 20:00'da ATV'de!", image: "https://i.imgur.com/jnhG97F.jpeg", targetChannel: "ATV" },
-    { title: "MASTERCHEF", desc: "20:00'da Yeni Bölüm Heyecanı Başlıyor!", image: "https://i.imgur.com/ebSpKg0.jpeg", targetChannel: "TV8" }
+    { title: "MASTERCHEF", desc: "20:00'da Yeni Bölüm Heyecanı Başlıyor!", image: "https://i.imgur.com/tfiSe30.jpeg", targetChannel: "TV8" }
 ];
 
 let aktifSira = 0;
