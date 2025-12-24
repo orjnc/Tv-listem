@@ -84,34 +84,46 @@ body {
     transition: transform 0.2s, background 0.3s;
 }
 
-.sidebar { 
+        .sidebar { 
     position: fixed; 
-    /* 1. KRİTİK AYAR: Üst ve Alt barlara olan uzaklığı tam belirler (Görseldeki boşluk hatasını giderir) */
     top: 75px !important; 
     bottom: 95px !important; 
-    
-    /* 2. KRİTİK AYAR: Menüyü ekranın ortasına mıhlar */
     left: 50% !important; 
-    transform: translate(-50%, 0) !important; 
+    /* Başlangıçta hafif aşağıda ve gizli */
+    transform: translate(-50%, 30px) !important; 
+    opacity: 0 !important; 
+    visibility: hidden !important;
     
-    /* 3. KRİTİK AYAR: Boydan boya kaplaması için genişlik */
     width: 94% !important; 
     max-width: 500px;
-    
-    /* Görseldeki o tam bulanıklık hissi için */
     backdrop-filter: blur(30px) !important; 
     -webkit-backdrop-filter: blur(30px) !important;
     background: rgba(0, 0, 0, 0.7) !important; 
-    
     border-radius: 30px !important; 
     padding: 25px !important; 
-    z-index: 2500 !important; /* Header (4000) altında, sayfanın üstünde */
+    z-index: 2500 !important; 
     display: flex; 
     flex-direction: column; 
     border: 1px solid rgba(255,255,255,0.1) !important;
-    
-    /* İçerik çoksa aşağı doğru kaysın, barları zorlamasın */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
     overflow-y: auto;
+}
+
+/* Sidebar Aktifleştiğinde (Açıldığında) */
+.sidebar.active { 
+    opacity: 1 !important; 
+    visibility: visible !important; 
+    transform: translate(-50%, 0) !important; 
+}
+
+/* Overlay Başlangıçta Gizli */
+.overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    z-index: 2400;
+    display: none; /* Başlangıçta kapalı */
 }
         
 
@@ -899,11 +911,21 @@ document.addEventListener('DOMContentLoaded', () => {
             renderGrid(allChannels);
         }
 
-        function toggleSidebar() { 
-            document.getElementById('sidebar').classList.toggle('active');
-            const ov = document.getElementById('overlay');
-            ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
-        }
+      function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    
+    // Sidebar'ı aç/kapat
+    sidebar.classList.toggle('active');
+    
+    // Overlay'i sidebar'ın durumuna göre göster/gizle
+    if (sidebar.classList.contains('active')) {
+        overlay.style.display = 'block';
+    } else {
+        overlay.style.display = 'none';
+    }
+      }
+             
 
         function checkHash() {
             const h = window.location.hash.substring(1);
