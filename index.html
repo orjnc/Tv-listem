@@ -15,9 +15,9 @@
     <style>
    
 :root {
-    /* Tarayıcıya "Sistemin ne dediği önemli değil, renkleri ben yöneteceğim" der */
-    color-scheme: light dark; 
-        }
+    /* light dark yerine ONLY light yapıyoruz ki sistem karışmasın */
+    color-scheme: only light; 
+}
         
         
         /* 1. RENK DEĞİŞKENLERİ */
@@ -483,6 +483,31 @@ body.normal-mode .player-info-sticky {
     
         
          <script>
+    // Uygulama ilk açıldığında çalışacak kısım
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('themeChoice');
+    
+    if (savedTheme) {
+        // Kullanıcı daha önce seçim yaptıysa (Siyah veya Mor) onu yükle
+        setTheme(savedTheme);
+    } else {
+        // Kullanıcı İLK DEFA giriyorsa, telefonu ne olursa olsun 
+        // VARSAYILAN olarak Normal (Mor) Mod ile başlat
+        setTheme('normal');
+    }
+
+    // Kanal verilerini getiren fetch kodun aynen kalsın...
+    fetch('kanallar.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => { 
+            allChannels = data; 
+            renderCategories(data); 
+            renderGrid(data); 
+            checkHash(); 
+        });
+});
+             
+             
              // Tıklanan butonu beyaz (aktif) yapma fonksiyonu
 function updateNavActive(id) {
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
