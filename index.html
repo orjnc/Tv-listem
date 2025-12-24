@@ -592,7 +592,7 @@ body:not(.normal-mode) .cat-btn:not(.active) {
         <span>Karanlık Mod</span>
     </div>
     <label class="switch">
-        <input type="checkbox" id="theme-switch" onchange="toggleTheme(this)" checked>
+        <input type="checkbox" id="theme-switch" onchange="toggleTheme(this)">
         <span class="slider"></span>
     </label>
             </div>
@@ -833,6 +833,59 @@ document.addEventListener('DOMContentLoaded', () => {
             checkHash(); 
         });
 });
+
+             // 1. SİDEBARI YÖNETEN ANA FONKSİYON
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const body = document.body;
+
+    // Sidebar'a 'active' sınıfını ekle veya çıkar
+    sidebar.classList.toggle('active');
+
+    if (sidebar.classList.contains('active')) {
+        // MENÜ AÇILDIĞINDA: Karartmayı göster ve arkadaki kaydırmayı kilitle
+        overlay.style.display = 'block';
+        body.classList.add('sidebar-open');
+    } else {
+        // MENÜ KAPANDIĞINDA: Karartmayı gizle ve kilidi kaldır
+        overlay.style.display = 'none';
+        body.classList.remove('sidebar-open');
+    }
+}
+
+// 2. TEMA DEĞİŞTİRME (SWITCH) FONKSİYONU
+function toggleTheme(checkbox) {
+    const body = document.body;
+    const themeMeta = document.getElementById('theme-meta');
+
+    if (checkbox.checked) {
+        // ANAHTAR AÇIKSA: Karanlık Mod (Siyah arka plan)
+        body.classList.remove('normal-mode');
+        if(themeMeta) themeMeta.content = "#000000";
+        localStorage.setItem('user-theme', 'dark');
+    } else {
+        // ANAHTAR KAPALIYSA: Normal Mod (Mor/Buzlu Cam arka plan)
+        body.classList.add('normal-mode');
+        if(themeMeta) themeMeta.content = "#230c40";
+        localStorage.setItem('user-theme', 'normal');
+    }
+}
+
+// 3. SAYFA YÜKLENDİĞİNDE TERCİHLERİ HATIRLAYAN SİSTEM
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('user-theme');
+    const themeSwitch = document.getElementById('theme-switch');
+    
+    // Eğer kullanıcı en son 'normal' modu seçtiyse, siteyi öyle aç
+    if (savedTheme === 'normal') {
+        document.body.classList.add('normal-mode');
+        // HTML'deki switch'i (anahtarı) kapalı konuma getir
+        if(themeSwitch) themeSwitch.checked = false;
+        const themeMeta = document.getElementById('theme-meta');
+        if(themeMeta) themeMeta.content = "#230c40";
+    }
+});
              
              
              // TEMA DEĞİŞTİRME FONKSİYONU (SİDEBAR'I KAPATMAZ)
@@ -867,8 +920,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
              
-             
-
              
         function renderCategories(data) {
             const catContainer = document.getElementById('category-list');
@@ -983,25 +1034,7 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('myTVfavs', JSON.stringify(favorites));
             renderGrid(allChannels);
         }
-
-      function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('overlay');
-    const body = document.body;
-
-    sidebar.classList.toggle('active');
-
-    if (sidebar.classList.contains('active')) {
-        // SİDEBAR AÇILDIĞINDA
-        overlay.style.display = 'block';
-        body.classList.add('sidebar-open'); // Kaydırmayı kilitler
-    } else {
-        // SİDEBAR KAPANDIĞINDA
-        overlay.style.display = 'none';
-        body.classList.remove('sidebar-open'); // Kaydırmayı açar
-    }
-      }
-             
+     
 
         function checkHash() {
             const h = window.location.hash.substring(1);
