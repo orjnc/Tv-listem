@@ -361,6 +361,33 @@ body.normal-mode .player-info-sticky {
 #player-box {
     padding-bottom: 150px !important;
 }
+       /* PLAYER SAYFASI KAYMA VE ÜST ÜSTE BİNME DÜZELTMESİ */
+
+/* 1. Video alanının en üstte ve sabit kalmasını sağla */
+.video-wrapper {
+    position: sticky !important;
+    top: 70px !important; /* Header (70px) yüksekliği kadar aşağıdan başlar */
+    z-index: 2000 !important; /* Videoyu sağlam bir katmana al */
+    background: #000;
+}
+
+/* 2. Kanal isminin videonun üzerine binmesini engelle */
+.player-info-sticky {
+    position: sticky !important;
+    /* ÖNEMLİ: Videonun yüksekliği (16:9 oranında ekran genişliği) + Header kadar pay bırakır */
+    top: calc(70px + (100vw * 9 / 16)) !important; 
+    z-index: 1500 !important; /* Videonun (2000) bir tık altında kalsın */
+    background: rgba(35, 12, 64, 0.9) !important; /* Arkasını göstermeyen cam efekti */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+/* 3. Header'ın her zaman en üstte (logonun görünür) kalmasını garanti et */
+.header {
+    z-index: 3000 !important;
+    position: sticky !important;
+    top: 0 !important;
+}
         
     </style>
 </head>
