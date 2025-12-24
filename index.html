@@ -208,7 +208,14 @@ center {
         video { width: 100%; aspect-ratio: 16/9; }
         .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
-        /* Navigasyon */
+/* KOYU MOD SEÇİLDİĞİNDE: Üst Menü Siyah Olsun */
+body:not(.normal-mode) .header {
+    background: #000000 !important;
+    border-bottom: 1px solid #1a1a1a !important;
+}
+        
+        
+        /* Navigasyon - TAM KONTROL */
 .bottom-nav { 
     position: fixed; 
     bottom: 15px; 
@@ -219,16 +226,23 @@ center {
     display: flex; 
     justify-content: space-around; 
     padding: 12px; 
-    z-index: 2500; /* Sidebar'ın altında kalsın */
+    z-index: 2500; 
     transition: all 0.4s ease;
 
-    /* NORMAL MOD: Buzlu Cam Efekti */
+    /* VARSAYILAN: Buzlu Cam Efekti (Normal Mod) */
     background: rgba(255, 255, 255, 0.1) !important; 
     backdrop-filter: blur(15px); 
     -webkit-backdrop-filter: blur(15px); 
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
+/* KOYU MOD SEÇİLDİĞİNDE: Navigasyon Bar Siyah Olsun */
+body:not(.normal-mode) .bottom-nav {
+    background: #000000 !important;
+    border: 1px solid #1a1a1a !important;
+    backdrop-filter: none !important;
+}
+        
         .nav-btn { color: #666; font-size: 1.2rem; display: flex; flex-direction: column; align-items: center; text-decoration: none; cursor: pointer; }
         .nav-btn.active { color: var(--accent); }
         .nav-btn small { font-size: 0.6rem; margin-top: 4px; font-weight: bold; }
