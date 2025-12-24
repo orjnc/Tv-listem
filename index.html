@@ -401,6 +401,20 @@ body.normal-mode .player-info-sticky {
     position: sticky !important;
     top: 0 !important;
 }
+
+        /* PLAYER EKRANI: Kanal İsmi Alanı Koyu Mod Ayarı */
+body:not(.normal-mode) #player-container .player-info {
+    background: rgba(0, 0, 0, 0.7) !important; /* Mor yerine siyah cam */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Yazı rengini de netleştirelim */
+body:not(.normal-mode) #player-container .player-info h3 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
         
     </style>
 </head>
