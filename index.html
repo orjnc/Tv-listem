@@ -215,6 +215,34 @@ center {
         video { width: 100%; aspect-ratio: 16/9; }
         .player-info-sticky { padding: 15px 20px; border-bottom: 2px solid #222; }
 
+/* --- NORMAL MOD BLOĞU --- */
+
+/* 1. Arka plan */
+body.normal-mode #player-box {
+    background: linear-gradient(135deg, #1a0b2e 0%, #4a148c 100%) !important;
+    background-attachment: fixed !important;
+}
+
+/* 2. Kanal adı şeridi (Senin sorduğun kısım) */
+body.normal-mode .player-info-sticky {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 3. Cam Kartlar */
+body.normal-mode .list-item {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* 4. Yazı Rengi */
+body.normal-mode .list-info span, 
+body.normal-mode .list-info div {
+    color: #ffffff !important;
+}
+     
         /* Navigasyon */
 .bottom-nav { 
     position: fixed; 
