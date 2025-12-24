@@ -45,6 +45,24 @@ body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
 }
+
+        /* Normal modda en üstte sabit kalan alanın rengi */
+body.normal-mode .player-info-sticky {
+    background: #230c40 !important; /* Navigasyon barı rengiyle aynı */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Normal modda kanal adı ve "Canlı Yayın" yazısını beyaz ve net yap */
+body.normal-mode #now-playing {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+body.normal-mode #player-cat-info {
+    color: rgba(255, 255, 255, 0.7) !important; /* "Canlı Yayın" yazısı biraz daha şeffaf beyaz */
+}
+        
+        
 /* 2. ADIM: METİN VE KART GÖRÜNÜMÜ SABİTLEME */
 
 /* Tüm metin etiketlerini tek seferde temaya bağla */
@@ -375,13 +393,18 @@ body.normal-mode .list-info div {
     </div>
 
     <div id="player-box">
-        <div class="video-wrapper"><video id="video" controls autoplay playsinline></video></div>
-        <div class="player-info-sticky">
-            <h5 id="now-playing" class="m-0 text-truncate">Kanal Adı</h5>
-            <p class="small mt-1 mb-0" id="player-cat-info">Canlı Yayın</p>
-        </div>
-        <div class="p-3"><div id="suggested-list"></div></div>
+        <div style="position: sticky; top: 0; z-index: 1200;">
+    
+    <div class="video-wrapper">
+        <video id="video" controls autoplay playsinline></video>
     </div>
+
+    <div class="player-info-sticky">
+        <h5 id="now-playing" class="m-0 text-truncate">Kanal Adı</h5>
+        <p class="small mt-1 mb-0" id="player-cat-info">Canlı Yayın</p>
+    </div>
+
+        </div>
 
     <div id="main-content">
         <div class="category-container" id="category-list"></div>
