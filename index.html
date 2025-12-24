@@ -84,25 +84,36 @@ body {
     transition: transform 0.2s, background 0.3s;
 }
 
-/* --- YENİ GLASS SIDEBAR TASARIMI --- */
 .sidebar { 
     position: fixed; 
-    top: 70px !important;    /* Üst barı kapatmaz */
-    bottom: 85px !important; /* Alt barı kapatmaz */
+    /* 1. KRİTİK AYAR: Üst ve Alt barlara olan uzaklığı tam belirler (Görseldeki boşluk hatasını giderir) */
+    top: 75px !important; 
+    bottom: 95px !important; 
+    
+    /* 2. KRİTİK AYAR: Menüyü ekranın ortasına mıhlar */
     left: 50% !important; 
-    transform: translate(-50%, 20px) !important; 
-    width: 95% !important; 
-    border-radius: 25px !important; 
-    padding: 20px !important; 
-    z-index: 2450 !important; /* Navigasyonların tam arkasına sızar */
+    transform: translate(-50%, 0) !important; 
+    
+    /* 3. KRİTİK AYAR: Boydan boya kaplaması için genişlik */
+    width: 94% !important; 
+    max-width: 500px;
+    
+    /* Görseldeki o tam bulanıklık hissi için */
+    backdrop-filter: blur(30px) !important; 
+    -webkit-backdrop-filter: blur(30px) !important;
+    background: rgba(0, 0, 0, 0.7) !important; 
+    
+    border-radius: 30px !important; 
+    padding: 25px !important; 
+    z-index: 2500 !important; /* Header (4000) altında, sayfanın üstünde */
     display: flex; 
     flex-direction: column; 
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important; 
-    backdrop-filter: blur(25px) !important; 
-    -webkit-backdrop-filter: blur(25px) !important; 
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    
+    /* İçerik çoksa aşağı doğru kaysın, barları zorlamasın */
+    overflow-y: auto;
 }
+        
 
 .sidebar.active { 
     opacity: 1 !important;
