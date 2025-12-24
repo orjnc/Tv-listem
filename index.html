@@ -30,6 +30,14 @@
     --selected-cat: #F683BE; 
 }
 
+/* Sadece biz KOYU MODU seçtiğimizde butonlar siyah olsun */
+body:not(.normal-mode) .cat-btn {
+    background: #1a1a1a !important;
+    border: 1px solid #333;
+    backdrop-filter: none;
+}
+        
+        
 /* 2. NORMAL MOD (RENKLİ MOD) AYARLARI */
 body.normal-mode {
     --bg: linear-gradient(135deg, #1a0b2e 0%, #4a148c 100%);
@@ -126,14 +134,6 @@ body {
     -webkit-backdrop-filter: blur(10px);
 }
 
-/* Koyu Modda Butonları Eski Haline Döndür */
-@media (prefers-color-scheme: dark) {
-    .cat-btn { 
-        background: #1a1a1a !important; 
-        backdrop-filter: none; 
-        border: 1px solid #333; 
-    }
-}
 
          /* Ekranın ortasındaki gereksiz eski ikonları ve yazıları gizler */
 #home-section > i, 
