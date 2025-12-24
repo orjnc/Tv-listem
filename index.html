@@ -679,18 +679,6 @@ body:not(.normal-mode) .cat-btn:not(.active) {
     </div>
         
          <script>
-    // Uygulama ilk açıldığında çalışacak kısım
-document.addEventListener('DOMContentLoaded', () => {
-    const savedTheme = localStorage.getItem('themeChoice');
-    
-    if (savedTheme) {
-        // Kullanıcı daha önce seçim yaptıysa (Siyah veya Mor) onu yükle
-        setTheme(savedTheme);
-    } else {
-        // Kullanıcı İLK DEFA giriyorsa, telefonu ne olursa olsun 
-        // VARSAYILAN olarak Normal (Mor) Mod ile başlat
-        setTheme('normal');
-    }
 
     // Kanal verilerini getiren fetch kodun aynen kalsın...
     fetch('kanallar.json?v=' + Date.now())
@@ -804,14 +792,6 @@ function doSearch() {
             return "Genel";
         }
              
-             
-             // 1. Telefonun modu uygulama açıkken değişirse anında tepki verir
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    if (!localStorage.getItem('themeChoice')) {
-        const newMode = event.matches ? "dark" : "normal";
-        setTheme(newMode);
-    }
-});
 
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('themeChoice');
@@ -834,91 +814,64 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
-             // 1. SİDEBARI YÖNETEN ANA FONKSİYON
+             // --- TÜM SİSTEMİ YÖNETEN TEK PAKET ---
+
+// 1. SİDEBAR VE TEMA YÖNETİMİ
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
-    const body = document.body;
-
-    // Sidebar'a 'active' sınıfını ekle veya çıkar
     sidebar.classList.toggle('active');
-
     if (sidebar.classList.contains('active')) {
-        // MENÜ AÇILDIĞINDA: Karartmayı göster ve arkadaki kaydırmayı kilitle
         overlay.style.display = 'block';
-        body.classList.add('sidebar-open');
+        document.body.classList.add('sidebar-open');
     } else {
-        // MENÜ KAPANDIĞINDA: Karartmayı gizle ve kilidi kaldır
         overlay.style.display = 'none';
-        body.classList.remove('sidebar-open');
+        document.body.classList.remove('sidebar-open');
     }
 }
 
-// 2. TEMA DEĞİŞTİRME (SWITCH) FONKSİYONU
 function toggleTheme(checkbox) {
-    const body = document.body;
     const themeMeta = document.getElementById('theme-meta');
-
     if (checkbox.checked) {
-        // ANAHTAR AÇIKSA: Karanlık Mod (Siyah arka plan)
-        body.classList.remove('normal-mode');
+        document.body.classList.remove('normal-mode');
         if(themeMeta) themeMeta.content = "#000000";
         localStorage.setItem('user-theme', 'dark');
     } else {
-        // ANAHTAR KAPALIYSA: Normal Mod (Mor/Buzlu Cam arka plan)
-        body.classList.add('normal-mode');
+        document.body.classList.add('normal-mode');
         if(themeMeta) themeMeta.content = "#230c40";
         localStorage.setItem('user-theme', 'normal');
     }
 }
 
-// 3. SAYFA YÜKLENDİĞİNDE TERCİHLERİ HATIRLAYAN SİSTEM
-document.addEventListener('DOMContentLoaded', function() {
+// 2. SAYFA BAŞLATICI (KANALLAR VE TEMA HATIRLATICI)
+document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('user-theme');
     const themeSwitch = document.getElementById('theme-switch');
-    
-    // Eğer kullanıcı en son 'normal' modu seçtiyse, siteyi öyle aç
-    if (savedTheme === 'normal') {
+    const themeMeta = document.getElementById('theme-meta');
+
+    // Varsayılan: Normal (Mor) Mod
+    if (savedTheme === 'dark') {
+        document.body.classList.remove('normal-mode');
+        if(themeSwitch) themeSwitch.checked = true;
+        if(themeMeta) themeMeta.content = "#000000";
+    } else {
         document.body.classList.add('normal-mode');
-        // HTML'deki switch'i (anahtarı) kapalı konuma getir
         if(themeSwitch) themeSwitch.checked = false;
-        const themeMeta = document.getElementById('theme-meta');
         if(themeMeta) themeMeta.content = "#230c40";
     }
+
+    // KANALLARI GETİR
+    fetch('kanallar.json?v=' + Date.now())
+        .then(res => res.json())
+        .then(data => { 
+            allChannels = data; 
+            renderCategories(data); 
+            renderGrid(data); 
+            checkHash(); 
+        })
+        .catch(err => console.error("Hata:", err));
 });
              
-             
-             // TEMA DEĞİŞTİRME FONKSİYONU (SİDEBAR'I KAPATMAZ)
-function toggleTheme(checkbox) {
-    const body = document.body;
-    const themeMeta = document.getElementById('theme-meta');
-
-    if (checkbox.checked) {
-        // KARANLIK MOD AKTİF (Koyu Tema)
-        body.classList.remove('normal-mode');
-        if(themeMeta) themeMeta.content = "#000000";
-        localStorage.setItem('user-theme', 'dark');
-    } else {
-        // KARANLIK MOD KAPALI (Normal Mod / Buzlu Cam Tema)
-        body.classList.add('normal-mode');
-        if(themeMeta) themeMeta.content = "#230c40";
-        localStorage.setItem('user-theme', 'normal');
-    }
-}
-
-// SAYFA YÜKLENDİĞİNDE TERCİHİ HATIRLATMA SİSTEMİ
-document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('user-theme');
-    const themeSwitch = document.getElementById('theme-switch');
-    
-    // Eğer kullanıcı daha önce Normal Mod'u (Açık Tema) seçtiyse
-    if (savedTheme === 'normal') {
-        document.body.classList.add('normal-mode');
-        if(themeSwitch) themeSwitch.checked = false; // Switch'i kapalı konuma getir
-        const themeMeta = document.getElementById('theme-meta');
-        if(themeMeta) themeMeta.content = "#230c40";
-    }
-});
              
              
         function renderCategories(data) {
