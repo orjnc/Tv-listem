@@ -663,7 +663,18 @@ body:not(.normal-mode) .cat-btn:not(.active) {
         
          <script>
 
-    // Kanal verilerini getiren fetch kodun aynen kalsın...
+            document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('themeChoice');
+    const toggle = document.getElementById('darkModeToggle');
+    
+    if (savedTheme === 'dark') {
+        setTheme('dark');
+        if (toggle) toggle.checked = true;
+    } else {
+        setTheme('normal');
+        if (toggle) toggle.checked = false;
+    }
+
     fetch('kanallar.json?v=' + Date.now())
         .then(res => res.json())
         .then(data => { 
@@ -673,72 +684,45 @@ body:not(.normal-mode) .cat-btn:not(.active) {
             checkHash(); 
         });
 });
-             
-             
-             // Tıklanan butonu beyaz (aktif) yapma fonksiyonu
+
+function toggleThemeAction() {
+    const toggle = document.getElementById('darkModeToggle');
+    if (toggle && toggle.checked) { setTheme('dark'); } 
+    else { setTheme('normal'); }
+}
+
 function updateNavActive(id) {
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
     const target = document.getElementById(id);
     if(target) target.classList.add('active');
 }
 
-// Arama ekranını açan fonksiyon
 function showSearch() {
-    // Diğer tüm bölümleri gizle
     document.getElementById('player-box').style.display = "none";
     document.getElementById('home-section').style.display = "none";
     document.getElementById('category-list').style.display = "none";
     document.getElementById('promo-slider').style.display = "none";
-    
-    // Arama bölümünü göster
     document.getElementById('search-section').style.display = "block";
-    
-    // Alt menüdeki butonu beyaz yap
     updateNavActive('btn-search');
-    
-    // Video oynuyorsa durdur
-    if(typeof video !== 'undefined') video.pause();
-
-    // Saniyeler içinde klavyeyi açan odaklama komutu
-    setTimeout(() => {
-        const input = document.getElementById('searchInput');
-        if(input) {
-            input.focus();
-            // Mobil cihazlarda klavyeyi zorlamak için bazen gerekli
-            input.click(); 
-        }
-    }, 300);
+    setTimeout(() => { document.getElementById('searchInput')?.focus(); }, 300);
 }
-             
 
-// Favoriler ekranını açan fonksiyon
 function showFavorites() {
-    // Sadece favorilere eklenen kanalları filtrele
     const favChannels = allChannels.filter(k => favorites.includes(k.ad));
-    
     document.getElementById('player-box').style.display = "none";
     document.getElementById('search-section').style.display = "none";
     document.getElementById('home-section').style.display = "block";
     document.getElementById('category-list').style.display = "none";
     document.getElementById('promo-slider').style.display = "none";
-    
-    renderGrid(favChannels); // Sadece favorileri ekrana basar
-    updateNavActive('btn-fav'); // Butonu beyaz yapar
-    if(typeof video !== 'undefined') video.pause();
+    renderGrid(favChannels);
+    updateNavActive('btn-fav');
 }
 
-             
-             // Arama kutusuna yazılan metne göre kanalları filtreler
 function doSearch() {
     const q = document.getElementById('searchInput').value.toLowerCase();
-    
-    // Kanallar içinde isme göre filtreleme yapar
     const res = allChannels.filter(k => k.ad.toLowerCase().includes(q));
-    
-    // Sonuçları 'search-results' id'li div içerisine döker
     renderList(res, 'search-results');
 }
-             
           
              
              // --- KANAL YÖNETİM MASASI ---
