@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta id="theme-meta" name="theme-color" content="#230c40">
+    <meta name="color-scheme" content="dark">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>orjnc tv+ TEST</title>
+    <link rel="icon" type="image/png" href="logolar/logo.png">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --h-h: 70px; }
+        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding-top: var(--h-h); transition: 0.3s; }
+        body.normal-mode { background-color: #230c40; }
+
+        .navbar-custom {
+            height: var(--h-h); background: rgba(0,0,0,0.85); backdrop-filter: blur(10px);
+            position: fixed; top: 0; width: 100%; z-index: 2000;
+            display: flex; align-items: center; padding: 0 15px; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* STICKY PLAYER - GRUPLANMIŞ YAPI */
+        .sticky-wrapper {
+            position: sticky; top: var(--h-h); z-index: 1500;
+            background: inherit; /* Arka plan rengini body'den alır */
+        }
+
+        .video-wrapper { width: 100%; aspect-ratio: 16/9; background: #000; }
+        video { width: 100%; height: 100%; display: block; }
+
+        .player-info-sticky {
+            padding: 15px 20px; border-bottom: 2px solid rgba(255,255,255,0.1);
+            background: inherit;
+        }
+
+        #suggested-container { margin-top: 25px; padding-bottom: 100px; }
+
+        /* KARTLAR */
+        .channel-card {
+            background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;
+            transition: 0.3s; cursor: pointer; position: relative; text-align: center;
+        }
+        .channel-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.1); }
+        .channel-card img { height: 50px; margin-bottom: 10px; }
+        
+        .fav-btn { position: absolute; top: 10px; right: 10px; color: #444; z-index: 10; }
+        .fav-btn.active { color: #ff0055; }
+
+        #sidebar { position: fixed; left: -280px; top: 0; width: 280px; height: 100%; background: #111; z-index: 3000; transition: 0.3s; padding: 20px; }
+        #sidebar.active { left: 0; }
+        #overlay { position: fixed; display: none; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2500; top:0; left:0; }
+
+        .promo-active { animation: pulseGlow 2s infinite; }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 5px #7000ff; }
+            50% { box-shadow: 0 0 20px #7000ff; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="overlay" onclick="toggleSidebar()"></div>
+    
+    <nav class="navbar-custom justify-content-between">
+        <div class="d-flex align-items-center">
+            <i class="fas fa-bars me-3 fs-4 pointer" onclick="toggleSidebar()"></i>
+            <img src="logolar/logo.png" height="35" onclick="location.reload()">
+        </div>
+        <div class="flex-grow-1 mx-3">
+            <input type="text" id="searchInput" class="form-control bg-dark text-white border-0" placeholder="Kanal Ara...">
+        </div>
+        <i class="fas fa-moon fs-4 pointer" onclick="toggleTheme()"></i>
+    </nav>
+
+    <div id="sidebar">
+        <h4 class="mb-4 text-purple">Kategoriler</h4>
+        <div id="sidebar-content"></div>
+    </div>
+
+    <main class="container-fluid">
+        <div id="player-box" style="display:none;">
+            <div class="sticky-wrapper">
+                <div class="video-wrapper">
+                    <video id="video" controls autoplay playsinline></video>
+                </div>
+                <div class="player-info-sticky">
+                    <h5 id="now-playing" class="m-0 text-truncate">Kanal</h5>
+                    <p id="player-cat-info" class="small mb-0 opacity-50">Canlı</p>
+                </div>
+            </div>
+            <div id="suggested-container" class="px-2">
+                <h6 class="small fw-bold opacity-50 mb-3">ÖNERİLENLER</h6>
+                <div id="suggested-list" class="row g-2"></div>
+            </div>
+        </div>
+
+        <div id="main-content">
+            <div id="featured-area" class="mt-3"></div>
+            <div id="channel-grid" class="row g-3 mt-2"></div>
+        </div>
+    </main>
+
+    <script>
+        let allChannels = [];
+        let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
+        const hls = new Hls();
+
+        function getSafeCategory(c) { return c.kategori || "Genel"; }
+
+        fetch('kanallar.json').then(r => r.json()).then(data => {
+            allChannels = data;
+            renderGrid(allChannels);
+            renderSidebar();
+            checkHash();
+        });
+
+        function renderGrid(list) {
+            const grid = document.getElementById('channel-grid');
+            grid.innerHTML = list.map(c => `
+                <div class="col-6 col-md-3">
+                    <div class="channel-card" onclick="playChannel('${c.url}', '${c.ad}', true, '${getSafeCategory(c)}')">
+                        <i class="fas fa-heart fav-btn ${favorites.includes(c.ad) ? 'active' : ''}" onclick="event.stopPropagation(); toggleFav('${c.ad}')"></i>
+                        <img src="logolar/${c.ad}.png" onerror="this.src='logolar/default.png'">
+                        <div class="small text-truncate">${c.ad}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function playChannel(url, ad, scroll, cat) {
+            document.getElementById('player-box').style.display = 'block';
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('now-playing').innerText = ad;
+            document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + cat;
+            
+            const video = document.getElementById('video');
+            if (Hls.isSupported()) { hls.loadSource(url); hls.attachMedia(video); }
+            else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; }
+
+            window.location.hash = encodeURIComponent(ad);
+            if(scroll) window.scrollTo(0,0);
+            
+            const sug = allChannels.filter(c => getSafeCategory(c) === cat && c.ad !== ad).slice(0, 10);
+            document.getElementById('suggested-list').innerHTML = sug.map(c => `
+                <div class="col-6 col-md-4">
+                    <div class="channel-card py-2" onclick="playChannel('${c.url}', '${c.ad}', true, '${getSafeCategory(c)}')">
+                        <img src="logolar/${c.ad}.png" style="height:35px">
+                        <div style="font-size:11px" class="text-truncate">${c.ad}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFav(ad) {
+            favorites = favorites.includes(ad) ? favorites.filter(f => f !== ad) : [...favorites, ad];
+            localStorage.setItem('myTVfavs', JSON.stringify(favorites));
+            renderGrid(allChannels);
+        }
+
+        function renderSidebar() {
+            const cats = ['Tümü', ...new Set(allChannels.map(c => getSafeCategory(c)))];
+            document.getElementById('sidebar-content').innerHTML = cats.map(cat => `
+                <div class="p-2 mb-1 pointer" onclick="filterCat('${cat}')">${cat}</div>
+            `).join('');
+        }
+
+        function filterCat(cat) {
+            renderGrid(cat === 'Tümü' ? allChannels : allChannels.filter(c => getSafeCategory(c) === cat));
+            toggleSidebar();
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('normal-mode');
+            document.getElementById('theme-meta').content = document.body.classList.contains('normal-mode') ? "#230c40" : "#000000";
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            const ov = document.getElementById('overlay');
+            ov.style.display = (ov.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function checkHash() {
+            const h = window.location.hash.substring(1);
+            if(h) {
+                const c = allChannels.find(k => k.ad === decodeURIComponent(h));
+                if(c) playChannel(c.url, c.ad, true, getSafeCategory(c));
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            renderGrid(allChannels.filter(c => c.ad.toLowerCase().includes(e.target.value.toLowerCase())));
+        });
+
+        const observer = new MutationObserver(() => {
+            const f = document.getElementById('featured-card');
+            if (f) { f.classList.remove('promo-active'); void f.offsetWidth; f.classList.add('promo-active'); }
+        });
+        observer.observe(document.getElementById('featured-area'), { childList: true });
+    </script>
+</body>
+</html>
