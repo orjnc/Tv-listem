@@ -710,50 +710,25 @@ function updateNavActive(id) {
 }
 
 
-         function showHome() {
+  function showHome() {
     // 1. Sayfa Görünümünü Resetle
     document.getElementById('player-box').style.display = "none";
     document.getElementById('main-content').style.display = "block";
     document.getElementById('home-section').style.display = "block";
     document.getElementById('search-section').style.display = "none";
     document.getElementById('category-list').style.display = "flex";
+    document.getElementById('promo-slider').classList.remove('promo-hidden');
 
-    // ÖNEMLİ: Öneri kartını (promo-slider) kesin görünür yapalım
-    const promoSlider = document.getElementById('promo-slider');
-    if (promoSlider) {
-        promoSlider.classList.remove('promo-hidden');
-        promoSlider.style.display = "block"; // Zorunlu görünürlük
-    }
-
-    // 2. Videoyu ve Kaynağı Tamamen Temizle
+    // 2. Videoyu ve Kaynağı Tamamen Temizle (Performans için kritik)
     if (video) {
         video.pause();
-        video.src = ""; 
+        video.src = ""; // Belleği boşaltır
         video.load();
     }
     if (hls) {
-        hls.detachMedia();
-        hls.stopLoad();
+        hls.detachMedia(); // HLS bağlantısını koparır
+        hls.stopLoad();    // Veri indirmeyi tamamen durdurur
     }
-
-    // 3. Navigasyon Butonlarını Güncelle
-    updateNavActive('btn-home');
-
-    // 4. Listeyi ve Kategoriyi Sıfırla
-    renderGrid(allChannels); 
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    
-    const firstCatBtn = document.querySelector('.cat-btn:first-child');
-    if (firstCatBtn) {
-        firstCatBtn.classList.add('active');
-    }
-
-    // 5. URL'yi Temizle
-    history.pushState("", document.title, window.location.pathname);
-    
-    // 6. Sayfayı en yukarı kaydır
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-         }
              
              
              
