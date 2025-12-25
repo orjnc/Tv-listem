@@ -827,6 +827,44 @@ document.addEventListener('DOMContentLoaded', () => {
             checkHash(); 
         });
 });
+
+             // --- URL HASH YÖNETİMİ (Kopyala ve Script'in En Sonuna Yapıştır) ---
+
+// 1. Mevcut showFavorites fonksiyonunu genişletiyoruz
+const originalShowFavorites = showFavorites;
+showFavorites = function() {
+    window.location.hash = "favorites";
+    if (typeof originalShowFavorites === "function") originalShowFavorites();
+};
+
+// 2. Mevcut showHome fonksiyonunu genişletiyoruz
+const originalShowHome = showHome;
+showHome = function() {
+    window.location.hash = "home";
+    if (typeof originalShowHome === "function") originalShowHome();
+};
+
+// 3. Arama butonu tıklandığında URL'yi güncelle (Eğer arama fonksiyonun varsa ismini buraya yazabilirsin)
+// Örnek: document.querySelector('.fa-search').addEventListener('click', () => window.location.hash = "search");
+
+// 4. Geri tuşuna basıldığında ne olacağını kontrol et
+window.addEventListener('hashchange', function() {
+    const hash = window.location.hash.substring(1);
+    
+    if (hash === "favorites") {
+        if (typeof originalShowFavorites === "function") originalShowFavorites();
+    } else if (hash === "home" || hash === "") {
+        if (typeof originalShowHome === "function") originalShowHome();
+        // Eğer bir kanal oynatılıyorsa ana sayfaya dönünce kapatmak istemeyebilirsin, 
+        // o yüzden sadece ekranı değiştiriyoruz.
+    }
+});
+
+// 5. Sayfa ilk açıldığında URL'de ne yazdığına bak ve orayı aç
+window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash === "favorites") showFavorites();
+});
              
              
              function setTheme(mode) {
