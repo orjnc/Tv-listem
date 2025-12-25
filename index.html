@@ -798,7 +798,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
              }
 
-
+document.getElementById('theme-toggle').checked = (localStorage.getItem('themeChoice') === 'dark');
+             
              
              function handleThemeToggle() {
     const isChecked = document.getElementById('theme-toggle').checked;
