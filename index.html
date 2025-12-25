@@ -71,6 +71,12 @@ body {
     transition: color 0.3s ease;
 }
 
+/* Sidebar açıkken kaydırmayı durduran sınıf */
+.no-scroll {
+    overflow: hidden;
+    height: 100vh; /* Ekran yüksekliğini sabitler */
+}
+        
 /* Kategori listesindeki ikonlar için */
 .category-item i {
     color: var(--text);
@@ -925,15 +931,18 @@ document.getElementById('theme-toggle').checked = (localStorage.getItem('themeCh
       function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('overlay');
+    const body = document.body; // Body etiketine ulaşmak için
     
     // Sidebar'ı aç/kapat
     sidebar.classList.toggle('active');
     
-    // Overlay'i sidebar'ın durumuna göre göster/gizle
+    // Overlay ve Kaydırma Kontrolü
     if (sidebar.classList.contains('active')) {
         overlay.style.display = 'block';
+        body.classList.add('no-scroll'); // Kaydırmayı engelle
     } else {
         overlay.style.display = 'none';
+        body.classList.remove('no-scroll'); // Kaydırmayı tekrar aç
     }
       }
              
