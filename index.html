@@ -164,9 +164,8 @@ body:not(.normal-mode) .sidebar {
 }
 
 .overlay {
-    z-index: 2400 !important;
-    background: rgba(0,0,0,0.2) !important;
-    backdrop-filter: blur(3px);
+    background: rgba(0, 0, 0, 0.4) !important; /* 0.8 yerine 0.4 yaparak arkadaki moru görmeni sağlarız */
+    backdrop-filter: blur(4px);
 }
         
 
@@ -228,7 +227,11 @@ center {
     /* 1. NORMAL MOD: Senin Mor Rengin */
     background: rgba(37, 12, 68, 0.7) !important; 
 }
-        
+
+        main-content'e pay veriyoruz */
+#main-content {
+    padding-top: 80px; /* Header boyu kadar üstten boşluk */
+}
         
         .logo-container { flex: 1; display: flex; justify-content: center; align-items: center; }
         .site-logo { max-height: 48px; width: auto; object-fit: contain; cursor: pointer; }
