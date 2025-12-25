@@ -373,6 +373,7 @@ body:not(.normal-mode) .bottom-nav {
 
         
         .search-input {
+    margin-bottom: 25px !important;
     width: 100% !important; /* Sağdan sola tam en */
     background: rgba(255, 255, 255, 0.05) !important; 
     backdrop-filter: blur(20px) saturate(180%);
@@ -385,6 +386,11 @@ body:not(.normal-mode) .bottom-nav {
     display: block;
 }
 
+#search-results {
+    margin-top: 10px;
+    padding: 0 5px;
+}
+        
 /* Arama sayfasındayken arka plan kaymasını engellemek için */
 .no-scroll {
     overflow: hidden !important;
@@ -824,16 +830,15 @@ function showFavorites() {
              
 
              
-             // Arama kutusuna yazılan metne göre kanalları filtreler
-function doSearch() {
+             function doSearch() {
     const q = document.getElementById('searchInput').value.toLowerCase();
     
-    // Kanallar içinde isme göre filtreleme yapar
-    const res = allChannels.filter(k => k.ad.toLowerCase().includes(q));
+    // Sadece ilk 5 sonucu filtrele ve al
+    const res = allChannels.filter(k => k.ad.toLowerCase().includes(q)).slice(0, 5);
     
-    // Sonuçları 'search-results' id'li div içerisine döker
+    // Sonuçları mevcut div'e yazdır
     renderList(res, 'search-results');
-}
+             }
              
           
              
