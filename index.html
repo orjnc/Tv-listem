@@ -509,8 +509,7 @@ body:not(.normal-mode) .cat-btn:not(.active) {
 </head>
 <body> 
 
-
-        <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+         <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
     <div class="sidebar" id="sidebar">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -527,11 +526,13 @@ body:not(.normal-mode) .cat-btn:not(.active) {
             
             <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 5px;">
             
-            <div onclick="setTheme('dark'); toggleSidebar();" class="menu-item">
-                <i class="fas fa-moon"></i> <span>Koyu Mod</span>
-            </div>
-            <div onclick="setTheme('normal'); toggleSidebar();" class="menu-item">
-                <i class="fas fa-palette"></i> <span>Normal Mod (Buzlu Cam)</span>
+            <div class="menu-item d-flex justify-content-between align-items-center" style="cursor: default;">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="fas fa-moon"></i> <span>Karanlık Mod</span>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="theme-toggle" onclick="handleThemeToggle()" style="cursor: pointer; width: 40px; height: 20px;">
+                </div>
             </div>
             
             <hr style="border-color: rgba(255,255,255,0.1); margin: 15px 5px;">
@@ -613,6 +614,7 @@ body:not(.normal-mode) .cat-btn:not(.active) {
             <small>DAHA FAZLA</small>
         </div>
     </div>
+
         
          <script>
         let allChannels = [];
@@ -794,6 +796,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         body.style.color = '#ffffff';
     }
+             }
+
+
+             
+             function handleThemeToggle() {
+    const isChecked = document.getElementById('theme-toggle').checked;
+    setTheme(isChecked ? 'dark' : 'normal');
              }
              
 
