@@ -193,25 +193,23 @@ body:not(.normal-mode) .sidebar {
     -webkit-backdrop-filter: blur(10px);
 }
 
-    /* Plyr rengini senin kategorilerindeki pembe/mor renge sabitler */
-:root {
-    --plyr-color-main: #f683be !important; 
+
+         /* Ekranın ortasındaki gereksiz eski ikonları ve yazıları gizler */
+#home-section > i, 
+#home-section > small, 
+#home-section > br,
+#main-content > i,
+#main-content > small,
+center {
+    display: none !important;
 }
 
-/* Oynatıcıyı şıklaştır */
-.plyr {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+/* Arama sayfasındaki benzer fazlalıkları da temizler */
+#search-section > i,
+#search-section > small,
+#search-section > br {
+    display: none !important;
 }
-
-/* Kontrol çubuğunu siyah cam (blur) yap */
-.plyr__controls {
-    background: rgba(0, 0, 0, 0.5) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-         
         
         .cat-btn.active { background: var(--selected-cat) !important; color: white; border-color: var(--selected-cat); }
         .cat-hidden { display: none; }
@@ -605,9 +603,7 @@ body:not(.normal-mode) .cat-btn:not(.active) {
 
          <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-    
+ 
     <div class="sidebar" id="sidebar">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <img src="logolar/logo.png" alt="orjnc tv+" class="sidebar-logo" style="max-height: 30px; width: auto;">
@@ -1004,48 +1000,18 @@ document.getElementById('theme-toggle').checked = (localStorage.getItem('themeCh
             });
         }
 
-        let player; // Dosyanın en üstüne veya fonksiyonun dışına ekle
-
-function playChannel(url, name, isFav, category) {
-    const video = document.getElementById('video');
-
-    // 1. PLYR BAŞLATMA (Eğer daha önce başlatılmadıysa)
-    if (!player) {
-        player = new Plyr(video, {
-            controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-            hideControls: true
-        });
-    }
-
-    // 2. SENİN MEVCUT HLS MANTIĞIN (Dokunmadık)
-    if (Hls.isSupported()) {
-        if (window.hls) {
-            window.hls.destroy();
+        function playChannel(url, ad, fromHash = false, kategori = "Genel") {
+            if(!fromHash) history.pushState({page: 'player'}, ad, "#" + encodeURIComponent(ad));
+            document.getElementById('player-box').style.display = "block";
+            document.getElementById('main-content').style.display = "none";
+            document.getElementById('now-playing').innerText = ad;
+            document.getElementById('player-cat-info').innerText = "Canlı Yayın • " + kategori;
+            window.scrollTo(0,0);
+            const shuffled = [...allChannels].sort(() => 0.5 - Math.random()).slice(0, 5);
+            renderList(shuffled, 'suggested-list');
+            if (Hls.isSupported()) { hls.loadSource(url); hls.attachMedia(video); hls.on(Hls.Events.MANIFEST_PARSED, () => video.play()); }
+            else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; video.play(); }
         }
-        const hls = new Hls();
-        window.hls = hls;
-        hls.loadSource(url);
-        hls.attachMedia(video);
-        hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            video.play().catch(e => console.log("Oynatma hatası:", e));
-        });
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = url;
-        video.play().catch(e => console.log("Oynatma hatası:", e));
-    }
-
-    // 3. DİĞER MEVCUT İŞLEMLERİN (Favori, İsim vb.)
-    document.getElementById('player-box').style.display = 'block';
-    document.getElementById('current-channel-name').innerText = name;
-    
-    const favBtn = document.getElementById('player-fav-btn');
-    favBtn.onclick = () => toggleFavorite(url, name, category);
-    updatePlayerFavIcon(isFav);
-    
-    // Oynatıcı açıldığında sayfayı en üste kaydır
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-    
 
 
     function showHome() {
