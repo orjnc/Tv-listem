@@ -615,6 +615,12 @@ body:not(.normal-mode) .cat-btn:not(.active) {
     </div>
         
          <script>
+        let allChannels = [];
+        let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
+        const hls = new Hls();
+        const video = document.getElementById('video');
+
+             
     // Uygulama ilk açıldığında çalışacak kısım
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('themeChoice');
@@ -715,11 +721,6 @@ function doSearch() {
             "Belgesel": ["DMAX", "TLC", "TRT 2", "BELGESEL", "WILD", "NATIONAL"],
             "Sinema": ["FX", "CNBC-E", "SİNEMA", "FİLM", "MOVIE", "AKSİYON"]
         };
-
-        let allChannels = [];
-        let favorites = JSON.parse(localStorage.getItem('myTVfavs')) || [];
-        const hls = new Hls();
-        const video = document.getElementById('video');
 
         function getSafeLogo(k) {
             if (!k.logo) return 'logolar/default.png';
@@ -940,7 +941,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <script src="oneriler.js"></script>
 
 <script>
- tetikleyen sistem
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.type === "childList" || mutation.attributeName === "style") {
