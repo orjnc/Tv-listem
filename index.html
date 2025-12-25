@@ -538,8 +538,7 @@ body:not(.normal-mode) .cat-btn:not(.active) {
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
         
-        
-    </style>
+      </style>
 </head>
 <body> 
 
@@ -936,25 +935,25 @@ document.getElementById('theme-toggle').checked = (localStorage.getItem('themeCh
             else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; video.play(); }
         }
 
+        function showHome() {
+    // 1. Sayfa Görünümünü Resetle
+    document.getElementById('player-box').style.display = "none";
+    document.getElementById('main-content').style.display = "block";
+    document.getElementById('home-section').style.display = "block";
+    document.getElementById('search-section').style.display = "none";
+    document.getElementById('category-list').style.display = "flex";
+    document.getElementById('promo-slider').classList.remove('promo-hidden');
 
-function showHome() {
-    // URL'yi temizle
-    history.pushState("", document.title, window.location.pathname);
-    // Sayfayı tazele (Önerilerin gelmesi için sihirli dokunuş bu)
-    location.reload();
-}
-
-window.onpopstate = function() {
-    const h = window.location.hash;
-    // Eğer geri basıldığında anasayfaya gelindiyse tazele
-    if (!h || h === "" || h === "#") {
-        showHome();
-    } else {
-        checkHash();
+    // 2. Videoyu ve Kaynağı Tamamen Temizle (Performans için kritik)
+    if (video) {
+        video.pause();
+        video.src = ""; // Belleği boşaltır
+        video.load();
     }
-};
-             
-             
+    if (hls) {
+        hls.detachMedia(); // HLS bağlantısını koparır
+        hls.stopLoad();    // Veri indirmeyi tamamen durdurur
+    }
 
     // 3. Navigasyon Butonlarını Güncelle
     updateNavActive('btn-home'); // Anasayfa ikonunu beyaz/aktif yapar
@@ -973,8 +972,8 @@ window.onpopstate = function() {
 
 window.onpopstate = function() {
     const h = window.location.hash;
-    if (!h || h === "" || h === "#") {
-        showHome(); // Refresh yerine fonksiyonu çağır, daha hızlıdır.
+    if (!h || h === "") {
+        showHome();
     } else {
         checkHash();
     }
@@ -1065,5 +1064,3 @@ if (targetNode) {
 
 </body>
 </html>
-
-        
